@@ -12,9 +12,12 @@ func main() {
 	fileServer := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
-	// Handle all routes
+	// Handle '/' route
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// Get the index.html template
 		tmpl := template.Must(template.ParseFiles("./templates/index.html"))
+
+		// Show the page to the user
 		tmpl.Execute(w, nil)
 	})
 
