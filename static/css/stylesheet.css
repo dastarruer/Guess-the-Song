@@ -1,6 +1,7 @@
 :root {
     --artist-image-size: 300px;
 }
+
 body {
     background-color: #191414;
 }
@@ -24,12 +25,18 @@ body {
 #artist-info {
     display: flex;
     align-items: center;
+
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 50px; 
+    margin-bottom: 50px;
 }
 
 #artist-image {
     width: var(--artist-image-size);
     height: var(--artist-image-size);
 }
+
 #artist-name {
     text-align: center;
 
