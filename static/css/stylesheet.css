@@ -18,7 +18,22 @@ body {
     background-color: #1db954;
 }
 
+#artist-info {
+    display: flex;
+    align-items: center;
+}
+
 #artist-image {
     width: 300px;
     height: 300px;
+}
+#artist-name {
+    text-align: center;
+    color: #ffffff;
+    font-family: "Martian Mono", serif;
+    font-size: 3.125rem;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings: "wdth" 112.5;
 }
