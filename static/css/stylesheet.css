@@ -1,3 +1,6 @@
+:root {
+    --artist-image-size: 300px;
+}
 body {
     background-color: #191414;
 }
@@ -24,16 +27,19 @@ body {
 }
 
 #artist-image {
-    width: 300px;
-    height: 300px;
+    width: var(--artist-image-size);
+    height: var(--artist-image-size);
 }
 #artist-name {
     text-align: center;
-    color: #ffffff;
+
     font-family: "Martian Mono", serif;
     font-size: 3.125rem;
-    font-optical-sizing: auto;
     font-weight: 700;
+    color: #ffffff;
+    font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings: "wdth" 112.5;
+
+    width: var(--artist-image-size);
 }
