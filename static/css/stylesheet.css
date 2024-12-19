@@ -3,6 +3,10 @@ body {
 }
 
 #banner {
+    display: flex;
+
+    height: 22rem;
+
     color: #191414;
-    background-color: #1DB954;
+    background-color: #1db954;
 }
