@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	// NOTE: All directories must be manually configured to be served to the user, otherwise all content referencing said directories WILL NOT be shown
+	
 	// Serve static directory
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
