@@ -23,7 +23,6 @@ body {
 }
 
 #artist-info {
-
     width: 380px;
     height: auto;
 
@@ -65,7 +64,6 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    
 }
 
 #input {
@@ -75,4 +73,13 @@ body {
     border-radius: 12px;
     border-color: #ffffff;
     border-width: 3px;
+}
+
+#input::placeholder {
+    font-family: "REM", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    
+    color: #b3b3b3;
 }
