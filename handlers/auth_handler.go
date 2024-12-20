@@ -15,7 +15,7 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	clientId := getClientId()
 	clientSecret := getClientSecret()
 
-	// Base64 encode client_id:client_secret
+	// Base64 encode client_id:client_secret as per Spotify's specifications
 	authHeader := base64.StdEncoding.EncodeToString([]byte(clientId + ":" + clientSecret))
 
 	// Spotify token URL
@@ -57,7 +57,6 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(body)
 }
-
 
 func getClientId() string {
 	if err := godotenv.Load(); err != nil {
