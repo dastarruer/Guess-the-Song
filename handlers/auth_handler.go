@@ -3,7 +3,6 @@ package handlers
 import (
 	"encoding/base64"
 	"github.com/joho/godotenv"
-	"html/template"
 	"io"
 	"log"
 	"net/http"
@@ -59,13 +58,6 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(body)
 }
 
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	// Get the index.html template
-	tmpl := template.Must(template.ParseFiles("./templates/index.html"))
-
-	// Show the page to the user
-	tmpl.Execute(w, nil)
-}
 
 func getClientId() string {
 	if err := godotenv.Load(); err != nil {
