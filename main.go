@@ -8,9 +8,11 @@ import (
 )
 
 func main() {
-	// Initialize the server
-	fileServer := http.FileServer(http.Dir("./static"))
-	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
+	// Serve static directory
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+
+	// Serve images
+	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./images"))))
 
 	// Handle '/' route
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
