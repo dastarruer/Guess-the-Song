@@ -2,11 +2,9 @@ package main
 
 import (
 	"fmt"
-	"html/template"
+	"guess-the-artist/handlers"
 	"log"
 	"net/http"
-	"os"
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -19,28 +17,14 @@ func main() {
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./images"))))
 
 	// Handle '/' route
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Get the index.html template
-		tmpl := template.Must(template.ParseFiles("./templates/index.html"))
-
-		// Show the page to the user
-		tmpl.Execute(w, nil)
-	})
+	http.HandleFunc("/", handlers.IndexHandler)
 	
 	// Run the server
 	fmt.Printf("Running server on port http://localhost:8080...")
-	fmt.Printf(getClientSecret())
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
 }
 
-func getClientSecret() string {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal(err)
-	}
-
-	return os.Getenv("CLIENT_SECRET")
-}
 
 
