@@ -65,4 +65,14 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    
+}
+
+#input {
+    background-color: #121212;
+    width: 700px;
+    height: 62px;
+    border-radius: 12px;
+    border-color: #ffffff;
+    border-width: 3px;
 }
