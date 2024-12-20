@@ -70,12 +70,23 @@ body {
     background-color: #121212;
     padding-left: 30px;
 
+    position: relative;
+    left: -100px;
+    top: -120px;
+    
+    font-family: "REM", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: #ffffff;
+
     width: 700px;
     height: 62px;
 
     border-radius: 12px;
     border-color: #ffffff;
     border-width: 3px;
+    border-style: solid;
 }
 
 #input::placeholder {
@@ -86,4 +97,10 @@ body {
     letter-spacing: 25%;
 
     color: #b3b3b3;
+}
+
+#input:focus {
+    border-color: #1db954;
+    outline: none;
+    caret-color: #1db954;
 }
