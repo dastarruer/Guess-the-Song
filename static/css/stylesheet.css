@@ -28,7 +28,7 @@ body {
 
     margin-left: 200px;
     margin-right: 200px;
-    margin-top: 50px; 
+    margin-top: 50px;
     margin-bottom: 50px;
 }
 
@@ -51,4 +51,8 @@ body {
     font-variation-settings: "wdth" 112.5;
 
     width: var(--artist-image-size);
+}
+
+#game-container {
+    display: grid;
 }
