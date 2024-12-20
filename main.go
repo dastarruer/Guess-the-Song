@@ -16,8 +16,9 @@ func main() {
 	// Serve images
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./images"))))
 
-	// Handle '/' route
+	// Handle routes
 	http.HandleFunc("/", handlers.IndexHandler)
+	http.HandleFunc("/auth", handlers.AuthHandler)
 	
 	// Run the server
 	fmt.Printf("Running server on port http://localhost:8080...")
