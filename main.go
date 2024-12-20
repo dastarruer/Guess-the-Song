@@ -5,11 +5,13 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	// NOTE: All directories must be manually configured to be served to the user, otherwise all content referencing said directories WILL NOT be shown
-	
+
 	// Serve static directory
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
@@ -24,12 +26,21 @@ func main() {
 		// Show the page to the user
 		tmpl.Execute(w, nil)
 	})
-
+	
 	// Run the server
 	fmt.Printf("Running server on port http://localhost:8080...")
+	fmt.Printf(getClientSecret())
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func getClientSecret() string {
+	if err := godotenv.Load(); err != nil {
+		log.Fatal(err)
+	}
+
+	return os.Getenv("CLIENT_SECRET")
 }
 
 
