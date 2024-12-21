@@ -3,7 +3,7 @@ package handlers
 import (
 	"encoding/base64"
 	"encoding/json"
-	"fmt"
+	// "fmt"
 	"io"
 	"log"
 	"net/http"
@@ -21,6 +21,26 @@ type AuthResponse struct {
 }
 
 func AuthHandler(w http.ResponseWriter, r *http.Request) {
+	sendPlaylistJSON(w)
+}
+
+func getClientId() string {
+	if err := godotenv.Load(); err != nil {
+		log.Fatal(err)
+	}
+
+	return os.Getenv("CLIENT_ID")
+}
+
+func getClientSecret() string {
+	if err := godotenv.Load(); err != nil {
+		log.Fatal(err)
+	}
+
+	return os.Getenv("CLIENT_SECRET")
+}
+
+func getAccessToken(w http.ResponseWriter) string {
 	clientId := getClientId()
 	clientSecret := getClientSecret()
 
@@ -38,12 +58,52 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	req, err := http.NewRequest("POST", tokenURL, strings.NewReader(data.Encode()))
 	if err != nil {
 		http.Error(w, "Failed to create request", http.StatusInternalServerError)
-		return
+		return "error"
 	}
 
 	// Add headers to the request
 	req.Header.Add("Authorization", "Basic "+authHeader)
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Add("Accept", "application/json")
+
+	// Send the request
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		http.Error(w, "Failed to make POST request", http.StatusInternalServerError)
+		return "error"
+	}
+	defer resp.Body.Close()
+
+	// Read and process the response body
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		http.Error(w, "Failed to read response body", http.StatusInternalServerError)
+		return "error"
+	}
+
+	// Convert response to JSON
+	var authResponse AuthResponse
+	json.Unmarshal(body, &authResponse)
+
+	return authResponse.AccessToken
+}
+
+func sendPlaylistJSON(w http.ResponseWriter) {
+	billboardTop100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ?si=fb9ea777334348d1"
+	playlistURL := "https://api.spotify.com/playlists/" + billboardTop100PlaylistID
+
+	accessToken := getAccessToken(w)
+
+	// Create a new POST request
+	req, err := http.NewRequest("GET", playlistURL, nil)
+	if err != nil {
+		http.Error(w, "Failed to create request", http.StatusInternalServerError)
+		return
+	}
+
+	// Add headers to the request
+	req.Header.Add("Authorization", "Bearer "+accessToken)
 	req.Header.Add("Accept", "application/json")
 
 	// Send the request
@@ -62,25 +122,6 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Convert response to JSON
-	var authResponse AuthResponse
-	json.Unmarshal(body, &authResponse)
-
-	authToken := authResponse.AccessToken
-}
-
-func getClientId() string {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal(err)
-	}
-
-	return os.Getenv("CLIENT_ID")
-}
-
-func getClientSecret() string {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal(err)
-	}
-
-	return os.Getenv("CLIENT_SECRET")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(body)
 }
