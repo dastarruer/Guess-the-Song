@@ -21,7 +21,8 @@ type AuthResponse struct {
 }
 
 func AuthHandler(w http.ResponseWriter, r *http.Request) {
-	sendPlaylistJSON(w)
+	accessToken := getAccessToken(w)
+	sendPlaylistJSON(w, accessToken)
 }
 
 func getClientId() string {
@@ -89,13 +90,11 @@ func getAccessToken(w http.ResponseWriter) string {
 	return authResponse.AccessToken
 }
 
-func sendPlaylistJSON(w http.ResponseWriter) {
-	billboardTop100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ?si=fb9ea777334348d1"
+func sendPlaylistJSON(w http.ResponseWriter, accessToken string) {
+	billboardTop100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ"
 	playlistURL := "https://api.spotify.com/playlists/" + billboardTop100PlaylistID
 
-	accessToken := getAccessToken(w)
-
-	// Create a new POST request
+	// Create a GET request
 	req, err := http.NewRequest("GET", playlistURL, nil)
 	if err != nil {
 		http.Error(w, "Failed to create request", http.StatusInternalServerError)
@@ -122,6 +121,7 @@ func sendPlaylistJSON(w http.ResponseWriter) {
 		return
 	}
 
+	// Send the JSON
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(body)
 }
