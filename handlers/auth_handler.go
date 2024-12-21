@@ -2,14 +2,23 @@ package handlers
 
 import (
 	"encoding/base64"
-	"github.com/joho/godotenv"
+	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
 	"os"
 	"strings"
+
+	"github.com/joho/godotenv"
 )
+
+type AuthResponse struct {
+	AccessToken string `json:"access_token"`
+	TokenType   string `json:"token_type"`
+	ExpiresIn   int    `json:"expires_in"`
+}
 
 func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	clientId := getClientId()
@@ -53,9 +62,11 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Send the response to the frontend
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(body)
+	// Convert response to JSON
+	var authResponse AuthResponse
+	json.Unmarshal(body, &authResponse)
+
+	authToken := authResponse.AccessToken
 }
 
 func getClientId() string {
