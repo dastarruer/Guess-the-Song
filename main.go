@@ -19,13 +19,10 @@ func main() {
 	// Handle routes
 	http.HandleFunc("/", handlers.IndexHandler)
 	http.HandleFunc("/auth", handlers.AuthHandler)
-	
+
 	// Run the server
 	fmt.Printf("Running server on port http://localhost:8080...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
 }
-
-
-
