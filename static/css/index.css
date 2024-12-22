@@ -27,7 +27,10 @@ body {
     height: auto;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    position: relative;
 
     margin-left: 200px;
     margin-right: 200px;
@@ -54,8 +57,6 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings: "wdth" 112.5;
-
-    padding-bottom: 30px;
 
     width: var(--artist-image-size);
 }
@@ -107,5 +108,14 @@ body {
 }
 
 #play-track {
-    font-size: 50px;
+    position: relative;
+    left: 37%; 
+
+    font-size: 70px;
+    color: #ffffff;
+    cursor: pointer;
+
+    margin-top: 20px; /* Adds spacing below the image */
+    text-align: center; /* Ensures the icon is centered */
 }
+
