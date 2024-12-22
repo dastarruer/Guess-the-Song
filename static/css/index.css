@@ -73,7 +73,7 @@ body {
     position: relative;
     left: -100px;
     top: -120px;
-    
+
     font-family: "REM", serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -104,4 +104,8 @@ body {
     border-color: #1db954;
     outline: none;
     caret-color: #1db954;
+}
+
+#play-track {
+    font-size: 50px;
 }
