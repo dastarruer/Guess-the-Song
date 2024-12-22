@@ -110,7 +110,7 @@ func getAccessToken(w http.ResponseWriter) string {
 // any errors occur during the request creation, execution, or response
 // processing, an appropriate HTTP error is set in the response.
 
-func sendPlaylistJSON(w http.ResponseWriter, accessToken string, , playlistID string) {
+func sendPlaylistJSON(w http.ResponseWriter, accessToken string, playlistID string) {
 	playlistURL := "https://api.spotify.com/v1/playlists/" + playlistID
 
 	// Create a GET request
