@@ -3,7 +3,6 @@ package handlers
 import (
 	"encoding/base64"
 	"encoding/json"
-	// "fmt"
 	"io"
 	"log"
 	"net/http"
@@ -92,7 +91,7 @@ func getAccessToken(w http.ResponseWriter) string {
 
 func sendPlaylistJSON(w http.ResponseWriter, accessToken string) {
 	billboardTop100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ"
-	playlistURL := "https://api.spotify.com/playlists/" + billboardTop100PlaylistID
+	playlistURL := "https://api.spotify.com/v1/playlists/" + billboardTop100PlaylistID
 
 	// Create a GET request
 	req, err := http.NewRequest("GET", playlistURL, nil)
