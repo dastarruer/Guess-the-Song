@@ -2,6 +2,7 @@
 // TODO: Make audio start and stop when play button is pressed
 const apiButton = document.getElementById("api");
 const playButton = document.getElementById("play-track");
+const audioPlayer = document.getElementById("track-player");
 
 apiButton.addEventListener("click", async () => {
     const data = await getRandomBillboardHot100Song();
@@ -9,12 +10,14 @@ apiButton.addEventListener("click", async () => {
 });
 
 playButton.addEventListener("click", () => {
-    let pause = "bi bi-pause-circle-fill";
-    let play = "bi bi-play-circle-fill";
-    if (playButton.className === pause){
-        playButton.className  = play;
+    let pauseClass = "bi bi-pause-circle-fill";
+    let playClass = "bi bi-play-circle-fill";
+    if (playButton.className === pauseClass) {
+        playButton.className = playClass;
+        audioPlayer.play()
     } else {
-        playButton.className = pause
+        playButton.className = pauseClass;
+        audioPlayer.pause()
     }
 });
 
