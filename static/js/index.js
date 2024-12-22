@@ -6,7 +6,8 @@ var isPlaying = false;
 
 apiButton.addEventListener("click", async () => {
     const data = await getRandomBillboardHot100Song();
-    console.log(data);
+    console.log(data)
+    playTrack(data.preview_url)
 });
 
 playButton.addEventListener("click", () => {
@@ -25,7 +26,7 @@ async function getRandomBillboardHot100Song() {
     const response = await fetch("http://localhost:8080/auth");
     const data = await response.json();
     const track =
-        data.tracks.items[Math.floor(Math.random() * data.tracks.items.length)];
+        data.tracks.items[Math.floor(Math.random() * data.tracks.items.length)].track;
     return track;
 }
 
