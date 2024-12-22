@@ -1,5 +1,4 @@
 // TODO: Play a random song off of the billboard hot 100
-// TODO: Make audio start and stop when play button is pressed
 const apiButton = document.getElementById("api");
 const playButton = document.getElementById("play-track");
 const audioPlayer = document.getElementById("track-player");
@@ -15,7 +14,7 @@ playButton.addEventListener("click", () => {
     let playClass = "bi bi-play-circle-fill";
     if (playButton.className === pauseClass) {
         playButton.className = playClass;
-        togglePlay()
+        togglePlay();
     } else {
         playButton.className = pauseClass;
         togglePlay();
@@ -32,6 +31,12 @@ async function getRandomBillboardHot100Song() {
 
 function togglePlay() {
     isPlaying ? audioPlayer.pause() : audioPlayer.play();
+}
+
+function playTrack(src) {
+    audioPlayer.src = src;
+    audioPlayer.load()
+    audioPlayer.play()
 }
 
 audioPlayer.onplaying = function () {
