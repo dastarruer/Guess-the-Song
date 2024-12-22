@@ -3,6 +3,7 @@
 const apiButton = document.getElementById("api");
 const playButton = document.getElementById("play-track");
 const audioPlayer = document.getElementById("track-player");
+var isPlaying = false;
 
 apiButton.addEventListener("click", async () => {
     const data = await getRandomBillboardHot100Song();
@@ -14,10 +15,10 @@ playButton.addEventListener("click", () => {
     let playClass = "bi bi-play-circle-fill";
     if (playButton.className === pauseClass) {
         playButton.className = playClass;
-        audioPlayer.play()
+        togglePlay()
     } else {
         playButton.className = pauseClass;
-        audioPlayer.pause()
+        togglePlay();
     }
 });
 
@@ -28,3 +29,14 @@ async function getRandomBillboardHot100Song() {
         data.tracks.items[Math.floor(Math.random() * data.tracks.items.length)];
     return track;
 }
+
+function togglePlay() {
+    isPlaying ? audioPlayer.pause() : audioPlayer.play();
+}
+
+audioPlayer.onplaying = function () {
+    isPlaying = true;
+};
+audioPlayer.onpause = function () {
+    isPlaying = false;
+};
