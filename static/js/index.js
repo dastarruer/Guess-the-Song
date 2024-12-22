@@ -6,8 +6,8 @@ var isPlaying = false;
 
 apiButton.addEventListener("click", async () => {
     const data = await getRandomBillboardHot100Song();
-    console.log(data)
-    playTrack(data.preview_url)
+    console.log(data);
+    playTrack(data.preview_url);
 });
 
 playButton.addEventListener("click", () => {
@@ -25,8 +25,9 @@ playButton.addEventListener("click", () => {
 async function getRandomBillboardHot100Song() {
     const response = await fetch("http://localhost:8080/auth");
     const data = await response.json();
-    const track =
-        data.tracks.items[Math.floor(Math.random() * data.tracks.items.length)].track;
+
+    let track = data.items[Math.floor(Math.random() * data.items.length)].track;
+
     return track;
 }
 
@@ -36,8 +37,8 @@ function togglePlay() {
 
 function playTrack(src) {
     audioPlayer.src = src;
-    audioPlayer.load()
-    audioPlayer.play()
+    audioPlayer.load();
+    audioPlayer.play();
 }
 
 audioPlayer.onplaying = function () {
