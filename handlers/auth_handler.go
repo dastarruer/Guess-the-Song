@@ -19,11 +19,20 @@ type AuthResponse struct {
 	ExpiresIn   int    `json:"expires_in"`
 }
 
+// AuthHandler handles the authentication process by obtaining an access token
+// and sending the Spotify playlist's data to the frontend. It first retrieves
+// the access token using the getAccessToken function and then uses the
+// sendPlaylistJSON function to send the playlist data as a JSON response.
+
 func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	accessToken := getAccessToken(w)
+
+	// Send the playlist's data to the frontend
 	sendPlaylistJSON(w, accessToken)
 }
 
+
+// getClientId returns the client ID of the Spotify API as a string, retrieved from the CLIENT_ID environment variable.
 func getClientId() string {
 	if err := godotenv.Load(); err != nil {
 		log.Fatal(err)
@@ -31,6 +40,10 @@ func getClientId() string {
 
 	return os.Getenv("CLIENT_ID")
 }
+
+// getClientSecret returns the client secret of the Spotify API as a string,
+// retrieved from the CLIENT_SECRET environment variable. If loading the
+// environment variables fails, the function will log a fatal error.
 
 func getClientSecret() string {
 	if err := godotenv.Load(); err != nil {
@@ -40,6 +53,7 @@ func getClientSecret() string {
 	return os.Getenv("CLIENT_SECRET")
 }
 
+// getAccessToken sends a POST request to the Spotify API to obtain an access token using the client ID and client secret. It then extracts the access token from the response and returns it as a string. If any errors occur during the process, it will set the HTTP status code to 500 and return "error".
 func getAccessToken(w http.ResponseWriter) string {
 	clientId := getClientId()
 	clientSecret := getClientSecret()
@@ -88,6 +102,12 @@ func getAccessToken(w http.ResponseWriter) string {
 
 	return authResponse.AccessToken
 }
+
+// sendPlaylistJSON sends a GET request to the Spotify API to retrieve the
+// Billboard Top 100 playlist data using the provided access token. It then
+// writes the data as a JSON response to the provided http.ResponseWriter. If
+// any errors occur during the request creation, execution, or response
+// processing, an appropriate HTTP error is set in the response.
 
 func sendPlaylistJSON(w http.ResponseWriter, accessToken string) {
 	billboardTop100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ"
