@@ -22,13 +22,14 @@ type AuthResponse struct {
 // AuthHandler handles the authentication process by obtaining an access token
 // and sending the Spotify playlist's data to the frontend. It first retrieves
 // the access token using the getAccessToken function and then uses the
-// sendPlaylistJSON function to send the playlist data as a JSON response.
+// sendPlaylistJSON function to send the playlist data as a JSON response, passing in the Billboard Hot 100 playlist ID.
 
 func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	accessToken := getAccessToken(w)
 
 	// Send the playlist's data to the frontend
-	sendPlaylistJSON(w, accessToken)
+	billboardHot100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ"
+	sendPlaylistJSON(w, accessToken, billboardHot100PlaylistID)
 }
 
 
@@ -109,9 +110,8 @@ func getAccessToken(w http.ResponseWriter) string {
 // any errors occur during the request creation, execution, or response
 // processing, an appropriate HTTP error is set in the response.
 
-func sendPlaylistJSON(w http.ResponseWriter, accessToken string) {
-	billboardTop100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ"
-	playlistURL := "https://api.spotify.com/v1/playlists/" + billboardTop100PlaylistID
+func sendPlaylistJSON(w http.ResponseWriter, accessToken string, , playlistID string) {
+	playlistURL := "https://api.spotify.com/v1/playlists/" + playlistID
 
 	// Create a GET request
 	req, err := http.NewRequest("GET", playlistURL, nil)
