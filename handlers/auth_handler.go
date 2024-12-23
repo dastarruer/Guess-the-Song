@@ -32,7 +32,6 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	sendPlaylistJSON(w, accessToken, billboardHot100PlaylistID)
 }
 
-
 // getClientId returns the client ID of the Spotify API as a string, retrieved from the CLIENT_ID environment variable.
 func getClientId() string {
 	if err := godotenv.Load(); err != nil {
@@ -143,4 +142,48 @@ func sendPlaylistJSON(w http.ResponseWriter, accessToken string, playlistID stri
 	// Send the JSON
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(body)
+}
+
+func requestUserAuth(w http.ResponseWriter) {
+	clientId := getClientId()
+	responseType := "code"
+	redirectURI := "http://localhost:8080"
+	state := generateRandomString(16)
+
+	playlistURL := "https://accounts.spotify.com/api/authorize?client_id=" + clientId + "?response_type=" + responseType + "?redirect_uri="	+ redirectURI + "?state=" + state
+
+	// Create a GET request
+	req, err := http.NewRequest("GET", playlistURL, nil)
+	if err != nil {
+		http.Error(w, "Failed to create request", http.StatusInternalServerError)
+		return
+	}
+
+	// Send the request
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		http.Error(w, "Failed to make POST request", http.StatusInternalServerError)
+		return
+	}
+	defer resp.Body.Close()
+
+	// Read and process the response body
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		http.Error(w, "Failed to read response body", http.StatusInternalServerError)
+		return
+	}
+}
+
+func generateRandomString(length int) string {
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	var seededRand = rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	// Create a string of random characters from the charset
+	randomString := make([]byte, length)
+	for i := range randomString {
+		randomString[i] = charset[seededRand.Intn(len(charset))]
+	}
+	return string(randomString)
 }
