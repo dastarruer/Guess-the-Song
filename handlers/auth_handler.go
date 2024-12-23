@@ -44,10 +44,6 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Get the access token
 	accessToken := getAccessToken(w, code)
-	if accessToken == "" {
-		// Error already handled in getAccessToken
-		return
-	}
 
 	// Send the playlist's data to the frontend
 	billboardHot100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ"
