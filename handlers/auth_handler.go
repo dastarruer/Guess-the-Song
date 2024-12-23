@@ -3,6 +3,7 @@ package handlers
 import (
 	// "encoding/base64"
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -37,10 +38,6 @@ const redirectURI = "http://localhost:8080"
 func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	// Retrieve the authorization code from the query
 	code := r.URL.Query().Get("code")
-	if code == "" {
-		http.Error(w, "Authorization code not provided", http.StatusBadRequest)
-		return
-	}
 
 	// Get the access token
 	accessToken := getAccessToken(w, code)
@@ -96,6 +93,10 @@ func getAccessToken(w http.ResponseWriter, code string) string {
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
+	credentials := clientID + ":" + clientSecret
+	encodedCredentials := "Basic " + base64.StdEncoding.EncodeToString([]byte(credentials))
+	req.Header.Set("Authorization", encodedCredentials)
+
 	// Send the request
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -126,7 +127,6 @@ func getAccessToken(w http.ResponseWriter, code string) string {
 
 	return tokenResponse.AccessToken
 }
-
 
 // sendPlaylistJSON sends a GET request to the Spotify API to retrieve the
 // Billboard Top 100 playlist data using the provided access token. It then
