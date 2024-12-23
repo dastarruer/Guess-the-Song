@@ -1,25 +1,33 @@
 package handlers
 
 import (
-	"encoding/base64"
+	// "encoding/base64"
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"os"
-	"strings"
+
+	// "strings"
 	"time"
-	"math/rand"
 
 	"github.com/joho/godotenv"
 )
 
 type AuthResponse struct {
-	AccessToken string `json:"access_token"`
-	TokenType   string `json:"token_type"`
-	ExpiresIn   int    `json:"expires_in"`
+	AccessToken  string `json:"access_token"`
+	TokenType    string `json:"token_type"`
+	Scope        string `json:"scope"`
+	ExpiresIn    int    `json:"expires_in"`
+	RefreshToken string `json:"refresh_token"`
 }
+
+const redirectURI = "http://localhost:8080"
 
 // AuthHandler handles the authentication process by obtaining an access token
 // and sending the Spotify playlist's data to the frontend. It first retrieves
@@ -27,7 +35,19 @@ type AuthResponse struct {
 // sendPlaylistJSON function to send the playlist data as a JSON response, passing in the Billboard Hot 100 playlist ID.
 
 func AuthHandler(w http.ResponseWriter, r *http.Request) {
-	accessToken := getAccessToken(w)
+	// Retrieve the authorization code from the query
+	code := r.URL.Query().Get("code")
+	if code == "" {
+		http.Error(w, "Authorization code not provided", http.StatusBadRequest)
+		return
+	}
+
+	// Get the access token
+	accessToken := getAccessToken(w, code)
+	if accessToken == "" {
+		// Error already handled in getAccessToken
+		return
+	}
 
 	// Send the playlist's data to the frontend
 	billboardHot100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ"
@@ -55,55 +75,62 @@ func getClientSecret() string {
 	return os.Getenv("CLIENT_SECRET")
 }
 
-// getAccessToken sends a POST request to the Spotify API to obtain an access token using the client ID and client secret. It then extracts the access token from the response and returns it as a string. If any errors occur during the process, it will set the HTTP status code to 500 and return "error".
-func getAccessToken(w http.ResponseWriter) string {
-	clientId := getClientId()
+// getAccessToken sends a POST request to the Spotify API to obtain an access token using the client ID and client secret.
+// If an error occurs, it sets the HTTP status code and writes the error to the response.
+func getAccessToken(w http.ResponseWriter, code string) string {
+	clientID := getClientId()
 	clientSecret := getClientSecret()
 
-	// Base64 encode client_id:client_secret as per Spotify's specifications
-	authHeader := base64.StdEncoding.EncodeToString([]byte(clientId + ":" + clientSecret))
-
-	// Spotify token URL
+	// Spotify token endpoint
 	tokenURL := "https://accounts.spotify.com/api/token"
 
-	// Prepare the POST request body with required URL-encoded data
+	// Prepare the request body
 	data := url.Values{}
-	data.Set("grant_type", "client_credentials")
+	data.Set("grant_type", "authorization_code")
+	data.Set("code", code)
+	data.Set("redirect_uri", redirectURI)
+	data.Set("client_id", clientID)
+	data.Set("client_secret", clientSecret)
 
-	// Create a new POST request
-	req, err := http.NewRequest("POST", tokenURL, strings.NewReader(data.Encode()))
+	// Create a POST request
+	req, err := http.NewRequest("POST", tokenURL, bytes.NewBufferString(data.Encode()))
 	if err != nil {
-		http.Error(w, "Failed to create request", http.StatusInternalServerError)
-		return "error"
+		http.Error(w, "Failed to create request: "+err.Error(), http.StatusInternalServerError)
+		return ""
 	}
-
-	// Add headers to the request
-	req.Header.Add("Authorization", "Basic "+authHeader)
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Add("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	// Send the request
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		http.Error(w, "Failed to make POST request", http.StatusInternalServerError)
-		return "error"
+		http.Error(w, "Failed to make request: "+err.Error(), http.StatusInternalServerError)
+		return ""
 	}
 	defer resp.Body.Close()
 
-	// Read and process the response body
-	body, err := io.ReadAll(resp.Body)
+	// Read and parse the response
+	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		http.Error(w, "Failed to read response body", http.StatusInternalServerError)
-		return "error"
+		http.Error(w, "Failed to read response: "+err.Error(), http.StatusInternalServerError)
+		return ""
 	}
 
-	// Convert response to JSON
-	var authResponse AuthResponse
-	json.Unmarshal(body, &authResponse)
+	if resp.StatusCode != http.StatusOK {
+		http.Error(w, fmt.Sprintf("Unexpected status code: %d, response: %s", resp.StatusCode, body), http.StatusInternalServerError)
+		return ""
+	}
 
-	return authResponse.AccessToken
+	var tokenResponse AuthResponse
+	err = json.Unmarshal(body, &tokenResponse)
+	if err != nil {
+		http.Error(w, "Failed to parse JSON response: "+err.Error(), http.StatusInternalServerError)
+		return ""
+	}
+
+	return tokenResponse.AccessToken
 }
+
 
 // sendPlaylistJSON sends a GET request to the Spotify API to retrieve the
 // Billboard Top 100 playlist data using the provided access token. It then
@@ -147,16 +174,14 @@ func sendPlaylistJSON(w http.ResponseWriter, accessToken string, playlistID stri
 }
 
 func RequestUserAuth(w http.ResponseWriter, r *http.Request) {
-	clientId := getClientId()
+	clientID := getClientId()
 	responseType := "code"
-	// TODO: Make a new redirect URI and change it on the Spotify dashboard
-	redirectURI := "http://localhost:8080"
 	state := generateRandomString(16)
 	scope := "user-read-private user-read-email"
 
 	// Build the authorization URL
 	authURL := "https://accounts.spotify.com/authorize?" + url.Values{
-		"client_id":     {clientId},
+		"client_id":     {clientID},
 		"response_type": {responseType},
 		"redirect_uri":  {redirectURI},
 		"state":         {state},
