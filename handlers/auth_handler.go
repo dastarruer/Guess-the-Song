@@ -10,9 +10,9 @@ import (
 	"os"
 	"strings"
 	"time"
+	"math/rand"
 
 	"github.com/joho/godotenv"
-	"golang.org/x/exp/rand"
 )
 
 type AuthResponse struct {
@@ -146,36 +146,24 @@ func sendPlaylistJSON(w http.ResponseWriter, accessToken string, playlistID stri
 	w.Write(body)
 }
 
-func requestUserAuth(w http.ResponseWriter) {
+func RequestUserAuth(w http.ResponseWriter, r *http.Request) {
 	clientId := getClientId()
 	responseType := "code"
-	redirectURI := "http://localhost:8080"
+	redirectURI := "http://localhost:8080/"
 	state := generateRandomString(16)
+	scope := "user-read-private user-read-email"
 
-	playlistURL := "https://accounts.spotify.com/api/authorize?client_id=" + clientId + "?response_type=" + responseType + "?redirect_uri="	+ redirectURI + "?state=" + state
+	// Build the authorization URL
+	authURL := "https://accounts.spotify.com/authorize?" + url.Values{
+		"client_id":     {clientId},
+		"response_type": {responseType},
+		"redirect_uri":  {redirectURI},
+		"state":         {state},
+		"scope":         {scope},
+	}.Encode()
 
-	// Create a GET request
-	req, err := http.NewRequest("GET", playlistURL, nil)
-	if err != nil {
-		http.Error(w, "Failed to create request", http.StatusInternalServerError)
-		return
-	}
-
-	// Send the request
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		http.Error(w, "Failed to make POST request", http.StatusInternalServerError)
-		return
-	}
-	defer resp.Body.Close()
-
-	// Read and process the response body
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		http.Error(w, "Failed to read response body", http.StatusInternalServerError)
-		return
-	}
+	// Redirect the user's browser to Spotify's authorization page
+	http.Redirect(w, r, authURL, http.StatusFound)
 }
 
 func generateRandomString(length int) string {

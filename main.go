@@ -18,6 +18,7 @@ func main() {
 
 	// Handle routes
 	http.HandleFunc("/", handlers.IndexHandler)
+	http.HandleFunc("/login", handlers.RequestUserAuth)
 	http.HandleFunc("/auth", handlers.AuthHandler)
 
 	// Run the server
