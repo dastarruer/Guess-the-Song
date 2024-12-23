@@ -149,7 +149,8 @@ func sendPlaylistJSON(w http.ResponseWriter, accessToken string, playlistID stri
 func RequestUserAuth(w http.ResponseWriter, r *http.Request) {
 	clientId := getClientId()
 	responseType := "code"
-	redirectURI := "http://localhost:8080/"
+	// TODO: Make a new redirect URI and change it on the Spotify dashboard
+	redirectURI := "http://localhost:8080"
 	state := generateRandomString(16)
 	scope := "user-read-private user-read-email"
 
