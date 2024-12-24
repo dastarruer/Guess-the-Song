@@ -26,10 +26,20 @@ playButton.addEventListener("click", () => {
 
 // Send an API call to retreive an access token and get playlist data
 async function getRandomBillboardHot100Song() {
-    const response = await fetch("http://localhost:8080/auth");
-    const data = await response.json();
+    let code = new URL(window.location.href).searchParams.get("code");
+    let route = new URL("http://localhost:8080/auth");
+    route.searchParams.append("code", code);
 
-    let track = data.items[Math.floor(Math.random() * data.items.length)].track;
+    const response = await fetch(route);
+    const data = await response.json();
+    console.log(data.items)
+    let track = null
+    do {
+        let trackIndex = Math.floor(Math.random() * data.items.length)
+        track =
+            data.items[trackIndex].track;
+        data.items.splice(trackIndex, 1)
+    } while (track.preview_url === null);
 
     return track;
 }
