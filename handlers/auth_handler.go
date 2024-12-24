@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"math/rand"
 	"net/http"
@@ -132,7 +131,7 @@ func getAccessToken(w http.ResponseWriter, code string) string {
 	defer resp.Body.Close()
 
 	// Read and parse the response
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		http.Error(w, "Failed to read response: "+err.Error(), http.StatusInternalServerError)
 		return ""
