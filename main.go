@@ -19,7 +19,8 @@ func main() {
 	// Handle routes
 	http.HandleFunc("/", handlers.IndexHandler)
 	http.HandleFunc("/login", handlers.RequestUserAuth)
-	http.HandleFunc("/auth", handlers.AuthHandler)
+	http.HandleFunc("/playlist", handlers.PlaylistHandler)
+	http.HandleFunc("/token", handlers.TokenHandler)
 
 	// Run the server
 	fmt.Printf("Running server on port http://localhost:8080...")

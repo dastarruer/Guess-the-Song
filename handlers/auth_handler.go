@@ -30,13 +30,9 @@ type AuthResponse struct {
 
 const redirectURI = "http://localhost:8080"
 
-func AuthHandler(w http.ResponseWriter, r *http.Request) {
-	// Retrieve the authorization code from the query
-	code := r.URL.Query().Get("code")
+var accessToken string
 
-	// Get the access token
-	accessToken := getAccessToken(w, code)
-
+func PlaylistHandler(w http.ResponseWriter, r *http.Request) {
 	// Send the playlist's data to the frontend
 	billboardHot100PlaylistID := "6UeSakyzhiEt4NB3UAd6NQ"
 	sendPlaylistJSON(w, accessToken, billboardHot100PlaylistID)
@@ -48,6 +44,47 @@ func getClientId() string {
 	}
 
 	return os.Getenv("CLIENT_ID")
+}
+
+func TokenHandler(w http.ResponseWriter, r *http.Request) {
+	// Retrieve the authorization code from the query
+	code := r.URL.Query().Get("code")
+
+	// Get the access token
+	accessToken = getAccessToken(w, code)
+
+	response := map[string]interface{}{
+		"access_token": accessToken,
+	}
+
+	// Convert the response to JSON
+	jsonResponse, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, "Failed to encode JSON response: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	// Send the JSON response to the frontend
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonResponse)
+}
+
+func RequestUserAuth(w http.ResponseWriter, r *http.Request) {
+	clientID := getClientId()
+	responseType := "code"
+	state := generateRandomString(16)
+	scope := "user-read-private user-read-email"
+
+	// Build the authorization URL
+	authURL := "https://accounts.spotify.com/authorize?" + url.Values{
+		"client_id":     {clientID},
+		"response_type": {responseType},
+		"redirect_uri":  {redirectURI},
+		"state":         {state},
+		"scope":         {scope},
+	}.Encode()
+
+	// Redirect the user's browser to Spotify's authorization page
+	http.Redirect(w, r, authURL, http.StatusFound)
 }
 
 func getClientSecret() string {
@@ -148,25 +185,6 @@ func sendPlaylistJSON(w http.ResponseWriter, accessToken string, playlistID stri
 	// Send the JSON
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(body)
-}
-
-func RequestUserAuth(w http.ResponseWriter, r *http.Request) {
-	clientID := getClientId()
-	responseType := "code"
-	state := generateRandomString(16)
-	scope := "user-read-private user-read-email"
-
-	// Build the authorization URL
-	authURL := "https://accounts.spotify.com/authorize?" + url.Values{
-		"client_id":     {clientID},
-		"response_type": {responseType},
-		"redirect_uri":  {redirectURI},
-		"state":         {state},
-		"scope":         {scope},
-	}.Encode()
-
-	// Redirect the user's browser to Spotify's authorization page
-	http.Redirect(w, r, authURL, http.StatusFound)
 }
 
 func generateRandomString(length int) string {

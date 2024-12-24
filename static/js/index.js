@@ -5,9 +5,7 @@ const audioPlayer = document.getElementById("track-player");
 var isPlaying = false;
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-    // TODO: Generate this token at runtime
-    const token =
-        "BQBpiF_Lg_o_bjd267VozYzO8gi9ddGhsFex6tD5P7WPVYEfy2JcUd0ykYlKZOufQFDZ3luhqBRQrzq1misB80lB-d6XlYtrqFKuXQ_m6UDSr2L5MFCiJg94ucld-BaT8OXCKOr3nP3c9A_KRSEnk393IMsAhLRfJ1_yDS0kBKAEGrmDDjhnLgA9v8jJrcY6xkt2ZwwKejE7pgi36Yz4NvKA8nldM_uIM1yr";
+    const token = getAuthToken();
     const player = new Spotify.Player({
         name: "Web Playback SDK Quick Start Player",
         getOAuthToken: (cb) => {
@@ -63,4 +61,11 @@ async function getRandomBillboardHot100Song() {
     const track =
         tracks.items[Math.floor(Math.random() * tracks.items.length)];
     return track;
+}
+
+async function getAuthToken() {
+    const response = await fetch("http://localhost:8080/token");
+    let token = await response.json();
+    token = token.access_token;
+    return token
 }
