@@ -6,9 +6,8 @@ var isPlaying = false;
 
 // A temporary button to send API requests when clicked
 apiButton.addEventListener("click", async () => {
-    const data = await getRandomBillboardHot100Song();
-    console.log(data);
-    playTrack(data.preview_url);
+    const track = await getRandomBillboardHot100Song();
+    console.log(track);
 });
 
 // Toggle the play button from a play to a pause icon when clicked
@@ -31,27 +30,15 @@ async function getRandomBillboardHot100Song() {
     route.searchParams.append("code", code);
 
     const response = await fetch(route);
-    const data = await response.json();
-    console.log(data.items)
-    let track = null
-    do {
-        let trackIndex = Math.floor(Math.random() * data.items.length)
-        track =
-            data.items[trackIndex].track;
-        data.items.splice(trackIndex, 1)
-    } while (track.preview_url === null);
+    const tracks = await response.json();
+
+    let track = tracks[Math.floor(Math.random() * tracks.length)];
 
     return track;
 }
 
 function togglePlay() {
     isPlaying ? audioPlayer.pause() : audioPlayer.play();
-}
-
-function playTrack(src) {
-    audioPlayer.src = src;
-    audioPlayer.load();
-    audioPlayer.play();
 }
 
 audioPlayer.onplaying = function () {
