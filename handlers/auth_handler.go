@@ -111,8 +111,7 @@ func getAccessToken(w http.ResponseWriter) string {
 // processing, an appropriate HTTP error is set in the response.
 
 func sendPlaylistJSON(w http.ResponseWriter, accessToken string, playlistID string) {
-	playlistURL := "https://api.spotify.com/v1/playlists/" + playlistID
-
+	playlistURL := "https://api.spotify.com/v1/playlists/" + playlistID + "/tracks"
 	// Create a GET request
 	req, err := http.NewRequest("GET", playlistURL, nil)
 	if err != nil {

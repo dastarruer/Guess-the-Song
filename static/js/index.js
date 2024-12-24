@@ -5,6 +5,7 @@ const audioPlayer = document.getElementById("track-player");
 var isPlaying = false;
 
 window.onSpotifyWebPlaybackSDKReady = () => {
+    // TODO: Generate this token at runtime
     const token =
         "BQBpiF_Lg_o_bjd267VozYzO8gi9ddGhsFex6tD5P7WPVYEfy2JcUd0ykYlKZOufQFDZ3luhqBRQrzq1misB80lB-d6XlYtrqFKuXQ_m6UDSr2L5MFCiJg94ucld-BaT8OXCKOr3nP3c9A_KRSEnk393IMsAhLRfJ1_yDS0kBKAEGrmDDjhnLgA9v8jJrcY6xkt2ZwwKejE7pgi36Yz4NvKA8nldM_uIM1yr";
     const player = new Spotify.Player({
@@ -49,18 +50,17 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
         player.togglePlay();
     });
-};
 
-apiButton.addEventListener("click", async () => {
-    const data = await getRandomBillboardHot100Song();
-    console.log(data);
-});
+    apiButton.addEventListener("click", async () => {
+        const data = await getRandomBillboardHot100Song();
+    });
+};
 
 async function getRandomBillboardHot100Song() {
     const response = await fetch("http://localhost:8080/auth");
-    const data = await response.json();
+    const tracks = await response.json();
     const track =
-        data.tracks.items[Math.floor(Math.random() * data.tracks.items.length)]
+        tracks.items[Math.floor(Math.random() * tracks.items.length)]
             .track;
     return track;
 }
