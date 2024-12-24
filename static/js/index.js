@@ -56,6 +56,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     });
 };
 
+// Send an API call to retreive an access token and get playlist data
 async function getRandomBillboardHot100Song() {
     const response = await fetch("http://localhost:8080/auth");
     const tracks = await response.json();
