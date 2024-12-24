@@ -52,7 +52,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     });
 
     apiButton.addEventListener("click", async () => {
-        const data = await getRandomBillboardHot100Song();
+        const track = await getRandomBillboardHot100Song();
     });
 };
 
@@ -60,7 +60,6 @@ async function getRandomBillboardHot100Song() {
     const response = await fetch("http://localhost:8080/auth");
     const tracks = await response.json();
     const track =
-        tracks.items[Math.floor(Math.random() * tracks.items.length)]
-            .track;
+        tracks.items[Math.floor(Math.random() * tracks.items.length)];
     return track;
 }
