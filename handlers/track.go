@@ -12,13 +12,13 @@ type Track struct {
 	PreviewURL string `json:"preview"`
 }
 
-// TODO: Get an actual preview link
 func TrackHandler(w http.ResponseWriter, r *http.Request) {
 	id := 3135556
 	var track Track
 	err := requests.
 		URL("https://api.deezer.com").
-		Pathf("/tracks/%d", id).
+		Pathf("/track/%d", id).
+		ContentType("application/json").
 		ToJSON(&track).
 		Fetch(context.Background())
 	if err != nil {
