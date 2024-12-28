@@ -9,6 +9,7 @@ import (
 )
 
 type Track struct {
+	Title      string `json:"title"`
 	PreviewURL string `json:"preview"`
 }
 
