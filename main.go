@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
+
+	"guess-the-song/handlers"
 )
 
 func main() {
 	// NOTE: All directories must be manually configured to be served to the user, otherwise all content referencing said directories WILL NOT be shown
-	
+
 	// Serve static directory
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
@@ -17,13 +18,7 @@ func main() {
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./images"))))
 
 	// Handle '/' route
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Get the index.html template
-		tmpl := template.Must(template.ParseFiles("./templates/index.html"))
-
-		// Show the page to the user
-		tmpl.Execute(w, nil)
-	})
+	http.HandleFunc("/", handlers.IndexHandler)
 
 	// Run the server
 	fmt.Printf("Running server on port http://localhost:8080...")
@@ -31,5 +26,3 @@ func main() {
 		log.Fatal(err)
 	}
 }
-
-

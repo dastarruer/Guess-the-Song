@@ -1,3 +1,3 @@
-module guess-the-artist
+module guess-the-song
 
 go 1.22.2
