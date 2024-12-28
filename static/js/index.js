@@ -1,5 +1,6 @@
-const apiButton = document.getElementById("api")
+const apiButton = document.getElementById("api");
 
-apiButton.addEventListener("click", () => {
-    console.log("hello")
-})
+apiButton.addEventListener("click", async () => {
+    const data = await fetch("http://localhost:8080/track");
+    console.log(data);
+});
