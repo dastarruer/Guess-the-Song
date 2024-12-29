@@ -6,7 +6,7 @@ apiButton.addEventListener("click", async () => {
 });
 
 async function getRandomArtistTrack() {
-    const data = await fetch("http://localhost:8080/artist");
+    const data = await fetch("http://localhost:8080/artist/top");
     const json = await data.json();
 
     let tracks = json.data
