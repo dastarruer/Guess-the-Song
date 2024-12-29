@@ -8,14 +8,19 @@ window.onload = async function () {
     submitButton.addEventListener("click", () => {
         const input = document.getElementById("input");
         const guess = input.value.toLowerCase();
-        const trackName = track.title.toLowerCase();
-        if (guess === trackName) {
-            console.log("correct");
+        const trackName = track.title;
+
+        if (guess === trackName.toLowerCase()) {
+            const trackCaption = document.getElementById("track-name");
+            const trackImage = document.getElementById("artist-image");
+
+            trackCaption.textContent = trackName;
+            trackImage.src = track.album.cover;
         } else {
             console.log("incorrect");
         }
     });
-};
+};;
 
 async function getRandomArtistTrack() {
     const data = await fetch("http://localhost:8080/artist/top");
