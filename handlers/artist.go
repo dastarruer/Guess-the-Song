@@ -9,7 +9,7 @@ import (
 )
 
 type Artist struct {
-	Name string `json:"name"`
+	Name    string `json:"name"`
 	Picture string `json:"picture"`
 }
 
