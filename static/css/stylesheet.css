@@ -44,13 +44,30 @@ body {
     border-radius: 7px;
 }
 
-#artist-name {
+#track-name {
     text-align: center;
 
     font-family: "Martian Mono", serif;
     font-size: 3.125rem;
     font-weight: 700;
     color: #ffffff;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 112.5;
+
+    padding-bottom: 15px;
+
+    width: var(--artist-image-size);
+}
+
+
+#artist-name {
+    text-align: center;
+
+    font-family: "Martian Mono", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #b3b3b3;
     font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings: "wdth" 112.5;
@@ -108,6 +125,7 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/* Loading animation */
 .loading-dots {
   display: flex;
   justify-content: center;

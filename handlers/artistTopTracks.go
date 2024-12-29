@@ -14,7 +14,7 @@ type ArtistTopTracks struct {
 }
 
 func ArtistTopTracksHandler(w http.ResponseWriter, r *http.Request) {
-	id := 27
+	id := 525046
 	var artist ArtistTopTracks
 	err := requests.
 		URL("https://api.deezer.com").

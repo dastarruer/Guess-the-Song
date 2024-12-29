@@ -14,7 +14,7 @@ type Artist struct {
 }
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
-	id := 27
+	id := 525046
 	var artist Artist
 	err := requests.
 		URL("https://api.deezer.com").
