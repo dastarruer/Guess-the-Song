@@ -1,10 +1,8 @@
-const apiButton = document.getElementById("api");
-
-apiButton.addEventListener("click", async () => {
+window.onload = async function() {
     const track = await getRandomArtistTrack();
     const artist = await getArtist()
     setTrack(artist, track.preview)
-});
+}
 
 async function getRandomArtistTrack() {
     const data = await fetch("http://localhost:8080/artist/top");
