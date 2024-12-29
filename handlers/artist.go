@@ -10,7 +10,7 @@ import (
 )
 
 type Artist struct {
-	Tracklist string `json:"tracklist"`
+	Tracklist []Track `json:"data"`
 }
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +18,8 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	var artist Artist
 	err := requests.
 		URL("https://api.deezer.com").
-		Pathf("/artist/%d", id).
+		Pathf("/artist/%d/top", id).
+		Param("limit", "50").
 		ContentType("application/json").
 		ToJSON(&artist).
 		Fetch(context.Background())
