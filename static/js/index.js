@@ -1,7 +1,13 @@
+const submitButton = document.getElementById("submit-guess");
+
 window.onload = async function () {
     const track = await getRandomArtistTrack();
     const artist = await getArtist();
     setTrack(artist, track.preview);
+
+    submitButton.addEventListener("click", () => {
+        console.log("hello");
+    });
 };
 
 async function getRandomArtistTrack() {
