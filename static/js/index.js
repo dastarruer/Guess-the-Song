@@ -2,7 +2,8 @@ const apiButton = document.getElementById("api");
 
 apiButton.addEventListener("click", async () => {
     const track = await getRandomArtistTrack();
-    setTrack(track.preview)
+    const artist = await getArtist()
+    setTrack(artist, track.preview)
 });
 
 async function getRandomArtistTrack() {
@@ -14,9 +15,22 @@ async function getRandomArtistTrack() {
     return track;
 }
 
-function setTrack(previewUrl) {
-    const trackPlayer = document.getElementById("track");
-    trackPlayer.src = previewUrl;
-    trackPlayer.load();
+async function getArtist() {
+    const data = await fetch("http://localhost:8080/artist");
+    const artist = await data.json();
+    return artist
 }
 
+function setTrack(artist, previewUrl) {
+    const trackPlayer = document.getElementById("track");
+    const artistName = document.getElementById("artist-name");
+    const artistImage = document.getElementById("artist-image");
+
+    // Set the audio
+    trackPlayer.src = previewUrl;
+    trackPlayer.load();
+
+    // Set the artist info
+    artistImage.src = artist.picture
+    artistName.textContent = artist.name
+}
