@@ -1,5 +1,4 @@
 const apiButton = document.getElementById("api");
-const trackPlayer = document.getElementById("track");
 
 apiButton.addEventListener("click", async () => {
     const track = await getRandomArtistTrack();
@@ -15,7 +14,9 @@ async function getRandomArtistTrack() {
     return track;
 }
 
-async function setTrack(previewUrl) {
+function setTrack(previewUrl) {
+    const trackPlayer = document.getElementById("track");
     trackPlayer.src = previewUrl;
     trackPlayer.load();
 }
+
