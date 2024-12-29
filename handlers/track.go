@@ -15,6 +15,7 @@ type Album struct {
 type Track struct {
 	Title      string `json:"title"`
 	PreviewURL string `json:"preview"`
+	Album      Album  `json:"album"`
 }
 
 func TrackHandler(w http.ResponseWriter, r *http.Request) {
