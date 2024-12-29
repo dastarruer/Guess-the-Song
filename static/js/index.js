@@ -33,5 +33,5 @@ function setTrack(artist, previewUrl) {
     artistImage.src = artist.picture;
     artistName.textContent = artist.name;
 
-    trackName.innerText = "???"
+    trackName.innerText = "???";
 }
