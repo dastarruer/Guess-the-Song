@@ -11,7 +11,8 @@ async function getRandomArtistTrack() {
     const json = await data.json();
 
     let tracks = json.data
-    return tracks;
+    let track = tracks[Math.floor(Math.random() * tracks.length)]
+    return track;
 }
 
 async function setTrack() {
