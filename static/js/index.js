@@ -6,7 +6,14 @@ window.onload = async function () {
     setTrack(artist, track.preview);
 
     submitButton.addEventListener("click", () => {
-        console.log("hello");
+        const input = document.getElementById("input");
+        const guess = input.value.toLowerCase();
+        const trackName = track.title.toLowerCase();
+        if (guess === trackName) {
+            console.log("correct");
+        } else {
+            console.log("incorrect");
+        }
     });
 };
 
