@@ -131,14 +131,18 @@ body {
 }
 
 #submit-guess {
-    background-color: #1db954;
+    background-color: #ffffff;
+
     position: relative;
     left: -100px;
     top: -90px;
 
-    border-radius: 8px;
     width: 300px;
     height: 60px;
+    
+    border-radius: 8px;
+    border-color: #ffffff;
+    border-style: solid;
 }
 
 /* Loading animation */
