@@ -8,6 +8,10 @@ import (
 	"github.com/carlmjohnson/requests"
 )
 
+type Album struct {
+	Cover string `json:"cover"`
+}
+
 type Track struct {
 	Title      string `json:"title"`
 	PreviewURL string `json:"preview"`
