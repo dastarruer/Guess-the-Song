@@ -20,6 +20,7 @@ func main() {
 	http.HandleFunc("/", handlers.IndexHandler)
 	http.HandleFunc("/track", handlers.TrackHandler)
 	http.HandleFunc("/artist", handlers.ArtistHandler)
+	http.HandleFunc("/artist/top", handlers.ArtistTopTracksHandler)
 
 	// Run the server
 	fmt.Printf("Running server on port http://localhost:8080...")

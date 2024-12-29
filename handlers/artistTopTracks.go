@@ -9,16 +9,17 @@ import (
 	"github.com/carlmjohnson/requests"
 )
 
-type Artist struct {
-	Picture string `json:"picture"`
+type ArtistTopTracks struct {
+	Tracklist []Track `json:"data"`
 }
 
-func ArtistHandler(w http.ResponseWriter, r *http.Request) {
+func ArtistTopTracksHandler(w http.ResponseWriter, r *http.Request) {
 	id := 27
-	var artist Artist
+	var artist ArtistTopTracks
 	err := requests.
 		URL("https://api.deezer.com").
-		Pathf("/artist/%d", id).
+		Pathf("/artist/%d/top", id).
+		Param("limit", "50").
 		ContentType("application/json").
 		ToJSON(&artist).
 		Fetch(context.Background())
