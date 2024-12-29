@@ -83,9 +83,8 @@ body {
 }
 
 #input-container {
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
+    display: flex;
+    flex-direction: column;
 }
 
 #input {
@@ -143,16 +142,23 @@ body {
     border-radius: 8px;
     border-color: #ffffff;
     border-style: solid;
+
+    font-family: "JetBrains Mono", serif;
+    font-size: 1.1rem;
+    font-optical-sizing: auto;
+    letter-spacing: 30%;
+    font-weight: 800;
+    font-style: normal;
 }
 
 #submit-guess:focus {
-  background-color: #1db954;
-  border-color: #1db954;
+    background-color: #1db954;
+    border-color: #1db954;
 }
 
 #submit-guess:hover {
-  background-color: #1db954;
-  border-color: #1db954;
+    background-color: #1db954;
+    border-color: #1db954;
 }
 
 /* Loading animation */
