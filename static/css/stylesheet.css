@@ -154,6 +154,7 @@ body {
 #submit-guess:focus {
     background-color: #1db954;
     border-color: #1db954;
+    outline: none;
 }
 
 #submit-guess:hover {
