@@ -24,8 +24,17 @@ window.onload = async function () {
     });
 
     guessInput.addEventListener("input", () => {
-        console.log(guessInput.value)
-    })
+        const guess = guessInput.value
+        const relevantTracks = tracklist.sort((a, b) => {
+            // Calculate Levenshtein distance for both tracks' names
+            const distanceA = levenshteinDistance(guess, a.title);
+            const distanceB = levenshteinDistance(guess, b.title);
+
+            // Compare distances
+            return distanceA - distanceB;
+        });
+        console.log(relevantTracks)
+    });
 };
 
 function levenshteinDistance(a, b) {
