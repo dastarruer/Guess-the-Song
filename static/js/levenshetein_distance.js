@@ -1,6 +1,12 @@
 function levenshteinDistance(a, b) {
-    lenA = a.length;
-    lenB = b.length;
+    let lenA = a.length;
+    let lenB = b.length;
+
+    let headA = a[0];
+    let headB = b[0];
+
+    let tailA = a.slice(1);
+    let tailB = b.slice(1);
 
     if (lenA === 0) {
         return lenB;
