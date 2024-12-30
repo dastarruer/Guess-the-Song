@@ -15,7 +15,14 @@ function levenshteinDistance(a, b) {
     }
 
     if (headA === headB) {
-        return levenshteinDistance(tailA, tailB)
+        return levenshteinDistance(tailA, tailB);
     }
+
+    return (
+        Math.min(
+            levenshteinDistance(tailA, b),
+            levenshteinDistance(a, tailB),
+            levenshteinDistance(tailA, tailB)
+        ) + 1
+    );
 }
-console.log(levenshteinDistance("h", "hello"));
