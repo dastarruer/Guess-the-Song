@@ -13,5 +13,9 @@ function levenshteinDistance(a, b) {
     } else if (lenB === 0) {
         return lenA;
     }
+
+    if (headA === headB) {
+        return levenshteinDistance(tailA, tailB)
+    }
 }
-console.log(levenshteinDistance("", "hello"));
+console.log(levenshteinDistance("h", "hello"));
