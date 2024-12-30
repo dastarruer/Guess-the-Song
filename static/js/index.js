@@ -23,47 +23,65 @@ window.onload = async function () {
         }
     });
 
-    guessInput.addEventListener("input", () => {
-        const guess = guessInput.value
-        const relevantTracks = tracklist.sort((a, b) => {
-            // Calculate Levenshtein distance for both tracks' names
-            const distanceA = levenshteinDistance(guess, a.title);
-            const distanceB = levenshteinDistance(guess, b.title);
+    guessInput.addEventListener(
+        "input",
+        debounce(() => {
+            const guess = guessInput.value.toLowerCase();
+            let relevantTracks = tracklist.filter((track) =>
+                track.title.toLowerCase().startsWith(guess.slice(0, 3))
+            );
+            relevantTracks = tracklist
+                .sort((a, b) => {
+                    // Calculate Levenshtein distance for both tracks' names
+                    const distanceA = levenshteinDistance(
+                        guess,
+                        a.title.toLowerCase()
+                    );
+                    const distanceB = levenshteinDistance(
+                        guess,
+                        b.title.toLowerCase()
+                    );
 
-            // Compare distances
-            return distanceA - distanceB;
-        });
-        console.log(relevantTracks)
-    });
+                    // Compare distances
+                    return distanceA - distanceB;
+                })
+                .slice(0, 3);
+            console.log(relevantTracks);
+        }),
+        300
+    );
 };
 
+function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
 function levenshteinDistance(a, b) {
-    let lenA = a.length;
-    let lenB = b.length;
+    const lenA = a.length,
+        lenB = b.length;
+    const dp = Array.from({ length: lenA + 1 }, () => Array(lenB + 1).fill(0));
 
-    let headA = a[0];
-    let headB = b[0];
+    for (let i = 0; i <= lenA; i++) dp[i][0] = i;
+    for (let j = 0; j <= lenB; j++) dp[0][j] = j;
 
-    let tailA = a.slice(1);
-    let tailB = b.slice(1);
-
-    if (lenA === 0) {
-        return lenB;
-    } else if (lenB === 0) {
-        return lenA;
+    for (let i = 1; i <= lenA; i++) {
+        for (let j = 1; j <= lenB; j++) {
+            if (a[i - 1] === b[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1];
+            } else {
+                dp[i][j] = Math.min(
+                    dp[i - 1][j] + 1, // Deletion
+                    dp[i][j - 1] + 1, // Insertion
+                    dp[i - 1][j - 1] + 1 // Substitution
+                );
+            }
+        }
     }
-
-    if (headA === headB) {
-        return levenshteinDistance(tailA, tailB);
-    }
-
-    return (
-        Math.min(
-            levenshteinDistance(tailA, b),
-            levenshteinDistance(a, tailB),
-            levenshteinDistance(tailA, tailB)
-        ) + 1
-    );
+    return dp[lenA][lenB];
 }
 
 function getRandomArtistTrack(tracklist) {
