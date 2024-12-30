@@ -1,7 +1,8 @@
 const submitButton = document.getElementById("submit-guess");
 
 window.onload = async function () {
-    const track = await getRandomArtistTrack();
+    const tracklist = await getArtistTracklist();
+    const track = getRandomArtistTrack(tracklist);
     const artist = await getArtist();
     setTrack(artist, track.preview);
 
@@ -20,15 +21,19 @@ window.onload = async function () {
             console.log("incorrect");
         }
     });
-};;
+};
 
-async function getRandomArtistTrack() {
+function getRandomArtistTrack(tracklist) {
+    let track = tracklist[Math.floor(Math.random() * tracklist.length)];
+    return track;
+}
+
+async function getArtistTracklist() {
     const data = await fetch("http://localhost:8080/artist/top");
     const json = await data.json();
 
     let tracks = json.data;
-    let track = tracks[Math.floor(Math.random() * tracks.length)];
-    return track;
+    return tracks;
 }
 
 async function getArtist() {
