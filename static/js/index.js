@@ -1,4 +1,5 @@
 const submitButton = document.getElementById("submit-guess");
+const guessInput = document.getElementById("input");
 
 window.onload = async function () {
     const tracklist = await getArtistTracklist();
@@ -21,6 +22,10 @@ window.onload = async function () {
             console.log("incorrect");
         }
     });
+
+    guessInput.addEventListener("input", () => {
+        console.log(guessInput.value)
+    })
 };
 
 function getRandomArtistTrack(tracklist) {
