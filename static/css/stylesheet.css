@@ -180,6 +180,8 @@ body {
 
     margin-left: -400px;
     margin-top: -20px;
+
+    border-radius: 8px;
 }
 
 .suggestion-container {
