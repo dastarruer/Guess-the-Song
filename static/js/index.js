@@ -63,25 +63,26 @@ function debounce(func, delay) {
 function levenshteinDistance(a, b) {
     const lenA = a.length,
         lenB = b.length;
-    const dp = Array.from({ length: lenA + 1 }, () => Array(lenB + 1).fill(0));
 
-    for (let i = 0; i <= lenA; i++) dp[i][0] = i;
-    for (let j = 0; j <= lenB; j++) dp[0][j] = j;
+    const d = Array.from({ length: lenA + 1 }, () => Array(lenB + 1).fill(0));
+
+    for (let i = 0; i <= lenA; i++) d[i][0] = i;
+    for (let j = 0; j <= lenB; j++) d[0][j] = j;
 
     for (let i = 1; i <= lenA; i++) {
         for (let j = 1; j <= lenB; j++) {
             if (a[i - 1] === b[j - 1]) {
-                dp[i][j] = dp[i - 1][j - 1];
+                d[i][j] = d[i - 1][j - 1];
             } else {
-                dp[i][j] = Math.min(
-                    dp[i - 1][j] + 1, // Deletion
-                    dp[i][j - 1] + 1, // Insertion
-                    dp[i - 1][j - 1] + 1 // Substitution
+                d[i][j] = Math.min(
+                    d[i - 1][j] + 1, // Deletion
+                    d[i][j - 1] + 1, // Insertion
+                    d[i - 1][j - 1] + 1 // Substitution
                 );
             }
         }
     }
-    return dp[lenA][lenB];
+    return d[lenA][lenB];
 }
 
 function getRandomArtistTrack(tracklist) {
