@@ -84,6 +84,7 @@ body {
 
 #input-container {
     display: grid;
+    margin-bottom: 200px
 }
 
 #input {
