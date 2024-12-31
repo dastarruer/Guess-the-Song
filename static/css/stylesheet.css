@@ -167,6 +167,7 @@ body {
     list-style-type: none;
     color: #ffffff;
     background-color: #535353;
+    display: none;
 }
 
 .suggestion-container {

@@ -46,10 +46,13 @@ window.onload = async function () {
                     return distanceA - distanceB;
                 })
                 .slice(0, 3);
-            const suggestions = document.getElementById("suggestions-container");
+            const suggestions = document.getElementById(
+                "suggestions-container"
+            );
 
             // Clear the list so that the previous suggestions are not shown
             suggestions.innerHTML = "";
+            suggestions.style.display = "block";
             for (const track of relevantTracks) {
                 const suggestion = document.createElement("li");
                 suggestion.innerHTML = `
