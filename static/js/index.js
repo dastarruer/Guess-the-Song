@@ -53,8 +53,10 @@ window.onload = async function () {
             for (const track of relevantTracks) {
                 const suggestion = document.createElement("li");
                 suggestion.innerHTML = `
-                    <img class="suggestion-cover" src=${track.album.cover}>
-                    <p>${track.title}</p>
+                    <div class="suggestion-container">
+                        <img class="suggestion-cover" src=${track.album.cover}>
+                        <p>${track.title}</p>
+                    </div>
                 `;
                 suggestions.appendChild(suggestion);
             }
