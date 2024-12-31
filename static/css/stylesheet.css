@@ -163,6 +163,7 @@ body {
 }
 
 #suggestions-container {
+    list-style-type: none;
     color: #ffffff;
 }
 
