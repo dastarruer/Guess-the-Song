@@ -166,8 +166,9 @@ body {
     flex-direction: column;
     list-style-type: none;
     color: #ffffff;
-    background-color: #535353;
+    background-color: #121212;
     display: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .suggestion-container {
