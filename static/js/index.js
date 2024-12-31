@@ -46,7 +46,13 @@ window.onload = async function () {
                     return distanceA - distanceB;
                 })
                 .slice(0, 3);
-            console.log(relevantTracks);
+            const suggestions = document.getElementById("guess-suggestions");
+            suggestions.innerHTML = ""
+            for (const track of relevantTracks) {
+                const suggestion = document.createElement("li");
+                suggestion.innerHTML = `${track.title}`;
+                suggestions.appendChild(suggestion);
+            }
         }),
         300
     );
