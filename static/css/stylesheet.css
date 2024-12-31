@@ -162,6 +162,15 @@ body {
     border-color: #1db954;
 }
 
+#suggestions-container {
+    color: #ffffff;
+}
+
+.suggestion-cover {
+    height: 50px;
+    width: 50px;
+}
+
 /* Loading animation */
 .loading-dots-track {
     display: flex;

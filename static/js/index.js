@@ -46,14 +46,14 @@ window.onload = async function () {
                     return distanceA - distanceB;
                 })
                 .slice(0, 3);
-            const suggestions = document.getElementById("guess-suggestions");
+            const suggestions = document.getElementById("suggestions-container");
 
             // Clear the list so that the previous suggestions are not shown
             suggestions.innerHTML = "";
             for (const track of relevantTracks) {
                 const suggestion = document.createElement("li");
                 suggestion.innerHTML = `
-                    <img style="height:100px;width:100px;" src=${track.album.cover}>
+                    <img class="suggestion-cover" src=${track.album.cover}>
                     <p>${track.title}</p>
                 `;
                 suggestions.appendChild(suggestion);
