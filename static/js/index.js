@@ -47,10 +47,15 @@ window.onload = async function () {
                 })
                 .slice(0, 3);
             const suggestions = document.getElementById("guess-suggestions");
-            suggestions.innerHTML = ""
+
+            // Clear the list so that the previous suggestions are not shown
+            suggestions.innerHTML = "";
             for (const track of relevantTracks) {
                 const suggestion = document.createElement("li");
-                suggestion.innerHTML = `${track.title}`;
+                suggestion.innerHTML = `
+                    <img style="height:100px;width:100px;" src=${track.album.cover}>
+                    <p>${track.title}</p>
+                `;
                 suggestions.appendChild(suggestion);
             }
         }),
