@@ -85,6 +85,8 @@ body {
 #input-container {
     display: grid;
     row-gap: 40px;
+
+    margin-left: -100px;
     margin-bottom: 200px
 }
 
