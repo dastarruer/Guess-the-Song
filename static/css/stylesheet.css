@@ -166,6 +166,7 @@ body {
     flex-direction: column;
     list-style-type: none;
     color: #ffffff;
+    background-color: #535353;
 }
 
 .suggestion-container {
