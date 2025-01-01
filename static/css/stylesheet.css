@@ -172,7 +172,7 @@ body {
     color: #ffffff;
     background-color: #121212;
 
-    max-height: 200px;
+    max-height: 300px;
     /* Adds a scrollbar */
     overflow-y: auto;
 
@@ -187,6 +187,9 @@ body {
 .suggestion-container {
     display: flex;
     gap: 20px;
+
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .suggestion-cover {
