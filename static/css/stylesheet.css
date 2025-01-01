@@ -195,6 +195,8 @@ body {
     margin-top: 15px;
     margin-top: 15px;
     margin-left: -25px;
+
+    border-radius: 10px;
 }
 
 .suggestion-container:hover {
