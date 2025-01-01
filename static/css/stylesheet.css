@@ -188,8 +188,11 @@ body {
     display: flex;
     gap: 20px;
 
-    margin-bottom: 15px;
-    margin-top: 15px;
+    padding: 10px;
+}
+
+.suggestion-container:hover {
+    background-color: #b3b3b3;
 }
 
 .suggestion-cover {
