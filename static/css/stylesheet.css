@@ -200,7 +200,8 @@ body {
 }
 
 .suggestion-container:hover {
-    background-color: #b3b3b3;
+    background-color: #1db954;
+    color: #121212;
 }
 
 .suggestion-cover {
