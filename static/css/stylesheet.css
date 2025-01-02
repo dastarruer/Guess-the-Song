@@ -199,6 +199,8 @@ body {
     border-radius: 7px;
 }
 
+
+
 .suggestion-container:hover {
     background-color: #1db954;
     color: #121212;
@@ -207,6 +209,8 @@ body {
 .suggestion-cover {
     height: 50px;
     width: 50px;
+
+    border-radius: 7px;
 }
 
 /* Loading animation */
