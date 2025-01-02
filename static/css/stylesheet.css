@@ -194,7 +194,7 @@ body {
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 35px;
-    
+
     margin-right: 15px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -202,8 +202,6 @@ body {
 
     border-radius: 7px;
 }
-
-
 
 .suggestion-container:hover {
     background-color: #1db954;
@@ -223,13 +221,19 @@ body {
     font-weight: 700;
     color: #b3b3b3;
     font-optical-sizing: auto;
-    font-style: normal;
+    font-style: italic;
     font-variation-settings: "wdth" 112.5;
+
+    margin-top: -6px;
 }
 
 .suggestion-caption-container {
     display: flex;
     flex-direction: column;
+
+    justify-content: center;
+
+    margin-top: -10px;
 }
 
 /* Loading animation */
