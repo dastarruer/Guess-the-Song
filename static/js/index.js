@@ -56,13 +56,13 @@ window.onload = async function () {
             for (const track of relevantTracks) {
                 const suggestion = document.createElement("li");
                 suggestion.innerHTML = `
-                    <div class="suggestion-container">
+                    <li tabindex="0" class="suggestion-container">
                         <img class="suggestion-cover" src=${track.album.cover}>
                         <div class="suggestion-caption-container">
                             <p class="suggestion-title">${track.title}</p>
                             <p class="suggestion-artist">${artist.name}</p>
                         </div>
-                    </div>
+                    </li>
                 `;
                 suggestions.appendChild(suggestion);
             }
