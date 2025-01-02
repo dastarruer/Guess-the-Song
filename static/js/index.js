@@ -58,7 +58,10 @@ window.onload = async function () {
                 suggestion.innerHTML = `
                     <div class="suggestion-container">
                         <img class="suggestion-cover" src=${track.album.cover}>
-                        <p>${track.title}</p>
+                        <div class="suggestion-caption-container">
+                            <p class="suggestion-title">${track.title}</p>
+                            <p class="suggestion-artist">${artist.name}</p>
+                        </div>
                     </div>
                 `;
                 suggestions.appendChild(suggestion);

@@ -188,7 +188,11 @@ body {
     display: flex;
     gap: 20px;
 
-    padding: 10px;
+    align-items: center;
+
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 10px;
     padding-right: 35px;
     
     margin-right: 15px;
@@ -211,6 +215,21 @@ body {
     width: 50px;
 
     border-radius: 7px;
+}
+
+.suggestion-artist {
+    font-family: "Martian Mono", serif;
+    font-size: 0.1rem;
+    font-weight: 700;
+    color: #b3b3b3;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 112.5;
+}
+
+.suggestion-caption-container {
+    display: flex;
+    flex-direction: column;
 }
 
 /* Loading animation */
