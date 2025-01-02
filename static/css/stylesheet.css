@@ -205,7 +205,6 @@ body {
 
 .suggestion-container:hover {
     background-color: #1db954;
-    color: #121212;
 }
 
 .suggestion-cover {
@@ -234,6 +233,11 @@ body {
     font-variation-settings: "wdth" 112.5;
 
     margin-top: -6px;
+}
+
+.suggestion-container:hover .suggestion-title,
+.suggestion-container:hover .suggestion-artist {
+    color: #121212; /* Change text color to black on hover */
 }
 
 .suggestion-caption-container {
