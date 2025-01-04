@@ -5,21 +5,23 @@ window.onload = async function () {
     const tracklist = await getArtistTracklist();
     const track = getRandomArtistTrack(tracklist);
     const artist = await getArtist();
+
+    let relevantTracks = null;
+
     setTrack(artist, track.preview);
 
     submitButton.addEventListener("click", () => {
         const input = document.getElementById("input");
-        const guess = input.value.toLowerCase();
         const trackName = track.title;
 
-        if (guess === trackName.toLowerCase()) {
+        if (relevantTracks[0].title === trackName.toLowerCase()) {
             const trackCaption = document.getElementById("track-name");
             const trackImage = document.getElementById("artist-image");
 
             trackCaption.textContent = trackName;
             trackImage.src = track.album.cover;
         } else {
-            console.log("incorrect");
+            console.log(relevantTracks[0].title);
         }
     });
 
@@ -27,7 +29,7 @@ window.onload = async function () {
         "input",
         debounce(() => {
             const guess = guessInput.value.toLowerCase();
-            let relevantTracks = tracklist.filter((track) =>
+            relevantTracks = tracklist.filter((track) =>
                 track.title.toLowerCase().startsWith(guess.slice(0, 3))
             );
             relevantTracks = tracklist
