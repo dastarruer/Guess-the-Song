@@ -1,3 +1,5 @@
+import songSuggestions from "./suggestions";
+
 const submitButton = document.getElementById("submit-guess");
 const guessInput = document.getElementById("input");
 
@@ -5,6 +7,7 @@ window.onload = async function () {
     const tracklist = await getArtistTracklist();
     const track = getRandomArtistTrack(tracklist);
     const artist = await getArtist();
+    songSuggestions.h()
 
     let relevantTracks = null;
 
