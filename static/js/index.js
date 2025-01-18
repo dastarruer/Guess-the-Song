@@ -15,7 +15,6 @@ window.onload = async function () {
     setTrack(artist, track.preview);
 
     submitButton.addEventListener("click", () => {
-        const input = document.getElementById("input");
         const trackName = track.title;
 
         if (relevantTracks[0].title === trackName.toLowerCase()) {
