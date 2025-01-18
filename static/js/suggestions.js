@@ -38,14 +38,13 @@ class SuggestionProvider {
         for (const track of relevantTracks) {
             // Create a list element to show the track
             const suggestion = document.createElement("li");
+            suggestion.classList.add("suggestion-container");
             suggestion.innerHTML = `
-                    <li class="suggestion-container">
-                        <img class="suggestion-cover" src=${track.album.cover}>
-                        <div class="suggestion-caption-container">
-                            <p class="suggestion-title">${track.title}</p>
-                            <p class="suggestion-artist">${artist.name}</p>
-                        </div>
-                    </li>
+                    <img class="suggestion-cover" src=${track.album.cover}>
+                    <div class="suggestion-caption-container">
+                        <p class="suggestion-title">${track.title}</p>
+                        <p class="suggestion-artist">${artist.name}</p>
+                    </div>
                 `;
             suggestions.appendChild(suggestion);
         }
