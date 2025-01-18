@@ -10,21 +10,19 @@ window.onload = async function () {
 
     const songSuggestions = new SuggestionProvider();
 
-    let relevantTracks = null;
-
     setTrack(artist, track.preview);
 
     submitButton.addEventListener("click", () => {
         const trackName = track.title;
 
-        if (relevantTracks[0].title === trackName.toLowerCase()) {
+        if (songSuggestions.relevantTracks[0].title === trackName.toLowerCase()) {
             const trackCaption = document.getElementById("track-name");
             const trackImage = document.getElementById("artist-image");
 
             trackCaption.textContent = trackName;
             trackImage.src = track.album.cover;
         } else {
-            console.log(relevantTracks[0].title);
+            console.log(songSuggestions.relevantTracks[0].title);
         }
     });
 
