@@ -1,0 +1,15 @@
+#banner {
+    display: flex;
+    height: 18rem;
+
+    align-items: center;
+    justify-content: center;
+    font-family: "Jersey 25", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4rem;
+    letter-spacing: 14%;
+
+    color: var(--text-dark);
+    background-color: var(--primary-accent-color);
+}
