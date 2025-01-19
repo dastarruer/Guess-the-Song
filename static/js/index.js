@@ -1,14 +1,17 @@
-import SuggestionProvider from "./suggestions.js";
-import ArtistPlayer from "./artist_player.js";
+import SuggestionProvider from "./modules/suggestions.js";
+import ArtistPlayer from "./modules/artistPlayer.js";
 
 const submitButton = document.getElementById("submit-guess");
 const guessInput = document.getElementById("input");
 
 window.onload = async function () {
     const player = new ArtistPlayer();
-    const songSuggestions = new SuggestionProvider();
-
     await player.setTrack();
+
+    const songSuggestions = new SuggestionProvider(
+        player.artist,
+        player.tracklist
+    );
 
     submitButton.addEventListener("click", () => {
         const trackName = player.track.title;
@@ -27,23 +30,6 @@ window.onload = async function () {
     });
 
     guessInput.addEventListener("input", () => {
-        songSuggestions.showSuggestions(guessInput, player.artist, player.tracklist);
+        songSuggestions.showSuggestions();
     });
 };
-
-function setTrack(artist, previewUrl) {
-    const trackPlayer = document.getElementById("track");
-    const artistName = document.getElementById("artist-name");
-    const artistImage = document.getElementById("artist-image");
-    const trackName = document.getElementById("track-name");
-
-    // Set the audio
-    trackPlayer.src = previewUrl;
-    trackPlayer.load();
-
-    // Set the artist info
-    artistImage.src = artist.picture;
-    artistName.textContent = artist.name;
-
-    trackName.innerText = "???";
-}

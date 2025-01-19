@@ -1,15 +1,19 @@
 class SuggestionProvider {
-    constructor() {
-        this.relevantTracks = null
+    constructor(artist, tracklist) {
+        this.artist = artist;
+        this.tracklist = tracklist;
+
+        this.guessInput = document.getElementById("input");
+        this.relevantTracks = null;
     }
 
     // Show suggestions to the user
-    showSuggestions(guessInput, artist, tracklist) {
+    showSuggestions() {
         // Get the guess and convert it to lowercase
-        const guess = guessInput.value.toLowerCase();
+        const guess = this.guessInput.value.toLowerCase();
 
         // Set the relevant tracks to the first 3 characters of each track's title
-        this.relevantTracks = tracklist.filter((track) =>
+        this.relevantTracks = this.tracklist.filter((track) =>
             track.title.toLowerCase().startsWith(guess.slice(0, 3))
         );
 
@@ -48,7 +52,7 @@ class SuggestionProvider {
                     <img class="suggestion-cover" src=${track.album.cover}>
                     <div class="suggestion-caption-container">
                         <p class="suggestion-title">${track.title}</p>
-                        <p class="suggestion-artist">${artist.name}</p>
+                        <p class="suggestion-artist">${this.artist.name}</p>
                     </div>
                 `;
             suggestions.appendChild(suggestion);
