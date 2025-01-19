@@ -2,6 +2,8 @@ class SuggestionProvider {
     constructor() {
         this.relevantTracks = null
     }
+
+    // Show suggestions to the user
     showSuggestions(guessInput, artist, tracklist) {
         // Get the guess and convert it to lowercase
         const guess = guessInput.value.toLowerCase();
@@ -12,7 +14,7 @@ class SuggestionProvider {
         );
 
         // Sort the tracks from smallest to biggest distance from the guess
-        this.relevantTracks = tracklist
+        this.relevantTracks = this.relevantTracks
             .sort((a, b) => {
                 // Calculate Levenshtein distance for both tracks' names, and whittle it down to the first three tracks
                 const distanceA = this.levenshteinDistance(
