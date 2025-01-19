@@ -1,21 +1,21 @@
 import SuggestionProvider from "./suggestions.js";
+import ArtistPlayer from "./artist_player.js";
 
 const submitButton = document.getElementById("submit-guess");
 const guessInput = document.getElementById("input");
 
 window.onload = async function () {
-    const tracklist = await getArtistTracklist();
-    const track = getRandomArtistTrack(tracklist);
-    const artist = await getArtist();
-
+    const player = new ArtistPlayer();
     const songSuggestions = new SuggestionProvider();
 
-    setTrack(artist, track.preview);
+    await player.setTrack();
 
     submitButton.addEventListener("click", () => {
-        const trackName = track.title;
+        const trackName = player.track.title;
 
-        if (songSuggestions.relevantTracks[0].title === trackName.toLowerCase()) {
+        if (
+            songSuggestions.relevantTracks[0].title === trackName.toLowerCase()
+        ) {
             const trackCaption = document.getElementById("track-name");
             const trackImage = document.getElementById("artist-image");
 
@@ -27,36 +27,9 @@ window.onload = async function () {
     });
 
     guessInput.addEventListener("input", () => {
-        songSuggestions.showSuggestions(guessInput, artist, tracklist);
+        songSuggestions.showSuggestions(guessInput, player.artist, player.tracklist);
     });
 };
-
-function debounce(func, delay) {
-    let timer;
-    return function (...args) {
-        clearTimeout(timer);
-        timer = setTimeout(() => func.apply(this, args), delay);
-    };
-}
-
-function getRandomArtistTrack(tracklist) {
-    let track = tracklist[Math.floor(Math.random() * tracklist.length)];
-    return track;
-}
-
-async function getArtistTracklist() {
-    const data = await fetch("http://localhost:8080/artist/top");
-    const json = await data.json();
-
-    let tracks = json.data;
-    return tracks;
-}
-
-async function getArtist() {
-    const data = await fetch("http://localhost:8080/artist");
-    const artist = await data.json();
-    return artist;
-}
 
 function setTrack(artist, previewUrl) {
     const trackPlayer = document.getElementById("track");
