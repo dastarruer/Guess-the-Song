@@ -1,4 +1,10 @@
 class SuggestionProvider {
+    /**
+     * Initializes a new instance of the SuggestionProvider class.
+     * @param {Object} artist - The artist object containing artist details.
+     * @param {Array} tracklist - The list of tracks associated with the artist.
+     */
+
     constructor(artist, tracklist) {
         this.artist = artist;
         this.tracklist = tracklist;
@@ -7,7 +13,15 @@ class SuggestionProvider {
         this.relevantTracks = null;
     }
 
-    // Show suggestions to the user
+    /**
+     * Displays song suggestions based on the user's input.
+     * Filters the tracklist to find tracks whose titles start with the first
+     * three characters of the user's guess, then sorts them by their
+     * Levenshtein distance to the guess. The top three closest matches are
+     * displayed in the suggestions container. Each suggestion includes the
+     * track's cover image, title, and artist's name.
+     */
+
     showSuggestions() {
         // Get the guess and convert it to lowercase
         const guess = this.guessInput.value.toLowerCase();
@@ -33,7 +47,7 @@ class SuggestionProvider {
                 // Compare distances
                 return distanceA - distanceB;
             })
-            .slice(0, 3);
+            .slice(0, 3); // Take the first 3 characters of the string
 
         // The container that all suggestions are shown in
         const suggestions = document.getElementById("suggestions-container");
@@ -59,6 +73,7 @@ class SuggestionProvider {
         }
     }
 
+    // Calculate the levenshtein distance between two given strings
     levenshteinDistance(a, b) {
         const lenA = a.length,
             lenB = b.length;
