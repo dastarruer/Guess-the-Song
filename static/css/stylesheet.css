@@ -1,13 +1,4 @@
-:root {
-    /* Color palette */
-    --primary-accent-color: #1db954;
-    --primary-bg-color: #121212;
-    --text-dark: #191414;
-    --text-light: #ffffff;
-    --text-muted: #b3b3b3;
-
-    --artist-image-size: 300px;
-}
+@import "./base/variables.css";
 
 body {
     background-color: var(--primary-bg-color);
