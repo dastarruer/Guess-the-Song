@@ -1,0 +1,53 @@
+#artist-info {
+    width: 380px;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#artist-image {
+    width: var(--artist-image-size);
+    height: var(--artist-image-size);
+
+    border-radius: 7px;
+}
+
+#track-name {
+    text-align: center;
+
+    font-family: "Martian Mono", serif;
+    font-size: 3.125rem;
+    font-weight: 700;
+    color: var(--text-light);
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 112.5;
+
+    padding-bottom: 15px;
+
+    width: var(--artist-image-size);
+}
+
+#artist-name {
+    text-align: center;
+
+    font-family: "Martian Mono", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 112.5;
+
+    padding-bottom: 30px;
+
+    width: var(--artist-image-size);
+}
