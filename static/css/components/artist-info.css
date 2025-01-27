@@ -51,3 +51,74 @@
 
     width: var(--artist-image-size);
 }
+
+* Loading animation */
+.loading-dots-track {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 50px;
+}
+
+.loading-dots-track span {
+    width: 30px;
+    height: 30px;
+    background-color: var(--text-light);
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+
+.loading-dots-track span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots-track span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0%,
+    80%,
+    100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}
+
+.loading-dots-artist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 50px;
+}
+
+.loading-dots-artist span {
+    width: 20px;
+    height: 20px;
+    background-color: #535353;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+
+.loading-dots-artist span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots-artist span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0%,
+    80%,
+    100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}
