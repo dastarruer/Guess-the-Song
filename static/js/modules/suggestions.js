@@ -65,7 +65,7 @@ class SuggestionProvider {
             suggestion.innerHTML = `
                     <img class="suggestion-cover" src=${track.album.cover}>
                     <div class="suggestion-caption-container">
-                        <p class="suggestion-title">${track.title}</p>
+                        <p class="suggestion-title martian-mono">${track.title}</p>
                         <p class="suggestion-artist">${this.artist.name}</p>
                     </div>
                 `;

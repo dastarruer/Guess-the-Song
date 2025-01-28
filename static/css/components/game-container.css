@@ -137,22 +137,16 @@
 }
 
 .suggestion-title {
-    font-family: "Martian Mono", serif;
-    font-weight: 600;
     color: var(--text-light);
     font-optical-sizing: auto;
     font-style: normal;
-    font-variation-settings: "wdth" 112.5;
 }
 
 .suggestion-artist {
-    font-family: "Martian Mono", serif;
     font-size: 0.1rem;
     font-weight: 700;
     color: var(--text-muted);
-    font-optical-sizing: auto;
     font-style: italic;
-    font-variation-settings: "wdth" 112.5;
 
     margin-top: -6px;
 }

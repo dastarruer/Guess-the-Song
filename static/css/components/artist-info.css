@@ -22,14 +22,10 @@
 
 #track-name {
     text-align: center;
-
-    font-family: "Martian Mono", serif;
     font-size: 3.125rem;
     font-weight: 700;
     color: var(--text-light);
-    font-optical-sizing: auto;
     font-style: normal;
-    font-variation-settings: "wdth" 112.5;
 
     padding-bottom: 15px;
 
@@ -38,21 +34,17 @@
 
 #artist-name {
     text-align: center;
-
-    font-family: "Martian Mono", serif;
     font-size: 2rem;
     font-weight: 700;
     color: var(--text-muted);
-    font-optical-sizing: auto;
     font-style: normal;
-    font-variation-settings: "wdth" 112.5;
 
     padding-bottom: 30px;
 
     width: var(--artist-image-size);
 }
 
-* Loading animation */
+/* Loading animation  */
 .loading-dots-track {
     display: flex;
     justify-content: center;
