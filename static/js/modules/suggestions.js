@@ -66,7 +66,7 @@ class SuggestionProvider {
                     <img class="suggestion-cover" src=${track.album.cover}>
                     <div class="suggestion-caption-container">
                         <p class="suggestion-title martian-mono">${track.title}</p>
-                        <p class="suggestion-artist">${this.artist.name}</p>
+                        <p class="suggestion-artist semibold">${this.artist.name}</p>
                     </div>
                 `;
             suggestions.appendChild(suggestion);

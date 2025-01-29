@@ -23,7 +23,6 @@
 #track-name {
     text-align: center;
     font-size: 3.125rem;
-    font-weight: 700;
     color: var(--text-light);
     font-style: normal;
 
@@ -35,7 +34,6 @@
 #artist-name {
     text-align: center;
     font-size: 2rem;
-    font-weight: 700;
     color: var(--text-muted);
     font-style: normal;
 
