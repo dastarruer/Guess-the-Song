@@ -5,8 +5,15 @@
     --text-dark: #191414;
     --text-light: #ffffff;
     --text-muted: #b3b3b3;
+    --loading-dot-color-artist: #535353;
 
+    /* artist-info.css */
     --artist-image-size: 300px;
+    --artist-info-width: 380px;
+    --artist-info-width: 380px;
+    --loading-dot-size-track: 30px;
+    --loading-dot-size-artist: 20px;
+    --loading-dot-color-track: var(--text-light);
 
     /* game-container.css */
     --input-height: 62px;

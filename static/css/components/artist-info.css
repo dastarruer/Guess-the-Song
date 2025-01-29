@@ -1,19 +1,13 @@
 #artist-info {
-    width: 380px;
-
+    width: var(--artist-info-width);
     display: flex;
     align-items: center;
-
-    margin-left: 200px;
-    margin-right: 200px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin: 50px 200px;
 }
 
 #artist-image {
     width: var(--artist-image-size);
     height: var(--artist-image-size);
-
     border-radius: 7px;
 }
 
@@ -36,7 +30,7 @@
     padding-bottom: 30px;
 }
 
-/* Loading animation  */
+/* Loading animation */
 .loading-dots {
     display: flex;
     justify-content: center;
@@ -53,7 +47,7 @@
 .loading-dots-track span {
     width: var(--loading-dot-size-track);
     height: var(--loading-dot-size-track);
-    background-color: var(--text-light);
+    background-color: var(--loading-dot-color-track);
 }
 
 .loading-dots-artist span {
@@ -71,9 +65,7 @@
 }
 
 @keyframes blink {
-    0%,
-    80%,
-    100% {
+    0%, 80%, 100% {
         opacity: 0;
     }
     40% {
