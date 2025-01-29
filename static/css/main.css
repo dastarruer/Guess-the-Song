@@ -3,6 +3,7 @@
 @import "./components/artist-info.css";
 @import "./components/game-container.css";
 @import "./utilities/fonts.css";
+@import "./utilities/box-shadow.css";
 
 body {
     background-color: var(--primary-bg-color);
