@@ -7,27 +7,26 @@
 #input-container {
     display: grid;
     row-gap: 40px;
+    margin: 0 0 200px -100px;
+}
 
-    margin-left: -100px;
-    margin-bottom: 200px;
+#input,
+#submit-guess {
+    grid-column-start: 1;
+    border: 3px solid var(--text-light);
+    font-style: normal;
+    border-radius: 8px;
 }
 
 #input {
-    grid-column-start: 1;
     grid-column-end: 2;
     background-color: var(--primary-bg-color);
-    padding-left: 30px;
-
-    font-style: normal;
     color: var(--text-light);
 
-    width: 700px;
-    height: 62px;
+    width: var(--input-width);
+    height: var(--input-height);
 
-    border-radius: 12px;
-    border-color: var(--text-light);
-    border-width: 3px;
-    border-style: solid;
+    padding-left: 30px;
 }
 
 #input::placeholder {
@@ -37,116 +36,81 @@
 
 #input:focus {
     border-color: var(--primary-accent-color);
-    outline: none;
     caret-color: var(--primary-accent-color);
+    outline: none;
 }
 
 #submit-guess {
-    grid-column-start: 1;
     background-color: var(--text-light);
-
-    width: 300px;
-    height: 60px;
-
-    border-radius: 8px;
-    border-color: var(--text-light);
-    border-style: solid;
+    width: var(--submit-width);
+    height: var(--submit-height);
 
     font-size: 1.1rem;
-    letter-spacing: 30%;
     font-weight: 800;
-    font-style: normal;
+    letter-spacing: 30%;
 }
 
-#submit-guess:focus {
+#submit-guess:focus,
+#submit-guess:hover,
+.suggestion-container:hover {
     background-color: var(--primary-accent-color);
     border-color: var(--primary-accent-color);
     outline: none;
 }
 
-#submit-guess:hover {
-    background-color: var(--primary-accent-color);
-    border-color: var(--primary-accent-color);
-}
-
 #suggestions-container {
-    grid-column-start: 2;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    display: flex;
+    display: none; /* Default hidden */
     flex-direction: column;
 
-    list-style-type: none;
+    grid-column-start: 2;
+    list-style: none;
 
     color: var(--text-light);
     background-color: var(--primary-bg-color);
 
     max-height: 300px;
-    /* Adds a scrollbar */
     overflow-y: auto;
 
-    display: none;
-
-    margin-left: -400px;
-    margin-top: -20px;
-
+    margin: -20px 0 0 -400px;
     border-radius: 8px;
 }
 
 .suggestion-container {
     display: flex;
-    gap: 20px;
-
     align-items: center;
+    gap: var(--suggestion-gap);
 
-    padding-top: 5px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 35px;
-
-    margin-right: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: -25px;
+    padding: 5px 35px 10px 10px;
+    margin: 15px 15px 15px -25px;
 
     border-radius: 7px;
 }
 
-.suggestion-container:hover {
-    background-color: var(--primary-accent-color);
+.suggestion-container:hover .suggestion-title,
+.suggestion-container:hover .suggestion-artist {
+    color: var(--primary-bg-color);
 }
 
 .suggestion-cover {
-    height: 50px;
-    width: 50px;
-
+    width: var(--suggestion-size);
+    height: var(--suggestion-size);
     border-radius: 7px;
 }
 
 .suggestion-title {
     color: var(--text-light);
-    font-optical-sizing: auto;
-    font-style: normal;
 }
 
 .suggestion-artist {
     font-size: 0.1rem;
-    color: var(--text-muted);
     font-style: italic;
-
+    color: var(--text-muted);
     margin-top: -6px;
-}
-
-.suggestion-container:hover .suggestion-title,
-.suggestion-container:hover .suggestion-artist {
-    color: var(--primary-bg-color); /* Change text color to black on hover */
 }
 
 .suggestion-caption-container {
     display: flex;
     flex-direction: column;
-
     justify-content: center;
-
     margin-top: -10px;
 }

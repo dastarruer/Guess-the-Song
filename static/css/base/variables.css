@@ -7,4 +7,12 @@
     --text-muted: #b3b3b3;
 
     --artist-image-size: 300px;
+
+    /* game-container.css */
+    --input-height: 62px;
+    --input-width: 700px;
+    --submit-width: 300px;
+    --submit-height: 60px;
+    --suggestion-gap: 20px;
+    --suggestion-size: 50px;
 }
