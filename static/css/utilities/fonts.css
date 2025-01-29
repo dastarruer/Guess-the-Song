@@ -13,6 +13,11 @@
     font-family: "Jersey 25", serif;
 }
 
+.rem {
+    font-family: "REM", serif;
+    font-optical-sizing: auto;
+}
+
 .semibold {
     font-weight: 700;
 }

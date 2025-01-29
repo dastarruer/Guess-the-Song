@@ -18,8 +18,6 @@
     background-color: var(--primary-bg-color);
     padding-left: 30px;
 
-    font-family: "REM", serif;
-    font-optical-sizing: auto;
     font-style: normal;
     color: var(--text-light);
 
@@ -35,8 +33,6 @@
 }
 
 #input::placeholder {
-    font-family: "REM", serif;
-    font-optical-sizing: auto;
     font-style: normal;
     letter-spacing: 25%;
 
