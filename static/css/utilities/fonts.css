@@ -3,3 +3,8 @@
     font-variation-settings: "wdth" 112.5;
     font-optical-sizing: auto;
 }
+
+.jetbrains-mono {
+    font-family: "JetBrains Mono", serif;
+    font-optical-sizing: auto;
+}

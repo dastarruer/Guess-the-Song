@@ -63,9 +63,7 @@
     border-color: var(--text-light);
     border-style: solid;
 
-    font-family: "JetBrains Mono", serif;
     font-size: 1.1rem;
-    font-optical-sizing: auto;
     letter-spacing: 30%;
     font-weight: 800;
     font-style: normal;
