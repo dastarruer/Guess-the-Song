@@ -2,6 +2,7 @@
 @import "./components/banner.css";
 @import "./components/artist-info.css";
 @import "./components/game-container.css";
+@import "./utilities/fonts.css";
 
 body {
     background-color: var(--primary-bg-color);
