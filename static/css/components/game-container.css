@@ -51,7 +51,7 @@
 
 #submit-guess:focus,
 #submit-guess:hover,
-.suggestion-container:hover {
+.highlight {
     background-color: var(--primary-accent-color);
     border-color: var(--primary-accent-color);
     outline: none;
@@ -85,8 +85,8 @@
     border-radius: 7px;
 }
 
-.suggestion-container:hover .suggestion-title,
-.suggestion-container:hover .suggestion-artist {
+.highlight .suggestion-title,
+.highlight .suggestion-artist {
     color: var(--primary-bg-color);
 }
 
