@@ -3,7 +3,6 @@ import ArtistPlayer from "./modules/artistPlayer.js";
 
 const submitButton = document.getElementById("submit-guess");
 const guessInput = document.getElementById("input");
-const suggestionItems = document.querySelectorAll(".suggestion-container");
 let currentSuggestionIndex = -1;
 
 window.onload = async function () {
@@ -36,27 +35,31 @@ window.onload = async function () {
     });
 
     document.addEventListener("keydown", () => {
+        let suggestionItems = songSuggestions.getSongSuggestionItems();
         let firstSuggestionIndex = 0;
         let lastSuggestionIndex = 2;
         let defaultSuggestionIndex = -1;
-
-        // Function to handle suggestion navigation
-        function updateSuggestionIndex(event) {
-            if (event.key === "ArrowUp") {
-                currentSuggestionIndex = Math.max(
-                    firstSuggestionIndex,
-                    currentSuggestionIndex - 1
+        console.log(currentSuggestionIndex);
+        // Update the selected suggestion index
+        if (event.key === "ArrowUp") {
+            if (currentSuggestionIndex !== -1) {
+                // Remove the highlight of the current suggestion
+                suggestionItems[currentSuggestionIndex].classList.remove(
+                    "highlight"
                 );
-            } else if (event.key === "ArrowDown") {
-                currentSuggestionIndex = Math.min(
-                    lastSuggestionIndex,
-                    currentSuggestionIndex + 1
-                );
-            } else if (currentSuggestionIndex < defaultSuggestionIndex) {
-                currentSuggestionIndex = firstSuggestionIndex;
             }
-        }
 
-        document.addEventListener("keydown", updateSuggestionIndex);
+            // Update the suggestion index
+            currentSuggestionIndex += 1;
+
+            suggestionItems[currentSuggestionIndex].classList.add("highlight");
+        } else if (event.key === "ArrowDown") {
+            currentSuggestionIndex = Math.min(
+                lastSuggestionIndex,
+                currentSuggestionIndex + 1
+            );
+        } else if (currentSuggestionIndex < defaultSuggestionIndex) {
+            currentSuggestionIndex = firstSuggestionIndex;
+        }
     });
 };

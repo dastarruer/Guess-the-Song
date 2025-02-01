@@ -13,6 +13,14 @@ class SuggestionProvider {
         this.relevantTracks = null;
     }
 
+    getSongSuggestionItems() {
+        let suggestionItems = document.getElementsByClassName(
+            "suggestion-container"
+        );
+        console.log(suggestionItems);
+        return suggestionItems;
+    }
+
     /**
      * Displays song suggestions based on the user's input.
      * Filters the tracklist to find tracks whose titles start with the first
