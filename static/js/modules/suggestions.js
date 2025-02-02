@@ -10,6 +10,7 @@ class SuggestionProvider {
         this.tracklist = tracklist;
 
         this.guessInput = document.getElementById("input");
+        this.currentSuggestionIndex = -1;
         this.relevantTracks = null;
     }
 
@@ -78,6 +79,50 @@ class SuggestionProvider {
                     </div>
                 `;
             suggestions.appendChild(suggestion);
+        }
+    }
+
+    navigateSuggestions(event) {
+        let suggestionItems = this.getSongSuggestionItems();
+        let firstSuggestionIndex = 0;
+        let lastSuggestionIndex = 2;
+        let defaultSuggestionIndex = -1;
+
+        console.log(this.currentSuggestionIndex);
+        if (this.currentSuggestionIndex < defaultSuggestionIndex) {
+            this.currentSuggestionIndex = firstSuggestionIndex;
+        } else if (event.key === "ArrowUp") {
+            if (this.currentSuggestionIndex > firstSuggestionIndex) {
+                // Remove the highlight of the current suggestion
+                suggestionItems[this.currentSuggestionIndex].classList.remove(
+                    "highlight"
+                );
+            }
+
+            // This makes sure that this.currentSuggestionIndex never goes under firstSuggestionIndex
+            this.currentSuggestionIndex = Math.max(
+                firstSuggestionIndex,
+                this.currentSuggestionIndex - 1
+            );
+
+            suggestionItems[this.currentSuggestionIndex].classList.add("highlight");
+        } else if (event.key === "ArrowDown") {
+            // Update the selected suggestion index
+
+            if (this.currentSuggestionIndex < lastSuggestionIndex) {
+                // Remove the highlight of the current suggestion
+                suggestionItems[this.currentSuggestionIndex].classList.remove(
+                    "highlight"
+                );
+            }
+
+            // This makes sure that this.currentSuggestionIndex never goes over lastSuggestionIndex
+            this.currentSuggestionIndex = Math.min(
+                lastSuggestionIndex,
+                this.currentSuggestionIndex + 1
+            );
+
+            suggestionItems[this.currentSuggestionIndex].classList.add("highlight");
         }
     }
 
