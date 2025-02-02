@@ -109,7 +109,7 @@ class SuggestionProvider {
         } else if (event.key === "ArrowDown") {
             // Update the selected suggestion index
 
-            if (this.currentSuggestionIndex < lastSuggestionIndex) {
+            if (this.currentSuggestionIndex < lastSuggestionIndex && this.currentSuggestionIndex >= firstSuggestionIndex) {
                 // Remove the highlight of the current suggestion
                 suggestionItems[this.currentSuggestionIndex].classList.remove(
                     "highlight"
