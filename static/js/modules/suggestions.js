@@ -92,6 +92,7 @@ class SuggestionProvider {
         if (this.currentSuggestionIndex < defaultSuggestionIndex) {
             this.currentSuggestionIndex = firstSuggestionIndex;
         } else if (event.key === "ArrowUp") {
+            // Check if the currentSuggestionIndex is within the bounds of the suggestion list
             if (this.currentSuggestionIndex > firstSuggestionIndex) {
                 // Remove the highlight of the current suggestion
                 suggestionItems[this.currentSuggestionIndex].classList.remove(
@@ -105,10 +106,11 @@ class SuggestionProvider {
                 this.currentSuggestionIndex - 1
             );
 
-            suggestionItems[this.currentSuggestionIndex].classList.add("highlight");
+            suggestionItems[this.currentSuggestionIndex].classList.add(
+                "highlight"
+            );
         } else if (event.key === "ArrowDown") {
-            // Update the selected suggestion index
-
+            // Check if the currentSuggestionIndex is within the bounds of the suggestion list
             if (this.currentSuggestionIndex < lastSuggestionIndex && this.currentSuggestionIndex >= firstSuggestionIndex) {
                 // Remove the highlight of the current suggestion
                 suggestionItems[this.currentSuggestionIndex].classList.remove(
