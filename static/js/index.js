@@ -33,6 +33,7 @@ window.onload = async function () {
     guessInput.addEventListener("input", () => {
         // Set the currently focused suggestion to its default
         currentSuggestionIndex = -1;
+
         songSuggestions.showSuggestions();
     });
 
@@ -42,26 +43,40 @@ window.onload = async function () {
         let lastSuggestionIndex = 2;
         let defaultSuggestionIndex = -1;
         console.log(currentSuggestionIndex);
-        // Update the selected suggestion index
-        if (event.key === "ArrowUp") {
-            if (currentSuggestionIndex !== -1) {
+        if (currentSuggestionIndex < defaultSuggestionIndex) {
+            currentSuggestionIndex = firstSuggestionIndex;
+        } else if (event.key === "ArrowDown") {
+            // Update the selected suggestion index
+
+            if (currentSuggestionIndex < lastSuggestionIndex) {
                 // Remove the highlight of the current suggestion
                 suggestionItems[currentSuggestionIndex].classList.remove(
                     "highlight"
                 );
             }
 
-            // Update the suggestion index
-            currentSuggestionIndex += 1;
-
-            suggestionItems[currentSuggestionIndex].classList.add("highlight");
-        } else if (event.key === "ArrowDown") {
+            // This makes sure that currentSuggestionIndex never goes over lastSuggestionIndex
             currentSuggestionIndex = Math.min(
                 lastSuggestionIndex,
                 currentSuggestionIndex + 1
             );
-        } else if (currentSuggestionIndex < defaultSuggestionIndex) {
-            currentSuggestionIndex = firstSuggestionIndex;
+
+            suggestionItems[currentSuggestionIndex].classList.add("highlight");
+        } else if (event.key === "ArrowUp") {
+            if (currentSuggestionIndex > firstSuggestionIndex) {
+                // Remove the highlight of the current suggestion
+                suggestionItems[currentSuggestionIndex].classList.remove(
+                    "highlight"
+                );
+            }
+
+            // This makes sure that currentSuggestionIndex never goes under firstSuggestionIndex
+            currentSuggestionIndex = Math.max(
+                firstSuggestionIndex,
+                currentSuggestionIndex - 1
+            );
+
+            suggestionItems[currentSuggestionIndex].classList.add("highlight");
         }
     });
 };
