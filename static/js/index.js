@@ -29,14 +29,15 @@ window.onload = async function () {
         }
     });
 
+    
+    document.addEventListener("keydown", () => {
+        songSuggestions.navigateSuggestions(event)
+    });
+    
     guessInput.addEventListener("input", () => {
         // Set the currently focused suggestion to its default
         songSuggestions.currentSuggestionIndex = -1;
 
         songSuggestions.showSuggestions();
-    });
-
-    document.addEventListener("keydown", () => {
-        songSuggestions.navigateSuggestions(event)
     });
 };

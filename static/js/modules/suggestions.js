@@ -85,7 +85,7 @@ class SuggestionProvider {
     navigateSuggestions(event) {
         let suggestionItems = this.getSongSuggestionItems();
         let firstSuggestionIndex = 0;
-        let lastSuggestionIndex = 2;
+        let lastSuggestionIndex = this.relevantTracks.length - 1;
         let defaultSuggestionIndex = -1;
 
         console.log(this.currentSuggestionIndex);
