@@ -14,7 +14,7 @@ class SuggestionProvider {
         this.relevantTracks = null;
     }
 
-    getSuggestionItems() {
+    getSuggestionElements() {
         let suggestionItems = document.getElementsByClassName(
             "suggestion-container"
         );
@@ -82,8 +82,13 @@ class SuggestionProvider {
     }
 
     navigateSuggestions(event) {
-        let suggestionItems = this.getSuggestionItems();
-        
+        // If there are no suggestions to navigate, return
+        if (this.relevantTracks === null) {
+            return;
+        }
+
+        let suggestionItems = this.getSuggestionElements();
+
         let defaultSuggestionIndex = -1;
         let firstSuggestionIndex = 0;
         let lastSuggestionIndex = this.relevantTracks.length - 1;
@@ -110,7 +115,10 @@ class SuggestionProvider {
             );
         } else if (event.key === "ArrowDown") {
             // Check if the currentSuggestionIndex is within the bounds of the suggestion list
-            if (this.currentSuggestionIndex < lastSuggestionIndex && this.currentSuggestionIndex >= firstSuggestionIndex) {
+            if (
+                this.currentSuggestionIndex < lastSuggestionIndex &&
+                this.currentSuggestionIndex >= firstSuggestionIndex
+            ) {
                 // Remove the highlight of the current suggestion
                 suggestionItems[this.currentSuggestionIndex].classList.remove(
                     "highlight"
@@ -123,7 +131,9 @@ class SuggestionProvider {
                 this.currentSuggestionIndex + 1
             );
 
-            suggestionItems[this.currentSuggestionIndex].classList.add("highlight");
+            suggestionItems[this.currentSuggestionIndex].classList.add(
+                "highlight"
+            );
         }
     }
 
