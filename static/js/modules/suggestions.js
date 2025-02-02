@@ -14,11 +14,10 @@ class SuggestionProvider {
         this.relevantTracks = null;
     }
 
-    getSongSuggestionItems() {
+    getSuggestionItems() {
         let suggestionItems = document.getElementsByClassName(
             "suggestion-container"
         );
-        console.log(suggestionItems);
         return suggestionItems;
     }
 
@@ -83,12 +82,12 @@ class SuggestionProvider {
     }
 
     navigateSuggestions(event) {
-        let suggestionItems = this.getSongSuggestionItems();
+        let suggestionItems = this.getSuggestionItems();
+        
+        let defaultSuggestionIndex = -1;
         let firstSuggestionIndex = 0;
         let lastSuggestionIndex = this.relevantTracks.length - 1;
-        let defaultSuggestionIndex = -1;
 
-        console.log(this.currentSuggestionIndex);
         if (this.currentSuggestionIndex < defaultSuggestionIndex) {
             this.currentSuggestionIndex = firstSuggestionIndex;
         } else if (event.key === "ArrowUp") {
