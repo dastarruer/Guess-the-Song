@@ -31,6 +31,8 @@ window.onload = async function () {
     });
 
     guessInput.addEventListener("input", () => {
+        // Set the currently focused suggestion to its default
+        currentSuggestionIndex = -1;
         songSuggestions.showSuggestions();
     });
 
