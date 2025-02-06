@@ -14,19 +14,7 @@ window.onload = async function () {
     );
 
     submitButton.addEventListener("click", () => {
-        const trackName = player.track.title;
-
-        if (
-            songSuggestions.relevantTracks[0].title === trackName.toLowerCase()
-        ) {
-            const trackCaption = document.getElementById("track-name");
-            const trackImage = document.getElementById("artist-image");
-
-            trackCaption.textContent = trackName;
-            trackImage.src = track.album.cover;
-        } else {
-            console.log(songSuggestions.relevantTracks[0].title);
-        }
+        verifyGuess(player);
     });
 
     document.addEventListener("keydown", () => {
@@ -43,7 +31,22 @@ window.onload = async function () {
 
     guessInput.addEventListener("keydown", () => {
         if (event.key === "Enter") {
-            console.log("hello world");
+            verifyGuess(player);
         }
     });
 };
+
+function verifyGuess(player) {
+    const guess = guessInput.value.toLowerCase();
+    const trackName = player.track.title;
+
+    if (guess === trackName.toLowerCase()) {
+        const trackCaption = document.getElementById("track-name");
+        const trackImage = document.getElementById("artist-image");
+
+        trackCaption.textContent = trackName;
+        trackImage.src = track.album.cover;
+    } else {
+        console.log("incorrect");
+    }
+}
