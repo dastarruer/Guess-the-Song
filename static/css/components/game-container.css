@@ -71,6 +71,8 @@
     overflow-y: auto;
 
     margin: -20px 0 0 -400px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-radius: 8px;
 }
 
@@ -80,9 +82,7 @@
     gap: var(--suggestion-gap);
 
     padding: 5px 35px 10px 10px;
-    margin: 15px 15px 15px -25px;
-
-    border-radius: 7px;
+    margin-left: -40px;
 }
 
 .highlight .suggestion-title,
