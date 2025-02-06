@@ -9,7 +9,6 @@ class SuggestionProvider {
         this.artist = artist;
         this.tracklist = tracklist;
 
-        this.guessInput = document.getElementById("input");
         this.currentSuggestionIndex = -1;
         this.relevantTracks = null;
     }
@@ -30,10 +29,7 @@ class SuggestionProvider {
      * track's cover image, title, and artist's name.
      */
 
-    showSuggestions() {
-        // Get the guess and convert it to lowercase
-        const guess = this.guessInput.value.toLowerCase();
-
+    showSuggestions(guess) {
         // Set the relevant tracks to the first 3 characters of each track's title
         this.relevantTracks = this.tracklist.filter((track) =>
             track.title.toLowerCase().startsWith(guess.slice(0, 3))

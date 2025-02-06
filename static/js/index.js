@@ -29,15 +29,15 @@ window.onload = async function () {
         }
     });
 
-    
     document.addEventListener("keydown", () => {
         songSuggestions.navigateSuggestions(event)
     });
-    
+
     guessInput.addEventListener("input", () => {
-        // Set the currently focused suggestion to its default
+        // Unfocus the suggestions by resetting the index to its default
         songSuggestions.currentSuggestionIndex = -1;
 
-        songSuggestions.showSuggestions();
+        // Show suggestions to the user
+        songSuggestions.showSuggestions(guessInput.value.toLowerCase());
     });
 };
