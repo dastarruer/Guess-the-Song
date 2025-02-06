@@ -30,7 +30,7 @@ window.onload = async function () {
     });
 
     document.addEventListener("keydown", () => {
-        songSuggestions.navigateSuggestions(event)
+        songSuggestions.navigateSuggestions(event);
     });
 
     guessInput.addEventListener("input", () => {
@@ -39,5 +39,11 @@ window.onload = async function () {
 
         // Show suggestions to the user
         songSuggestions.showSuggestions(guessInput.value.toLowerCase());
+    });
+
+    guessInput.addEventListener("keydown", () => {
+        if (event.key === "Enter") {
+            console.log("hello world");
+        }
     });
 };
