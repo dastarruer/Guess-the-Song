@@ -131,6 +131,15 @@ class SuggestionProvider {
                 "highlight"
             );
         }
+
+        const highlightedSuggestionTitle = document.querySelector(
+            ".highlight .suggestion-title"
+        ).innerHTML;
+
+        if (highlightedSuggestionTitle !== null) {
+            // Set the input box's value to the name of the highlighted suggestion
+            document.getElementById("input").value = highlightedSuggestionTitle;
+        }
     }
 
     // Calculate the levenshtein distance between two given strings

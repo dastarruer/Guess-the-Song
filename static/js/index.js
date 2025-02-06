@@ -29,6 +29,7 @@ window.onload = async function () {
         songSuggestions.showSuggestions(guessInput.value.toLowerCase());
     });
 
+    // Check if the user presses enter while focused on the input box, and verify guess
     guessInput.addEventListener("keydown", () => {
         if (event.key === "Enter") {
             verifyGuess(player);
