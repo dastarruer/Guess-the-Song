@@ -30,9 +30,10 @@ class SuggestionNavigator {
 
         this.lastSuggestionIndex = numSuggestions - 1;
 
-        // If no suggestion is highlighted, highlight the first one
-        if (this.currentSuggestionIndex < this.defaultSuggestionIndex) {
+        // If no suggestion is highlighted, highlight the first one and terminate the function
+        if (!this.highlightedSuggestionExists()) {
             this.currentSuggestionIndex = this.firstSuggestionIndex;
+            this.highlightSuggestion(suggestionItems);
             return;
         }
 
@@ -40,40 +41,43 @@ class SuggestionNavigator {
             // Check if the currentSuggestionIndex is within the bounds of the suggestion list
             if (this.isOutOfBounds()) {
                 // Remove the highlight of the current suggestion
-                suggestionItems[this.currentSuggestionIndex].classList.remove(
-                    "highlight"
-                );
+                this.clearHighlight(suggestionItems);
             }
 
-            // This makes sure that this.currentSuggestionIndex never goes under firstSuggestionIndex
-            this.currentSuggestionIndex = Math.max(
-                this.firstSuggestionIndex,
-                this.currentSuggestionIndex - 1
-            );
+            this.moveUp();
 
             // Highlight the current suggestion
-            suggestionItems[this.currentSuggestionIndex].classList.add(
-                "highlight"
-            );
+            this.highlightSuggestion(suggestionItems);
         } else if (event.key === "ArrowDown") {
             if (this.isOutOfBounds()) {
-                // Remove highlight on the current suggestion
-                suggestionItems[this.currentSuggestionIndex].classList.remove(
-                    "highlight"
-                );
+                this.clearHighlight(suggestionItems);
             }
 
-            // This makes sure that this.currentSuggestionIndex never goes over lastSuggestionIndex
-            this.currentSuggestionIndex = Math.min(
-                this.lastSuggestionIndex,
-                this.currentSuggestionIndex + 1
-            );
+            this.moveDown();
 
-            suggestionItems[this.currentSuggestionIndex].classList.add(
-                "highlight"
-            );
+            this.highlightSuggestion(suggestionItems);
         }
 
+        this.autofillInputBox();
+    }
+
+    moveDown() {
+        // This makes sure that this.currentSuggestionIndex never goes over lastSuggestionIndex
+        this.currentSuggestionIndex = Math.min(
+            this.lastSuggestionIndex,
+            this.currentSuggestionIndex + 1
+        );
+    }
+
+    moveUp() {
+        // This makes sure that this.currentSuggestionIndex never goes under firstSuggestionIndex
+        this.currentSuggestionIndex = Math.max(
+            this.firstSuggestionIndex,
+            this.currentSuggestionIndex - 1
+        );
+    }
+
+    autofillInputBox() {
         const highlightedSuggestionTitle = document.querySelector(
             ".highlight .suggestion-title"
         ).innerHTML;
@@ -82,6 +86,20 @@ class SuggestionNavigator {
             // Set the input box's value to the name of the highlighted suggestion
             document.getElementById("input").value = highlightedSuggestionTitle;
         }
+    }
+
+    clearHighlight(suggestionItems) {
+        suggestionItems[this.currentSuggestionIndex].classList.remove(
+            "highlight"
+        );
+    }
+
+    highlightSuggestion(suggestionItems) {
+        suggestionItems[this.currentSuggestionIndex].classList.add("highlight");
+    }
+
+    highlightedSuggestionExists() {
+        return !(this.currentSuggestionIndex < this.defaultSuggestionIndex);
     }
 
     /** Check if currentSuggestionIndex is out of bounds of the list of suggestions */
