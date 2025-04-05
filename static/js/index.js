@@ -27,7 +27,9 @@ window.onload = async function () {
         // Unfocus the suggestions by resetting the index to its default
         suggestionNavigator.currentSuggestionIndex = -1;
 
-        trackMatcher.relevantTracks = trackMatcher.getRelevantTracks(guessInput.value.toLowerCase());
+        trackMatcher.relevantTracks = trackMatcher.getRelevantTracks(
+            guessInput.value.toLowerCase()
+        );
 
         // Show suggestions to the user
         songSuggestions.showSuggestions(trackMatcher.relevantTracks);
@@ -52,8 +54,10 @@ function verifyGuess(player) {
 
         trackCaption.textContent = trackName;
         trackImage.src = track.album.cover;
-        success.textContent = "Success";
+        success.textContent = "Correct!";
+        success.className = "correct";
     } else {
-        success.textContent = "Incorrect";
+        success.textContent = "Incorrect...";
+        success.className = "incorrect";
     }
 }

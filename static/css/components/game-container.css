@@ -19,6 +19,15 @@
     margin-bottom: -10px; 
 }
 
+#success-message.correct {
+    color: var(--primary-accent-color)
+}
+
+#success-message.incorrect {
+    /* TODO: Find a different color */
+    color: red;
+}
+
 #input,
 #submit-guess {
     grid-column-start: 1;
