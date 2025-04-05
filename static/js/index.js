@@ -1,11 +1,13 @@
 import SuggestionProvider from "./modules/suggestions.js";
 import ArtistPlayer from "./modules/artistPlayer.js";
+import SuggestionNavigator from "./modules/suggestionNavigator.js";
 
 const submitButton = document.getElementById("submit-guess");
 const guessInput = document.getElementById("input");
 
 window.onload = async function () {
     const player = new ArtistPlayer();
+    const suggestionNavigator = new SuggestionNavigator();
     await player.setTrack();
 
     const songSuggestions = new SuggestionProvider(
@@ -18,12 +20,18 @@ window.onload = async function () {
     });
 
     document.addEventListener("keydown", () => {
-        songSuggestions.navigateSuggestions(event);
+        let len;
+        if (songSuggestions.relevantTracks === null) {
+            len = 0;
+        } else {
+            len = songSuggestions.relevantTracks.length;
+        }
+        suggestionNavigator.navigateSuggestions(event, len);
     });
 
     guessInput.addEventListener("input", () => {
         // Unfocus the suggestions by resetting the index to its default
-        songSuggestions.currentSuggestionIndex = -1;
+        suggestionNavigator.currentSuggestionIndex = -1;
 
         // Show suggestions to the user
         songSuggestions.showSuggestions(guessInput.value.toLowerCase());

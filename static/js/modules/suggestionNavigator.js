@@ -1,15 +1,103 @@
-class SuggestionProvider {
+class SuggestionNavigator {
+    constructor() {
+        this.currentSuggestionIndex = -1;
+    }
+
+    /** Gets all the suggestions elements */
+    getSuggestionElements() {
+        let suggestionItems = document.getElementsByClassName(
+            "suggestion-container"
+        );
+        return suggestionItems;
+    }
+
+    navigateSuggestions(event, numSuggestions) {
+        // If there are no suggestions to navigate, return
+        if (numSuggestions === 0) {
+            return;
+        }
+
+        let suggestionItems = this.getSuggestionElements();
+
+        let defaultSuggestionIndex = -1;
+        let firstSuggestionIndex = 0;
+        let lastSuggestionIndex = numSuggestions - 1;
+
+        if (this.currentSuggestionIndex < defaultSuggestionIndex) {
+            this.currentSuggestionIndex = firstSuggestionIndex;
+        } else if (event.key === "ArrowUp") {
+            // Check if the currentSuggestionIndex is within the bounds of the suggestion list
+            if (this.currentSuggestionIndex > firstSuggestionIndex) {
+                // Remove the highlight of the current suggestion
+                suggestionItems[this.currentSuggestionIndex].classList.remove(
+                    "highlight"
+                );
+            }
+
+            // This makes sure that this.currentSuggestionIndex never goes under firstSuggestionIndex
+            this.currentSuggestionIndex = Math.max(
+                firstSuggestionIndex,
+                this.currentSuggestionIndex - 1
+            );
+
+            // Highlight the current suggestion
+            suggestionItems[this.currentSuggestionIndex].classList.add(
+                "highlight"
+            );
+        } else if (event.key === "ArrowDown") {
+            // Check if the currentSuggestionIndex is within the bounds of the suggestion list
+            if (
+                this.currentSuggestionIndex < lastSuggestionIndex &&
+                this.currentSuggestionIndex >= firstSuggestionIndex
+            ) {
+                // Remove highlight on the current suggestion
+                suggestionItems[this.currentSuggestionIndex].classList.remove(
+                    "highlight"
+                );
+            }
+
+            // This makes sure that this.currentSuggestionIndex never goes over lastSuggestionIndex
+            this.currentSuggestionIndex = Math.min(
+                lastSuggestionIndex,
+                this.currentSuggestionIndex + 1
+            );
+
+            suggestionItems[this.currentSuggestionIndex].classList.add(
+                "highlight"
+            );
+        }
+
+        const highlightedSuggestionTitle = document.querySelector(
+            ".highlight .suggestion-title"
+        ).innerHTML;
+
+        if (highlightedSuggestionTitle !== null) {
+            // Set the input box's value to the name of the highlighted suggestion
+            document.getElementById("input").value = highlightedSuggestionTitle;
+        }
+    }
+}
+
+export default SuggestionNavigator;
+export class SuggestionProvider {
     /**
      * Initializes a new instance of the SuggestionProvider class. This class will provide suggestions to the user based on what they type into text boxes.
      * @param {Object} artist - The artist object containing artist details.
      * @param {Array} tracklist - The list of tracks associated with the artist.
      */
-
     constructor(artist, tracklist) {
         this.artist = artist;
         this.tracklist = tracklist;
 
         this.relevantTracks = null;
+    }
+
+    /** Gets all the suggestions elements */
+    getSuggestionElements() {
+        let suggestionItems = document.getElementsByClassName(
+            "suggestion-container"
+        );
+        return suggestionItems;
     }
 
     /**
@@ -78,7 +166,7 @@ class SuggestionProvider {
             .slice(0, 3); // Take the first 3 characters of the string
     }
 
-    /** Calculate the levenshtein distance between two given strings */
+    // Calculate the levenshtein distance between two given strings
     levenshteinDistance(a, b) {
         const lenA = a.length,
             lenB = b.length;
@@ -106,4 +194,3 @@ class SuggestionProvider {
         return d[lenA][lenB];
     }
 }
-export default SuggestionProvider;
