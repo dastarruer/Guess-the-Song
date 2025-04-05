@@ -44,6 +44,7 @@ window.onload = async function () {
 function verifyGuess(player) {
     const guess = guessInput.value.toLowerCase();
     const trackName = player.track.title;
+    const success = document.getElementById("success-message");
 
     if (guess === trackName.toLowerCase()) {
         const trackCaption = document.getElementById("track-name");
@@ -51,7 +52,8 @@ function verifyGuess(player) {
 
         trackCaption.textContent = trackName;
         trackImage.src = track.album.cover;
+        success.textContent = "Success";
     } else {
-        console.log("incorrect");
+        success.textContent = "Incorrect";
     }
 }
