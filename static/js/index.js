@@ -19,12 +19,7 @@ window.onload = async function () {
     });
 
     document.addEventListener("keydown", () => {
-        let len;
-        if (songSuggestions.relevantTracks === null) {
-            len = 0;
-        } else {
-            len = trackMatcher.relevantTracks.length;
-        }
+        let len = trackMatcher.numRelevantTracks();
         suggestionNavigator.navigateSuggestions(event, len);
     });
 

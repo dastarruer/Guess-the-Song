@@ -30,6 +30,18 @@ class TrackMatcher {
             .slice(0, 3); // Take the first 3 characters of the string
     }
 
+    /** Get the number of the relevant tracks.
+     * If this.relevantTracks is null, return 0.
+     * Otherwse, return the length of this.relevantTracks.
+     */
+    numRelevantTracks() {
+        if (this.relevantTracks === null) {
+            return 0;
+        } else {
+            return this.relevantTracks.length;
+        }
+    }
+
     /** Calculate the levenshtein distance between two given strings */
     levenshteinDistance(a, b) {
         const lenA = a.length,
