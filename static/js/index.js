@@ -47,8 +47,9 @@ function verifyGuess(player) {
     const guess = guessInput.value.toLowerCase();
     const trackName = player.track.title;
     const firstGuessElement = document.querySelector(".guess");
+    const correctGuessExists = hasCorrectGuess();
 
-    if (guess === trackName.toLowerCase()) {
+    if (guess === trackName.toLowerCase() && !correctGuessExists) {
         const trackCaption = document.getElementById("track-name");
         const trackImage = document.getElementById("artist-image");
 
@@ -58,7 +59,11 @@ function verifyGuess(player) {
         </svg>`;
         trackCaption.textContent = trackName;
         trackImage.src = track.album.cover;
-    } else {
+    } else if (guess !== trackName.toLowerCase() && !correctGuessExists) {
         firstGuessElement.className = "incorrect-guess";
     }
 }
+
+function hasCorrectGuess() {
+    return document.querySelector(".correct-guess") !== null;
+} 
