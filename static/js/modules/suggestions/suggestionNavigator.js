@@ -28,13 +28,17 @@ class SuggestionNavigator {
 
         let suggestionItems = this.getSuggestionElements();
 
-        let lastSuggestionIndex = numSuggestions - 1;
+        this.lastSuggestionIndex = numSuggestions - 1;
 
+        // If no suggestion is highlighted, highlight the first one
         if (this.currentSuggestionIndex < this.defaultSuggestionIndex) {
             this.currentSuggestionIndex = this.firstSuggestionIndex;
-        } else if (event.key === "ArrowUp") {
+            return;
+        }
+
+        if (event.key === "ArrowUp") {
             // Check if the currentSuggestionIndex is within the bounds of the suggestion list
-            if (this.currentSuggestionIndex > this.firstSuggestionIndex) {
+            if (this.isOutOfBounds()) {
                 // Remove the highlight of the current suggestion
                 suggestionItems[this.currentSuggestionIndex].classList.remove(
                     "highlight"
@@ -52,11 +56,7 @@ class SuggestionNavigator {
                 "highlight"
             );
         } else if (event.key === "ArrowDown") {
-            // Check if the currentSuggestionIndex is within the bounds of the suggestion list
-            if (
-                this.currentSuggestionIndex < lastSuggestionIndex &&
-                this.currentSuggestionIndex >= this.firstSuggestionIndex
-            ) {
+            if (this.isOutOfBounds()) {
                 // Remove highlight on the current suggestion
                 suggestionItems[this.currentSuggestionIndex].classList.remove(
                     "highlight"
@@ -65,7 +65,7 @@ class SuggestionNavigator {
 
             // This makes sure that this.currentSuggestionIndex never goes over lastSuggestionIndex
             this.currentSuggestionIndex = Math.min(
-                lastSuggestionIndex,
+                this.lastSuggestionIndex,
                 this.currentSuggestionIndex + 1
             );
 
@@ -82,6 +82,15 @@ class SuggestionNavigator {
             // Set the input box's value to the name of the highlighted suggestion
             document.getElementById("input").value = highlightedSuggestionTitle;
         }
+    }
+
+    /** Check if currentSuggestionIndex is out of bounds of the list of suggestions */
+    isOutOfBounds() {
+        return (
+            this.currentSuggestionIndex > this.firstSuggestionIndex ||
+            (this.currentSuggestionIndex < this.lastSuggestionIndex &&
+                this.currentSuggestionIndex >= this.firstSuggestionIndex)
+        );
     }
 }
 
