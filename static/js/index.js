@@ -1,5 +1,6 @@
-import SuggestionProvider from "./modules/suggestions.js";
+import SuggestionProvider from "./modules/suggestionProvider.js";
 import ArtistPlayer from "./modules/artistPlayer.js";
+import TrackMatcher from "./modules/trackMatcher.js";
 import SuggestionNavigator from "./modules/suggestionNavigator.js";
 
 const submitButton = document.getElementById("submit-guess");
@@ -7,12 +8,12 @@ const guessInput = document.getElementById("input");
 
 window.onload = async function () {
     const player = new ArtistPlayer();
-    const suggestionNavigator = new SuggestionNavigator();
     await player.setTrack();
 
+    const suggestionNavigator = new SuggestionNavigator();
+    const trackMatcher = new TrackMatcher(player.tracklist);
     const songSuggestions = new SuggestionProvider(
         player.artist,
-        player.tracklist
     );
 
     submitButton.addEventListener("click", () => {
@@ -24,7 +25,7 @@ window.onload = async function () {
         if (songSuggestions.relevantTracks === null) {
             len = 0;
         } else {
-            len = songSuggestions.relevantTracks.length;
+            len = trackMatcher.relevantTracks.length;
         }
         suggestionNavigator.navigateSuggestions(event, len);
     });
@@ -33,8 +34,10 @@ window.onload = async function () {
         // Unfocus the suggestions by resetting the index to its default
         suggestionNavigator.currentSuggestionIndex = -1;
 
+        trackMatcher.getRelevantTracks(guessInput.value.toLowerCase());
+
         // Show suggestions to the user
-        songSuggestions.showSuggestions(guessInput.value.toLowerCase());
+        songSuggestions.showSuggestions(trackMatcher.relevantTracks);
     });
 
     // Check if the user presses enter while focused on the input box, and verify guess
