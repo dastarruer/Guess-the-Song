@@ -1,7 +1,7 @@
-import SuggestionProvider from "./modules/suggestionProvider.js";
 import ArtistPlayer from "./modules/artistPlayer.js";
-import TrackMatcher from "./modules/trackMatcher.js";
-import SuggestionNavigator from "./modules/suggestionNavigator.js";
+import SuggestionRenderer from "./modules/suggestions/suggestionRenderer.js";
+import SuggestionNavigator from "./modules/suggestions/suggestionNavigator.js";
+import TrackMatcher from "./modules/suggestions/trackMatcher.js";
 
 const submitButton = document.getElementById("submit-guess");
 const guessInput = document.getElementById("input");
@@ -12,9 +12,7 @@ window.onload = async function () {
 
     const suggestionNavigator = new SuggestionNavigator();
     const trackMatcher = new TrackMatcher(player.tracklist);
-    const songSuggestions = new SuggestionProvider(
-        player.artist,
-    );
+    const songSuggestions = new SuggestionRenderer(player.artist);
 
     submitButton.addEventListener("click", () => {
         verifyGuess(player);
