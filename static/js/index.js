@@ -18,7 +18,7 @@ window.onload = async function () {
         verifyGuess(player);
     });
 
-    document.addEventListener("keydown", () => {
+    document.addEventListener("keydown", (event) => {
         let len = trackMatcher.numRelevantTracks();
         suggestionNavigator.navigateSuggestions(event, len);
     });
