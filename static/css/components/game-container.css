@@ -12,11 +12,14 @@
 }
 
 #success-message {
-    grid-column: 1 / -1;
-    color: var(--text-light);
-    font-size: 1rem;
-    font-style: italic;
+    display: flex;
+    gap: 5px;
     margin-bottom: -10px; 
+}
+.guess {
+    color: var(--text-muted);
+    width: 30px;
+    height: 30px;
 }
 
 #success-message.correct {
