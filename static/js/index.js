@@ -27,7 +27,7 @@ window.onload = async function () {
         // Unfocus the suggestions by resetting the index to its default
         suggestionNavigator.currentSuggestionIndex = -1;
 
-        trackMatcher.getRelevantTracks(guessInput.value.toLowerCase());
+        trackMatcher.relevantTracks = trackMatcher.getRelevantTracks(guessInput.value.toLowerCase());
 
         // Show suggestions to the user
         songSuggestions.showSuggestions(trackMatcher.relevantTracks);

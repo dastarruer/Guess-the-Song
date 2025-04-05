@@ -7,12 +7,13 @@ class TrackMatcher {
 
     /** Set the relevant tracks to the first 3 characters of each track's title. */
     getRelevantTracks(guess) {
-        this.relevantTracks = this.tracklist.filter((track) =>
+        // Filters the tracklist to include tracks where the title starts with the same 3 first letters as the guess, disregarding case
+        const filtered = this.tracklist.filter((track) =>
             track.title.toLowerCase().startsWith(guess.slice(0, 3))
         );
 
-        // Sort the tracks from smallest to biggest distance from the guess
-        this.relevantTracks = this.relevantTracks
+        // Rearrange the list from closest to farthest away from the guess
+        return filtered
             .sort((a, b) => {
                 // Calculate Levenshtein distance for both tracks' names, and whittle it down to the first three tracks
                 const distanceA = this.levenshteinDistance(
