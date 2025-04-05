@@ -14,8 +14,11 @@ type Artist struct {
 }
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
+	// Hardcoded, to be changed
 	id := 525046
 	var artist Artist
+
+	// Get the artist's data
 	err := requests.
 		URL("https://api.deezer.com").
 		Pathf("/artist/%d", id).

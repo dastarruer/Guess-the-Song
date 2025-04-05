@@ -1,6 +1,6 @@
 class SuggestionProvider {
     /**
-     * Initializes a new instance of the SuggestionProvider class.
+     * Initializes a new instance of the SuggestionProvider class. This class will provide suggestions to the user based on what they type into text boxes.
      * @param {Object} artist - The artist object containing artist details.
      * @param {Array} tracklist - The list of tracks associated with the artist.
      */
@@ -13,6 +13,7 @@ class SuggestionProvider {
         this.relevantTracks = null;
     }
 
+    // Gets all the suggestions elements
     getSuggestionElements() {
         let suggestionItems = document.getElementsByClassName(
             "suggestion-container"
@@ -30,7 +31,40 @@ class SuggestionProvider {
      */
 
     showSuggestions(guess) {
-        // Set the relevant tracks to the first 3 characters of each track's title
+        this.getRelevantTracks(guess);
+
+        this.appendSuggestionsToHTML();
+    }
+
+    appendSuggestionsToHTML() {
+        // The container that all suggestions are shown in
+        const suggestions = document.getElementById("suggestions-container");
+
+        // Clear the list so that the previous suggestions are not shown
+        suggestions.innerHTML = "";
+
+        // Show the suggestions
+        suggestions.style.display = "block";
+
+        for (const track of this.relevantTracks) {
+            // Create a list element to show the track
+            const suggestion = document.createElement("li");
+            suggestion.classList.add("suggestion-container");
+
+            // The HTML of the suggestion
+            suggestion.innerHTML = `
+                    <img class="suggestion-cover" src=${track.album.cover}>
+                    <div class="suggestion-caption-container">
+                        <p class="suggestion-title martian-mono">${track.title}</p>
+                        <p class="suggestion-artist semibold">${this.artist.name}</p>
+                    </div>
+                `;
+            suggestions.appendChild(suggestion);
+        }
+    }
+
+    /** Set the relevant tracks to the first 3 characters of each track's title. */
+    getRelevantTracks(guess) {
         this.relevantTracks = this.tracklist.filter((track) =>
             track.title.toLowerCase().startsWith(guess.slice(0, 3))
         );
@@ -52,29 +86,6 @@ class SuggestionProvider {
                 return distanceA - distanceB;
             })
             .slice(0, 3); // Take the first 3 characters of the string
-
-        // The container that all suggestions are shown in
-        const suggestions = document.getElementById("suggestions-container");
-
-        // Clear the list so that the previous suggestions are not shown
-        suggestions.innerHTML = "";
-
-        // Show the suggestions
-        suggestions.style.display = "block";
-
-        for (const track of this.relevantTracks) {
-            // Create a list element to show the track
-            const suggestion = document.createElement("li");
-            suggestion.classList.add("suggestion-container");
-            suggestion.innerHTML = `
-                    <img class="suggestion-cover" src=${track.album.cover}>
-                    <div class="suggestion-caption-container">
-                        <p class="suggestion-title martian-mono">${track.title}</p>
-                        <p class="suggestion-artist semibold">${this.artist.name}</p>
-                    </div>
-                `;
-            suggestions.appendChild(suggestion);
-        }
     }
 
     navigateSuggestions(event) {
@@ -106,6 +117,7 @@ class SuggestionProvider {
                 this.currentSuggestionIndex - 1
             );
 
+            // Highlight the current suggestion
             suggestionItems[this.currentSuggestionIndex].classList.add(
                 "highlight"
             );
@@ -115,7 +127,7 @@ class SuggestionProvider {
                 this.currentSuggestionIndex < lastSuggestionIndex &&
                 this.currentSuggestionIndex >= firstSuggestionIndex
             ) {
-                // Remove the highlight of the current suggestion
+                // Remove highlight on the current suggestion
                 suggestionItems[this.currentSuggestionIndex].classList.remove(
                     "highlight"
                 );

@@ -14,8 +14,11 @@ type ArtistTopTracks struct {
 }
 
 func ArtistTopTracksHandler(w http.ResponseWriter, r *http.Request) {
+	// Hardcoded, to be changed
 	id := 525046
+
 	var artist ArtistTopTracks
+	// Get the artist's top tracks
 	err := requests.
 		URL("https://api.deezer.com").
 		Pathf("/artist/%d/top", id).
