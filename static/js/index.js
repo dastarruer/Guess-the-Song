@@ -38,32 +38,45 @@ window.onload = async function () {
     // Check if the user presses enter while focused on the input box, and verify guess
     guessInput.addEventListener("keydown", () => {
         if (event.key === "Enter") {
-            verifyGuess(player);
+            const firstGuessElement = document.querySelector(".guess");
+            const trackName = player.track.title;
+
+            if (verifyGuess(guessInput.value.toLowerCase(), trackName)) {
+                const trackNameElement = document.getElementById("track-name");
+                const artistImageElement =
+                    document.getElementById("artist-image");
+
+                const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+                </svg>`;
+
+                // Show a green check to indicate that the user made a correct guess
+                firstGuessElement.className = "correct-guess";
+                firstGuessElement.innerHTML = checkIcon;
+
+                revealTrack(trackNameElement, trackName, artistImageElement);
+            } else {
+                firstGuessElement.className = "incorrect-guess";
+            }
         }
     });
 };
 
-function verifyGuess(player) {
-    const guess = guessInput.value.toLowerCase();
-    const trackName = player.track.title;
-    const firstGuessElement = document.querySelector(".guess");
+function revealTrack(trackNameElement, trackName, artistImageElement) {
+    trackNameElement.textContent = trackName;
+    artistImageElement.src = track.album.cover;
+}
+
+function verifyGuess(guess, trackName) {
     const correctGuessExists = hasCorrectGuess();
 
     if (guess === trackName.toLowerCase() && !correctGuessExists) {
-        const trackCaption = document.getElementById("track-name");
-        const trackImage = document.getElementById("artist-image");
-
-        firstGuessElement.className = "correct-guess";
-        firstGuessElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
-        </svg>`;
-        trackCaption.textContent = trackName;
-        trackImage.src = track.album.cover;
+        return true;
     } else if (guess !== trackName.toLowerCase() && !correctGuessExists) {
-        firstGuessElement.className = "incorrect-guess";
+        return false;
     }
 }
 
 function hasCorrectGuess() {
     return document.querySelector(".correct-guess") !== null;
-} 
+}
