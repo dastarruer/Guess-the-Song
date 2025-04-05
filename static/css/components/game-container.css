@@ -16,17 +16,20 @@
     gap: 5px;
     margin-bottom: -10px; 
 }
-.guess {
-    color: var(--text-muted);
+.guess, .correct-guess, .incorrect-guess {
     width: 30px;
     height: 30px;
 }
 
-#success-message.correct {
+.guess {
+    color: var(--text-muted);
+}
+
+.correct-guess {
     color: var(--primary-accent-color)
 }
 
-#success-message.incorrect {
+.incorrect-guess {
     /* TODO: Find a different color */
     color: red;
 }

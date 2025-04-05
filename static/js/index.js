@@ -46,18 +46,16 @@ window.onload = async function () {
 function verifyGuess(player) {
     const guess = guessInput.value.toLowerCase();
     const trackName = player.track.title;
-    const success = document.getElementById("success-message");
+    const firstGuessElement = document.querySelector(".guess");
 
     if (guess === trackName.toLowerCase()) {
         const trackCaption = document.getElementById("track-name");
         const trackImage = document.getElementById("artist-image");
 
+        firstGuessElement.className = "correct-guess";
         trackCaption.textContent = trackName;
         trackImage.src = track.album.cover;
-        success.textContent = "Correct!";
-        success.className = "correct";
     } else {
-        success.textContent = "Incorrect...";
-        success.className = "incorrect";
+        firstGuessElement.className = "incorrect-guess";
     }
 }
