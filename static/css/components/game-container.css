@@ -6,8 +6,17 @@
 
 #input-container {
     display: grid;
-    row-gap: 40px;
+    grid-template-columns: auto;
+    row-gap: 20px;
     margin: 0 0 200px -100px;
+}
+
+#success-message {
+    grid-column: 1 / -1;
+    color: var(--text-light);
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: -10px; 
 }
 
 #input,

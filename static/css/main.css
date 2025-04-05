@@ -4,7 +4,6 @@
 @import "./components/game-container.css";
 @import "./utilities/fonts.css";
 @import "./utilities/box-shadow.css";
-@import "./components/success-message.css";
 
 body {
     background-color: var(--primary-bg-color);
