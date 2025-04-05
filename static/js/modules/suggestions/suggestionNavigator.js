@@ -31,7 +31,7 @@ class SuggestionNavigator {
         this.lastSuggestionIndex = numSuggestions - 1;
 
         // If no suggestion is highlighted, highlight the first one and terminate the function
-        if (!this.highlightedSuggestionExists()) {
+        if (!this.hasHighlightedSuggestion()) {
             this.currentSuggestionIndex = this.firstSuggestionIndex;
             this.highlightSuggestion(suggestionItems);
             return;
@@ -98,16 +98,16 @@ class SuggestionNavigator {
         suggestionItems[this.currentSuggestionIndex].classList.add("highlight");
     }
 
-    highlightedSuggestionExists() {
+    /** Return if there is a highlighted suggestion or not */
+    hasHighlightedSuggestion() {
         return !(this.currentSuggestionIndex < this.defaultSuggestionIndex);
     }
 
     /** Check if currentSuggestionIndex is out of bounds of the list of suggestions */
     isOutOfBounds() {
-        return (
-            this.currentSuggestionIndex > this.firstSuggestionIndex ||
-            (this.currentSuggestionIndex < this.lastSuggestionIndex &&
-                this.currentSuggestionIndex >= this.firstSuggestionIndex)
+        return !(
+            this.currentSuggestionIndex < this.firstSuggestionIndex ||
+            this.currentSuggestionIndex > this.lastSuggestionIndex
         );
     }
 }
