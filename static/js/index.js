@@ -17,15 +17,34 @@ window.onload = async function () {
 
     const gameManager = new GameManager(3);
 
+    // Add ability to submit guess
     submitButton.addEventListener("click", () => {
-        gameManager.verifyGuess(guessInput.value);
+        const firstGuessElement = document.querySelector(".guess");
+        const trackName = player.track.title;
+        const trackCoverUrl = player.track.album.cover;
+
+        // If the guess is valid
+        if (gameManager.verifyGuess(guessInput.value, trackName)) {
+            gameManager.handleCorrectGuess(
+                firstGuessElement,
+                trackName,
+                trackCoverUrl
+            );
+        } else {
+            // Check if firstGuessElement exists so that it doesn't interfere with other logic
+            if (firstGuessElement) {
+                gameManager.handleIncorrectGuess(firstGuessElement);
+            }
+        }
     });
 
+    // Navigate suggestions with arrow keys
     document.addEventListener("keydown", (event) => {
         let len = trackMatcher.numRelevantTracks();
         suggestionNavigator.navigateSuggestions(event, len);
     });
 
+    // Show suggestions based on what the user types into the input box
     guessInput.addEventListener("input", () => {
         // Unfocus the suggestions by resetting the index to its default
         suggestionNavigator.currentSuggestionIndex = -1;
@@ -45,6 +64,7 @@ window.onload = async function () {
             const trackName = player.track.title;
             const trackCoverUrl = player.track.album.cover;
 
+            // If the guess is valid
             if (gameManager.verifyGuess(guessInput.value, trackName)) {
                 gameManager.handleCorrectGuess(
                     firstGuessElement,
@@ -52,7 +72,10 @@ window.onload = async function () {
                     trackCoverUrl
                 );
             } else {
-                gameManager.handleIncorrectGuess(firstGuessElement);
+                // Check if firstGuessElement exists so that it doesn't interfere with other logic
+                if (firstGuessElement) {
+                    gameManager.handleIncorrectGuess(firstGuessElement);
+                }
             }
         }
     });

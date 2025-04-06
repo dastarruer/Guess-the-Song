@@ -5,9 +5,15 @@ class GameManager {
 
     handleIncorrectGuess(firstGuessElement) {
         firstGuessElement.className = "incorrect-guess";
+        this.subtractLife();
+    }
 
-        this.livesLeft -= 1;
-        console.log(this.livesLeft);
+    subtractLife() {
+        if (this.livesLeft <= 0) {
+            console.log("You lost!");
+        } else {
+            this.livesLeft -= 1;
+        }
     }
 
     /**Handles logic if user guesses correctly.
@@ -38,9 +44,9 @@ class GameManager {
     /** If the given guess is equal to the track name (disregarding case),
      * and there is not currently a correct guess, or the user has run out of guesses */
     verifyGuess(guess, trackName) {
-        const correctGuessExists = this.isGuessLeft();
         return (
-            !correctGuessExists &&
+            !this.isGuessLeft() &&
+            this.livesLeft !== 0 &&
             guess.toLowerCase() === trackName.toLowerCase()
         );
     }
