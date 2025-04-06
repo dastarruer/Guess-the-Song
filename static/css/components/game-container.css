@@ -102,6 +102,21 @@
     border-radius: 8px;
 }
 
+#restart-btn {
+    background-color: var(--text-light);
+    border-color: var(--text-light);
+    
+    display: none;
+    border-width: 0px;
+    outline: none;
+    border-radius: 8px;
+    align-items: center;
+}
+
+#restart-btn:hover {
+    background-color: #d1d5db;
+}
+
 .suggestion-container {
     display: flex;
     align-items: center;
