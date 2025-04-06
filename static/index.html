@@ -20,53 +20,57 @@
         <div id="banner" class="jersey-25 regular">
             <h1>Guess The Song</h1>
         </div>
+
         <div id="game-container">
             <div id="artist-info" class="box-shadow">
                 <figure>
-                    <img id="artist-image" src="images/loading.png"></img>
+                    <img id="artist-image" src="images/loading.png" />
                     <div id="captions">
                         <figcaption id="track-name" class="martian-mono semibold">
                             <div class="loading-dots-track">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                                <span></span><span></span><span></span>
                             </div>
                         </figcaption>
                         <figcaption id="artist-name" class="martian-mono semibold">
                             <div class="loading-dots-artist">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                                <span></span><span></span><span></span>
                             </div>
                         </figcaption>
                     </div>
                     <audio id="track" controls>
                         Your browser doesn't support this audio, sorry!
                     </audio>
-                    <button id="restart-btn" class="jetbrains-mono bold">Restart Game</button>
                 </figure>
             </div>
-            <div id="input-container">
+
+            <div id="input-container" class="flex flex-col items-center space-y-4">
                 <div id="success-message">
                     <div class="guess">
+                        <!-- X SVG -->
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                         </svg>
                     </div>
                     <div class="guess">
+                        <!-- X SVG -->
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                         </svg>
                     </div>
                     <div class="guess">
+                        <!-- X SVG -->
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                         </svg>
                     </div>
                 </div>
+
                 <input autofocus autocomplete="off" class="rem regular box-shadow" id="input" name="name" type="text" value="" placeholder="Guess the song..." />
                 <button id="submit-btn" class="jetbrains-mono bold">Submit guess</button>
                 <ul id="suggestions-container" class="box-shadow"></ul>
+
+                <!-- Restart button under input -->
+                <button id="restart-btn" class="jetbrains-mono bold hidden">Restart Game</button>
             </div>
         </div>
     </body>
