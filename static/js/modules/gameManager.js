@@ -1,3 +1,8 @@
+import ArtistPlayer from "./artistPlayer.js";
+import SuggestionRenderer from "./suggestions/suggestionRenderer.js";
+import SuggestionNavigator from "./suggestions/suggestionNavigator.js";
+import TrackMatcher from "./suggestions/trackMatcher.js";
+
 class GameManager {
     constructor(lives) {
         this.livesLeft = lives;
@@ -57,8 +62,15 @@ class GameManager {
     }
 
     /** Restart the game by reloading the page. */
-    restartGame() {
-        location.reload();
+    async startGame(lives) {
+        this.player = new ArtistPlayer();
+        await this.player.setTrack();
+
+        this.suggestionNavigator = new SuggestionNavigator();
+        this.trackMatcher = new TrackMatcher(this.player.tracklist);
+        this.songSuggestions = new SuggestionRenderer(this.player.artist);
+
+        this.livesLeft = lives;
     }
 }
 
