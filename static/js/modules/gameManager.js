@@ -61,8 +61,14 @@ class GameManager {
         return document.querySelector(".correct-guess") !== null;
     }
 
-    /** Restart the game by reloading the page. */
+    /** Start the game by initializing the ArtistPlayer, SuggestionNavigator, TrackMatcher, and SuggestionRenderer objects. 
+     * Rotate the restart icon as well to indicate to the user that the game is loading. */
     async startGame(lives) {
+        const restartIcon = document.getElementById("restart-icon");
+
+        // Rotate icon while waiting for game to start
+        restartIcon.classList.add("rotate");
+
         this.player = new ArtistPlayer();
         await this.player.setTrack();
 
@@ -71,6 +77,9 @@ class GameManager {
         this.songSuggestions = new SuggestionRenderer(this.player.artist);
 
         this.livesLeft = lives;
+
+        // Stop rotating the icon
+        restartIcon.classList.remove("rotate");
     }
 }
 

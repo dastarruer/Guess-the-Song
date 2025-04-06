@@ -105,7 +105,7 @@
 #restart-btn {
     background-color: var(--text-light);
     border-color: var(--text-light);
-    
+
     border-width: 0px;
     border-radius: 8px;
 
@@ -117,11 +117,10 @@
     padding-left: 5px;
     padding-right: 5px;
 
-    /* TODO: Set to none once done testing */
-    display: flex;
+    display: none;
     gap: 7px;
     outline: none;
-    
+
     align-items: center;
     justify-content: center;
 }
@@ -129,6 +128,15 @@
 #restart-btn:hover {
     background-color: var(--primary-accent-color);
 }
+
+#restart-icon {
+    width: 16px;
+    height: 16px;
+}
+
+#restart-icon.rotate {
+    animation: rotateIcon 1s linear infinite;
+} 
 
 .suggestion-container {
     display: flex;
@@ -166,4 +174,13 @@
     flex-direction: column;
     justify-content: center;
     margin-top: -10px;
+}
+
+@keyframes rotateIcon {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
