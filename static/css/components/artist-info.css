@@ -32,6 +32,9 @@
 
 #restart-btn {
     display: none;
+    border: 3px solid var(--text-light);
+    font-style: normal;
+    border-radius: 8px;
 }
 
 /* Loading animation */

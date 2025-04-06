@@ -79,4 +79,10 @@ window.onload = async function () {
             }
         }
     });
+
+    // Restart button
+    document.getElementById("restart-btn").addEventListener("click", () => {
+        location.reload(); // simplest way to reset state
+    });
+
 };
