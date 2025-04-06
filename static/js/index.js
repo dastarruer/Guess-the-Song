@@ -15,7 +15,7 @@ window.onload = async function () {
     const trackMatcher = new TrackMatcher(player.tracklist);
     const songSuggestions = new SuggestionRenderer(player.artist);
 
-    const gameManager = new GameManager();
+    const gameManager = new GameManager(3);
 
     submitButton.addEventListener("click", () => {
         gameManager.verifyGuess(guessInput.value);

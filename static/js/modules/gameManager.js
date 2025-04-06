@@ -1,6 +1,13 @@
 class GameManager {
+    constructor(lives) {
+        this.livesLeft = lives;
+    }
+
     handleIncorrectGuess(firstGuessElement) {
         firstGuessElement.className = "incorrect-guess";
+
+        this.livesLeft -= 1;
+        console.log(this.livesLeft);
     }
 
     /**Handles logic if user guesses correctly.
