@@ -55,6 +55,11 @@ class GameManager {
     isGuessLeft() {
         return document.querySelector(".correct-guess") !== null;
     }
+
+    /** Restart the game by reloading the page. */
+    restartGame() {
+        location.reload();
+    }
 }
 
 export default GameManager;
