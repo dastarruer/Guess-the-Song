@@ -14,9 +14,11 @@
 #success-message {
     display: flex;
     gap: 5px;
-    margin-bottom: -10px; 
+    margin-bottom: -10px;
 }
-.guess, .correct-guess, .incorrect-guess {
+.guess,
+.correct-guess,
+.incorrect-guess {
     width: 30px;
     height: 30px;
 }
@@ -26,7 +28,7 @@
 }
 
 .correct-guess {
-    color: var(--primary-accent-color)
+    color: var(--primary-accent-color);
 }
 
 .incorrect-guess {
@@ -35,7 +37,7 @@
 }
 
 #input,
-#submit-guess {
+#submit-btn {
     grid-column-start: 1;
     border: 3px solid var(--text-light);
     font-style: normal;
@@ -64,7 +66,7 @@
     outline: none;
 }
 
-#submit-guess {
+#submit-btn {
     background-color: var(--text-light);
     width: var(--submit-width);
     height: var(--submit-height);
@@ -73,8 +75,8 @@
     letter-spacing: 30%;
 }
 
-#submit-guess:focus,
-#submit-guess:hover,
+#submit-btn:focus,
+#submit-btn:hover,
 .highlight {
     background-color: var(--primary-accent-color);
     border-color: var(--primary-accent-color);

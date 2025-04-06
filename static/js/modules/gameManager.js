@@ -5,10 +5,6 @@ class GameManager {
 
     handleIncorrectGuess(firstGuessElement) {
         firstGuessElement.className = "incorrect-guess";
-        this.subtractLife();
-    }
-
-    subtractLife() {
         if (this.livesLeft <= 0) {
             console.log("You lost!");
         } else {

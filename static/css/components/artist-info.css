@@ -30,6 +30,10 @@
     padding-bottom: 30px;
 }
 
+#restart-btn {
+    display: none;
+}
+
 /* Loading animation */
 .loading-dots {
     display: flex;

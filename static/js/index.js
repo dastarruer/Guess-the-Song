@@ -4,7 +4,7 @@ import SuggestionNavigator from "./modules/suggestions/suggestionNavigator.js";
 import TrackMatcher from "./modules/suggestions/trackMatcher.js";
 import GameManager from "./modules/gameManager.js";
 
-const submitButton = document.getElementById("submit-guess");
+const submitButton = document.getElementById("submit-btn");
 const guessInput = document.getElementById("input");
 
 window.onload = async function () {
