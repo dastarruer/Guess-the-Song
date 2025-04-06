@@ -32,12 +32,10 @@ class GameManager {
      * and there is not currently a correct guess, or the user has run out of guesses */
     verifyGuess(guess, trackName) {
         const correctGuessExists = this.isGuessLeft();
-
-        if (guess === trackName.toLowerCase() && !correctGuessExists) {
-            return true;
-        } else if (guess !== trackName.toLowerCase() && !correctGuessExists) {
-            return false;
-        }
+        return (
+            !correctGuessExists &&
+            guess.toLowerCase() === trackName.toLowerCase()
+        );
     }
 
     /** Check if there is a correct-guess element.

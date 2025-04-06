@@ -18,7 +18,7 @@ window.onload = async function () {
     const gameManager = new GameManager();
 
     submitButton.addEventListener("click", () => {
-        gameManager.verifyGuess(guessInput.value.toLowerCase());
+        gameManager.verifyGuess(guessInput.value);
     });
 
     document.addEventListener("keydown", (event) => {
@@ -31,7 +31,7 @@ window.onload = async function () {
         suggestionNavigator.currentSuggestionIndex = -1;
 
         trackMatcher.relevantTracks = trackMatcher.getRelevantTracks(
-            guessInput.value.toLowerCase()
+            guessInput.value
         );
 
         // Show suggestions to the user
@@ -45,12 +45,15 @@ window.onload = async function () {
             const trackName = player.track.title;
             const trackCoverUrl = player.track.album.cover;
 
-            if (gameManager.verifyGuess(guessInput.value.toLowerCase(), trackName)) {
-                gameManager.handleCorrectGuess(firstGuessElement, trackName, trackCoverUrl);
+            if (gameManager.verifyGuess(guessInput.value, trackName)) {
+                gameManager.handleCorrectGuess(
+                    firstGuessElement,
+                    trackName,
+                    trackCoverUrl
+                );
             } else {
                 gameManager.handleIncorrectGuess(firstGuessElement);
             }
         }
     });
 };
-

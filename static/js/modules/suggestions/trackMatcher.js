@@ -5,8 +5,11 @@ class TrackMatcher {
         this.relevantTracks = null;
     }
 
-    /** Set the relevant tracks to the first 3 characters of each track's title. */
+    /** Get the list of tracks most relevant to a given guess. 
+     * Uses the Levenshtein distance algorithm to find the distance between two strings. */
     getRelevantTracks(guess) {
+        guess = guess.toLowerCase();
+
         // Filters the tracklist to include tracks where the title starts with the same 3 first letters as the guess, disregarding case
         const filtered = this.tracklist.filter((track) =>
             track.title.toLowerCase().startsWith(guess.slice(0, 3))
