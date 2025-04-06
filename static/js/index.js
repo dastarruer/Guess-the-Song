@@ -79,10 +79,9 @@ window.onload = async function () {
             }
         }
     });
-
+    // TODO: Restart without reloading page
     // Restart button
     document.getElementById("restart-btn").addEventListener("click", () => {
         location.reload(); // simplest way to reset state
     });
-
 };

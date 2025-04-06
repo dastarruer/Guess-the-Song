@@ -27,9 +27,8 @@ class GameManager {
 
         this.showTrackInfo(trackName, trackCoverUrl);
 
-        // TODO: Restart without reloading page
         // Show the restart button
-        document.getElementById("restart-btn").style.display = "block";
+        document.getElementById("restart-btn").style.display = "flex";
     }
 
     /** Show the user the track name and album cover of the song. */
