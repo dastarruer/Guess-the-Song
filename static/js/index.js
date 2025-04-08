@@ -42,7 +42,7 @@ window.onload = async function () {
 
     // Restart game when restart button is clicked
     document.getElementById("restart-btn").addEventListener("click", () => {
-        gameManager.startGame();
+        gameManager.startGame(lives);
     });
 };
 

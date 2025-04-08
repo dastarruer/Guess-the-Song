@@ -1,3 +1,5 @@
+// TODO: Replace raw html strings
+
 import ArtistPlayer from "./artistPlayer.js";
 import SuggestionRenderer from "./suggestions/suggestionRenderer.js";
 import SuggestionNavigator from "./suggestions/suggestionNavigator.js";
@@ -107,6 +109,17 @@ class GameManager {
      * Rotate the restart icon as well to indicate to the user that the game is loading. */
     async startGame(totalLives) {
         const restartButtonIcon = document.getElementById("restart-btn-icon");
+        const livesCounter = document.getElementById("success-message");
+        const livesIcon = `<div class="guess">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    class="bi bi-x-lg"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                                </svg>
+                            </div>`;
 
         // Rotate icon while waiting for game to start
         restartButtonIcon.classList.add("rotate");
@@ -118,7 +131,13 @@ class GameManager {
         this.trackMatcher = new TrackMatcher(this.player.tracklist);
         this.songSuggestions = new SuggestionRenderer(this.player.artist);
 
+        // Clear livesCounter
+        livesCounter.innerHTML = "";
+        for (let i = 0; i < totalLives; i++) {
+            livesCounter.innerHTML += livesIcon;
+        }
         this.livesLeft = totalLives;
+
         // Stop rotating the icon
         restartButtonIcon.classList.remove("rotate");
 
