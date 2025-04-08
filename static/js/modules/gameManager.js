@@ -47,10 +47,11 @@ class GameManager {
         const restartButtonIcon = document.getElementById("restart-btn-icon");
         const winIcon = `<svg 
                         id="restart-btn-icon"
-                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-forward-fill" viewBox="0 0 16 16">
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" class="bi bi-forward" viewBox="0 0 16 16">
                         <path
-                            d="m9.77 12.11 4.012-2.953a.647.647 0 0 0 0-1.114L9.771 5.09a.644.644 0 0 0-.971.557V6.65H2v3.9h6.8v1.003c0 .505.545.808.97.557"/>
-                    </svg>`;
+                            d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933.042-.028a.147.147 0 0 0 0-.252l-.042-.028zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3z"/>
+                        </svg>`;
         const lossIcon = `<svg
                         id="restart-btn-icon"
                         xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +63,7 @@ class GameManager {
                         <path
                             fill-rule="evenodd"
                             d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
-                    </svg>`;
+                        </svg>`;
 
         if (outcome === "win") {
             restartButtonIcon.outerHTML = winIcon; // Set the icon to an arrow icon, signifying that they have to move on
@@ -105,10 +106,10 @@ class GameManager {
     /** Start the game by initializing the ArtistPlayer, SuggestionNavigator, TrackMatcher, and SuggestionRenderer objects.
      * Rotate the restart icon as well to indicate to the user that the game is loading. */
     async startGame(totalLives) {
-        const restartIcon = document.getElementById("restart-btn-icon");
+        const restartButtonIcon = document.getElementById("restart-btn-icon");
 
         // Rotate icon while waiting for game to start
-        restartIcon.classList.add("rotate");
+        restartButtonIcon.classList.add("rotate");
 
         this.player = new ArtistPlayer();
         await this.player.setTrack();
@@ -119,7 +120,7 @@ class GameManager {
 
         this.livesLeft = totalLives;
         // Stop rotating the icon
-        restartIcon.classList.remove("rotate");
+        restartButtonIcon.classList.remove("rotate");
 
         this.hideRestartButton();
     }
