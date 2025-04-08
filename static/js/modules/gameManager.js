@@ -109,7 +109,7 @@ class GameManager {
      * Rotate the restart icon as well to indicate to the user that the game is loading. */
     async startGame(totalLives) {
         const restartButtonIcon = document.getElementById("restart-btn-icon");
-        const livesCounter = document.getElementById("success-message");
+        const livesCounter = document.getElementById("lives-counter");
         const livesIcon = `<div class="guess">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

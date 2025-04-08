@@ -11,7 +11,7 @@
     margin: 0 0 200px -100px;
 }
 
-#success-message {
+#lives-counter {
     display: flex;
     gap: 5px;
     margin-bottom: -10px;
