@@ -129,14 +129,14 @@
     background-color: var(--primary-accent-color);
 }
 
-#restart-icon {
+#restart-btn-icon {
     width: 16px;
     height: 16px;
 }
 
-#restart-icon.rotate {
+#restart-btn-icon.rotate {
     animation: rotateIcon 1s linear infinite;
-} 
+}
 
 .suggestion-container {
     display: flex;

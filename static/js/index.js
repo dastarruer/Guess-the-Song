@@ -2,10 +2,11 @@ import GameManager from "./modules/gameManager.js";
 
 const submitButton = document.getElementById("submit-btn");
 const guessInput = document.getElementById("input");
+const lives = 3;
 
 window.onload = async function () {
-    const gameManager = new GameManager(3);
-    await gameManager.startGame();
+    const gameManager = new GameManager();
+    await gameManager.startGame(lives);
 
     // Handle guess when submit button is clicked
     submitButton.addEventListener("click", () => {

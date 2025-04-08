@@ -4,17 +4,14 @@ import SuggestionNavigator from "./suggestions/suggestionNavigator.js";
 import TrackMatcher from "./suggestions/trackMatcher.js";
 
 class GameManager {
-    constructor(lives) {
-        this.livesLeft = lives;
-    }
-
     handleIncorrectGuess(firstGuessElement) {
-        firstGuessElement.className = "incorrect-guess";
-        if (this.livesLeft <= 0) {
-            console.log("You lost!");
+        if (this.livesLeft <= 1) {
+            this.showRestartButton("lose");
         } else {
             this.livesLeft -= 1;
         }
+
+        firstGuessElement.className = "incorrect-guess";
     }
 
     /**Handles logic if user guesses correctly.
@@ -33,7 +30,51 @@ class GameManager {
         this.showTrackInfo(trackName, trackCoverUrl);
 
         // Show the restart button
+        this.showRestartButton("win");
+        const restartButtonText = document.getElementById("restart-btn-text");
+        restartButtonText.innerText = "Next";
+    }
+
+    // TODO: Convert to enum
+    /** Show the restart button, with different text and a different icon depending on if the user won or lost the game.
+     * @param {string} outcome - A string with the outcome. Can either be "win" or "lose".
+     */
+    showRestartButton(outcome) {
+        // Show the restart button
         document.getElementById("restart-btn").style.display = "flex";
+
+        const restartButtonText = document.getElementById("restart-btn-text");
+        const restartButtonIcon = document.getElementById("restart-btn-icon");
+        const winIcon = `<svg 
+                        id="restart-btn-icon"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-forward-fill" viewBox="0 0 16 16">
+                        <path
+                            d="m9.77 12.11 4.012-2.953a.647.647 0 0 0 0-1.114L9.771 5.09a.644.644 0 0 0-.971.557V6.65H2v3.9h6.8v1.003c0 .505.545.808.97.557"/>
+                    </svg>`;
+        const lossIcon = `<svg
+                        id="restart-btn-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        class="bi bi-arrow-repeat"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                        <path
+                            fill-rule="evenodd"
+                            d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
+                    </svg>`;
+
+        if (outcome === "win") {
+            restartButtonIcon.outerHTML = winIcon; // Set the icon to an arrow icon, signifying that they have to move on
+            restartButtonText.innerText = "Next";
+        } else if (outcome === "lose") {
+            restartButtonIcon.outerHTML = lossIcon; // Set the icon to a restart icon, signifying that they have to try again
+            restartButtonText.innerText = "Try again";
+        }
+    }
+
+    hideRestartButton() {
+        document.getElementById("restart-btn").style.display = "none";
     }
 
     /** Show the user the track name and album cover of the song. */
@@ -61,10 +102,10 @@ class GameManager {
         return document.querySelector(".correct-guess") !== null;
     }
 
-    /** Start the game by initializing the ArtistPlayer, SuggestionNavigator, TrackMatcher, and SuggestionRenderer objects. 
+    /** Start the game by initializing the ArtistPlayer, SuggestionNavigator, TrackMatcher, and SuggestionRenderer objects.
      * Rotate the restart icon as well to indicate to the user that the game is loading. */
-    async startGame(lives) {
-        const restartIcon = document.getElementById("restart-icon");
+    async startGame(totalLives) {
+        const restartIcon = document.getElementById("restart-btn-icon");
 
         // Rotate icon while waiting for game to start
         restartIcon.classList.add("rotate");
@@ -76,10 +117,11 @@ class GameManager {
         this.trackMatcher = new TrackMatcher(this.player.tracklist);
         this.songSuggestions = new SuggestionRenderer(this.player.artist);
 
-        this.livesLeft = lives;
-
+        this.livesLeft = totalLives;
         // Stop rotating the icon
         restartIcon.classList.remove("rotate");
+
+        this.hideRestartButton();
     }
 }
 
