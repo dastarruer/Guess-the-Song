@@ -1,12 +1,12 @@
 #banner {
     display: flex;
-    height: 18rem;
+    height: 8rem;
 
     align-items: center;
     justify-content: center;
 
     font-style: normal;
-    font-size: 4rem;
+    font-size: 2rem;
     letter-spacing: 14%;
 
     color: var(--text-dark);

@@ -38,8 +38,8 @@ window.onload = async function () {
         gameManager.trackMatcher.relevantTracks =
             gameManager.trackMatcher.getRelevantTracks(guess);
 
-        // If there are no relevant tracks, don't show suggestions 
-        if (gameManager.trackMatcher.relevantTracks.length === 0) {
+        // If there are no relevant tracks, don't show suggestions
+        if (gameManager.trackMatcher.numRelevantTracks() === 0) {
             gameManager.suggestionRenderer.hideSuggestions();
             return;
         }
@@ -50,10 +50,14 @@ window.onload = async function () {
         );
     });
 
-    // Handle guess when enter is pressed on input box
     guessInput.addEventListener("keydown", () => {
+        // Handle guess when enter is pressed on input box
         if (event.key === "Enter") {
             handleGuess(gameManager);
+        }
+        // Unfocus input box when escape is pressed
+        else if (event.key === "Escape") {
+            guessInput.blur();
         }
     });
 
