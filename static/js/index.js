@@ -53,9 +53,14 @@ function handleGuess(gameManager) {
     const firstGuessElement = document.querySelector(".guess");
     const trackName = gameManager.player.track.title;
     const trackCoverUrl = gameManager.player.track.album.cover;
+    const guess = guessInput.value.trim();
+
+    if (guess === "") {
+        return;
+    }
 
     // If the guess is valid
-    if (gameManager.verifyGuess(guessInput.value, trackName)) {
+    if (gameManager.verifyGuess(guess, trackName)) {
         gameManager.handleCorrectGuess(
             firstGuessElement,
             trackName,
