@@ -9,6 +9,10 @@ class GameManager {
     handleIncorrectGuess(firstGuessElement) {
         if (this.livesLeft <= 1) {
             this.showRestartButton("lose");
+            
+            // Clear and hide suggestions
+            this.trackMatcher.relevantTracks = [];
+            this.suggestionRenderer.hideSuggestions();
         } else {
             this.livesLeft -= 1;
         }
@@ -35,6 +39,10 @@ class GameManager {
         this.showRestartButton("win");
         const restartButtonText = document.getElementById("restart-btn-text");
         restartButtonText.innerText = "Next";
+
+        // Clear and hide suggestions
+        this.trackMatcher.relevantTracks = []
+        this.suggestionRenderer.hideSuggestions();
     }
 
     // TODO: Convert to enum

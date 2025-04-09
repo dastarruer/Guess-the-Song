@@ -70,13 +70,14 @@ function handleGuess(gameManager) {
     const firstGuessElement = document.querySelector(".guess");
     const trackName = gameManager.player.track.title;
     const trackCoverUrl = gameManager.player.track.album.cover;
+    const guess = getGuess();
 
     if (guess === "") {
         return;
     }
 
     // If the guess is valid
-    if (gameManager.verifyGuess(getGuess(), trackName)) {
+    if (gameManager.verifyGuess(guess, trackName)) {
         gameManager.handleCorrectGuess(
             firstGuessElement,
             trackName,
