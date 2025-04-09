@@ -21,11 +21,18 @@ window.onload = async function () {
 
     // Show suggestions based on what the user types into the input box
     guessInput.addEventListener("input", () => {
+        const guess = getGuess();
+
+        if (guess === "") {
+            gameManager.suggestionRenderer.hideSuggestions();
+            return;
+        }
+
         // Unfocus the suggestions by resetting the index to its default
         gameManager.suggestionNavigator.currentSuggestionIndex = -1;
 
         gameManager.trackMatcher.relevantTracks =
-            gameManager.trackMatcher.getRelevantTracks(guessInput.value);
+            gameManager.trackMatcher.getRelevantTracks(guess);
 
         // Show suggestions to the user
         gameManager.suggestionRenderer.showSuggestions(
@@ -53,14 +60,13 @@ function handleGuess(gameManager) {
     const firstGuessElement = document.querySelector(".guess");
     const trackName = gameManager.player.track.title;
     const trackCoverUrl = gameManager.player.track.album.cover;
-    const guess = guessInput.value.trim();
 
     if (guess === "") {
         return;
     }
 
     // If the guess is valid
-    if (gameManager.verifyGuess(guess, trackName)) {
+    if (gameManager.verifyGuess(getGuess(), trackName)) {
         gameManager.handleCorrectGuess(
             firstGuessElement,
             trackName,
@@ -69,4 +75,8 @@ function handleGuess(gameManager) {
     } else {
         gameManager.handleIncorrectGuess(firstGuessElement);
     }
+}
+
+function getGuess() {
+    return guessInput.value.trim();
 }
