@@ -105,6 +105,11 @@ class GameManager {
         return document.querySelector(".correct-guess") !== null;
     }
 
+    clearInputBox() {
+        const input = document.getElementById("input");
+        input.value = "";
+    }
+
     /** Start the game by initializing the ArtistPlayer, SuggestionNavigator, TrackMatcher, and SuggestionRenderer objects.
      * Rotate the restart icon as well to indicate to the user that the game is loading. */
     async startGame(totalLives) {
@@ -141,7 +146,9 @@ class GameManager {
         // Stop rotating the icon
         restartButtonIcon.classList.remove("rotate");
 
+        // Hide these so that the user doesn't see them in the next game
         this.suggestionRenderer.hideSuggestions();
+        this.clearInputBox();
         this.hideRestartButton();
     }
 }
