@@ -129,7 +129,7 @@ class GameManager {
 
         this.suggestionNavigator = new SuggestionNavigator();
         this.trackMatcher = new TrackMatcher(this.player.tracklist);
-        this.songSuggestions = new SuggestionRenderer(this.player.artist);
+        this.suggestionRenderer = new SuggestionRenderer(this.player.artist);
 
         // Clear livesCounter
         livesCounter.innerHTML = "";
@@ -141,6 +141,7 @@ class GameManager {
         // Stop rotating the icon
         restartButtonIcon.classList.remove("rotate");
 
+        this.suggestionRenderer.hideSuggestions();
         this.hideRestartButton();
     }
 }

@@ -7,6 +7,11 @@ class SuggestionRenderer {
 
     constructor(artist, tracklist) {
         this.artist = artist;
+
+        // The container that all suggestions are shown in
+        this.suggestionsElement = document.getElementById(
+            "suggestions-container"
+        );
     }
 
     /**
@@ -21,15 +26,16 @@ class SuggestionRenderer {
         this.appendSuggestionsToHTML(relevantTracks);
     }
 
-    appendSuggestionsToHTML(relevantTracks) {
-        // The container that all suggestions are shown in
-        const suggestions = document.getElementById("suggestions-container");
+    hideSuggestions() {
+        this.suggestionsElement.style.display = "none";
+    }
 
+    appendSuggestionsToHTML(relevantTracks) {
         // Clear the list so that the previous suggestions are not shown
-        suggestions.innerHTML = "";
+        this.suggestionsElement.innerHTML = "";
 
         // Show the suggestions
-        suggestions.style.display = "block";
+        this.suggestionsElement.style.display = "block";
 
         for (const track of relevantTracks) {
             // Create a list element to show the track
@@ -44,7 +50,7 @@ class SuggestionRenderer {
                         <p class="suggestion-artist semibold">${this.artist.name}</p>
                     </div>
                 `;
-            suggestions.appendChild(suggestion);
+            this.suggestionsElement.appendChild(suggestion);
         }
     }
 }

@@ -28,7 +28,7 @@ window.onload = async function () {
             gameManager.trackMatcher.getRelevantTracks(guessInput.value);
 
         // Show suggestions to the user
-        gameManager.songSuggestions.showSuggestions(
+        gameManager.suggestionRenderer.showSuggestions(
             gameManager.trackMatcher.relevantTracks
         );
     });
