@@ -21,6 +21,10 @@ window.onload = async function () {
 
     // Show suggestions based on what the user types into the input box
     guessInput.addEventListener("input", () => {
+        if (gameManager.livesLeft <= 1) {
+            return;
+        }
+
         const guess = getGuess();
 
         if (guess === "") {
@@ -55,7 +59,7 @@ window.onload = async function () {
         gameManager.suggestionRenderer.showSuggestions(
             gameManager.trackMatcher.relevantTracks
         );
-    })
+    });
 
     // Restart game when restart button is clicked
     document.getElementById("restart-btn").addEventListener("click", () => {
