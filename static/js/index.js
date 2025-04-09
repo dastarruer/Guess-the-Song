@@ -38,6 +38,12 @@ window.onload = async function () {
         gameManager.trackMatcher.relevantTracks =
             gameManager.trackMatcher.getRelevantTracks(guess);
 
+        // If there are no relevant tracks, don't show suggestions 
+        if (gameManager.trackMatcher.relevantTracks.length === 0) {
+            gameManager.suggestionRenderer.hideSuggestions();
+            return;
+        }
+
         // Show suggestions to the user
         gameManager.suggestionRenderer.showSuggestions(
             gameManager.trackMatcher.relevantTracks
