@@ -47,6 +47,16 @@ window.onload = async function () {
         }
     });
 
+    guessInput.addEventListener("blur", () => {
+        gameManager.suggestionRenderer.hideSuggestions();
+    });
+
+    guessInput.addEventListener("focus", () => {
+        gameManager.suggestionRenderer.showSuggestions(
+            gameManager.trackMatcher.relevantTracks
+        );
+    })
+
     // Restart game when restart button is clicked
     document.getElementById("restart-btn").addEventListener("click", () => {
         gameManager.startGame(lives);
