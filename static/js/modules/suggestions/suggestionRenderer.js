@@ -23,14 +23,10 @@ class SuggestionRenderer {
      * track's cover image, title, and artist's name.
      */
     showSuggestions(relevantTracks) {
-        this.appendSuggestionsToHTML(relevantTracks);
-    }
-
-    hideSuggestions() {
-        this.suggestionsElement.style.display = "none";
-    }
-
-    appendSuggestionsToHTML(relevantTracks) {
+        if (relevantTracks === null) {
+            return;
+        }
+        
         // Clear the list so that the previous suggestions are not shown
         this.suggestionsElement.innerHTML = "";
 
@@ -52,6 +48,10 @@ class SuggestionRenderer {
                 `;
             this.suggestionsElement.appendChild(suggestion);
         }
+    }
+
+    hideSuggestions() {
+        this.suggestionsElement.style.display = "none";
     }
 }
 export default SuggestionRenderer;
