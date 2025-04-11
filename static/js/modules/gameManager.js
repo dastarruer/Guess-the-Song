@@ -139,7 +139,6 @@ class GameManager {
 
         this.player = new ArtistPlayer();
         await this.player.setTrack();
-        this.player.playPauseTrack();
 
         this.suggestionNavigator = new SuggestionNavigator();
         this.trackMatcher = new TrackMatcher(this.player.tracklist);
