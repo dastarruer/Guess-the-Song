@@ -30,6 +30,20 @@
     padding-bottom: 30px;
 }
 
+#play-track {
+    color: var(--text-light);
+    background-color: transparent;
+    border-color: transparent;
+    
+    display: block;
+    margin: 0 auto;
+}
+
+#play-track-icon {
+    width: 40px;
+    height: 40px;
+}
+
 /* Loading animation */
 .loading-dots {
     display: flex;
