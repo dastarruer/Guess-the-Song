@@ -31,7 +31,6 @@ class ArtistPlayer {
      * Fetches artist data, tracklist, and a random track, then updates the audio source and
      * artist elements in the DOM. The track name is obscured as "???" until guessed correctly.
      */
-
     async setTrack() {
         await this.fetchArtist();
         await this.fetchTracklist();
@@ -46,6 +45,15 @@ class ArtistPlayer {
         this.artistNameElement.textContent = this.artist.name;
 
         this.trackNameElement.innerText = "???";
+    }
+
+    /** Play/pause the current song */
+    playPauseTrack() {
+        if (this.trackPlayer.paused) {
+            this.trackPlayer.play();
+        } else {
+            this.trackPlayer.pause();
+        }
     }
 }
 

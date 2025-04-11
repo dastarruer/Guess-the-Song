@@ -2,11 +2,16 @@ import GameManager from "./modules/gameManager.js";
 
 const submitButton = document.getElementById("submit-btn");
 const guessInput = document.getElementById("input");
+const playPauseBtn = document.getElementById("play-track");
 const lives = 3;
 
 window.onload = async function () {
     const gameManager = new GameManager();
     await gameManager.startGame(lives);
+
+    playPauseBtn.addEventListener("click", () => {
+        gameManager.player.playPauseTrack();
+    });
 
     // Handle guess when submit button is clicked
     submitButton.addEventListener("click", () => {
