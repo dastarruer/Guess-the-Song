@@ -9,7 +9,7 @@ class GameManager {
     handleIncorrectGuess(firstGuessElement) {
         if (this.livesLeft <= 1) {
             this.showRestartButton("lose");
-            
+
             // Clear and hide suggestions
             this.trackMatcher.relevantTracks = [];
             this.suggestionRenderer.hideSuggestions();
@@ -139,6 +139,7 @@ class GameManager {
 
         this.player = new ArtistPlayer();
         await this.player.setTrack();
+        this.player.playPauseTrack();
 
         this.suggestionNavigator = new SuggestionNavigator();
         this.trackMatcher = new TrackMatcher(this.player.tracklist);
