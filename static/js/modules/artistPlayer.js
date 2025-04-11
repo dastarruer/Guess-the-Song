@@ -32,6 +32,9 @@ class ArtistPlayer {
      * artist elements in the DOM. The track name is obscured as "???" until guessed correctly.
      */
     async setTrack() {
+        // Set volume to 0 so fade function fades in audio
+        this.trackPlayer.volume = 0;
+
         await this.fetchArtist();
         await this.fetchTracklist();
         await this.fetchRandomArtistTrack();
@@ -47,7 +50,6 @@ class ArtistPlayer {
         this.trackNameElement.innerText = "???";
 
         // Play the audio
-        // TODO: Play audio automatically by getting user permission(?)
         this.playPauseTrack();
         this.fade();
     }
@@ -86,7 +88,7 @@ class ArtistPlayer {
     }
 
     fade() {
-        const audioLengthSecs = 30;
+        const audioLengthSecs = this.trackPlayer.duration;
         const fadeLengthSecs = 5;
 
         const volc = 1 / (fadeLengthSecs * 20); // 20 checks per second (50ms)
@@ -96,7 +98,6 @@ class ArtistPlayer {
         const minVolume = 0;
         const maxVolume = 1;
 
-        console.log(this.trackPlayer.volume);
         if (currentTime + fadeLengthSecs >= audioLengthSecs) {
             this.trackPlayer.volume = Math.max(
                 minVolume,
