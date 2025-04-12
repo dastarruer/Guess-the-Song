@@ -37,8 +37,8 @@ class SuggestionRenderer {
             // Create a list element to show the track
             const suggestion = document.createElement("li");
             suggestion.classList.add("suggestion-container");
-            const trackCoverUrl = this.getTrackCover(track)
-            
+            const trackCoverUrl = this.getTrackCover(track);
+
             // The HTML of the suggestion
             suggestion.innerHTML = `
                     <img class="suggestion-cover" src=${trackCoverUrl}>
@@ -48,6 +48,16 @@ class SuggestionRenderer {
                     </div>
                 `;
             this.suggestionsElement.appendChild(suggestion);
+        }
+
+        const suggestions = document.querySelectorAll(
+            "#suggestions-container .suggestion-container"
+        );
+
+        for (const suggestion of suggestions) {
+            suggestion.addEventListener("click", () => {
+                console.log(suggestion.innerHTML);
+            });
         }
     }
 

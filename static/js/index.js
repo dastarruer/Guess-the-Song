@@ -1,7 +1,6 @@
 import GameManager from "./modules/gameManager.js";
 
 const submitButton = document.getElementById("submit-btn");
-const suggestions = document.querySelectorAll("#suggestions-container li");
 const guessInput = document.getElementById("input");
 const playPauseBtn = document.getElementById("play-track");
 const lives = 3;
@@ -73,10 +72,6 @@ window.onload = async function () {
         );
     });
 
-    suggestions.forEach((li) => {
-        console.log(li.innerHTML);
-    });
-
     // Restart game when restart button is clicked
     document.getElementById("restart-btn").addEventListener("click", () => {
         gameManager.startGame(lives);
@@ -97,10 +92,7 @@ function handleGuess(gameManager) {
 
     // If the guess is valid
     if (gameManager.verifyGuess(guess, track)) {
-        gameManager.handleCorrectGuess(
-            firstGuessElement,
-            track
-        );
+        gameManager.handleCorrectGuess(firstGuessElement, track);
     } else {
         gameManager.handleIncorrectGuess(firstGuessElement);
     }
