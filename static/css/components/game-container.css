@@ -78,6 +78,14 @@
 #submit-btn:focus,
 #submit-btn:hover,
 .highlight {
+    background-color: var(--hover);
+    border-color: var(--hover);
+    outline: none;
+}
+
+#submit-btn:active,
+#submit-btn:active,
+.highlight:active {
     background-color: var(--primary-accent-color);
     border-color: var(--primary-accent-color);
     outline: none;
