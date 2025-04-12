@@ -9,7 +9,9 @@ import (
 )
 
 type Album struct {
-	Cover string `json:"cover"`
+	CoverBig    string `json:"cover_big"`
+	CoverMedium string `json:"cover_medium"`
+	CoverSmall  string `json:"cover_small"`
 }
 
 type Track struct {

@@ -9,8 +9,10 @@ import (
 )
 
 type Artist struct {
-	Name    string `json:"name"`
-	Picture string `json:"picture"`
+	Name          string `json:"name"`
+	PictureSmall  string `json:"picture_small"`
+	PictureMedium string `json:"picture_medium"`
+	PictureBig    string `json:"picture_big"`
 }
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {

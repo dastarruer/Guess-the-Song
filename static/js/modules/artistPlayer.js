@@ -39,13 +39,21 @@ class ArtistPlayer {
         await this.fetchArtist();
         await this.fetchTracklist();
         await this.fetchRandomArtistTrack();
+        console.log(this.artist);
 
         // Set the audio
         this.trackPlayer.src = this.track.preview;
         this.trackPlayer.load();
 
         // Set the artist info
-        this.artistImageElement.src = this.artist.picture;
+        if (this.artist.picture_big) {
+            this.artistImageElement.src = this.artist.picture_big;
+        } else if (this.artist.picture_medium) {
+            this.artistImageElement.src = this.artist.picture_medium;
+        } else {
+            this.artistImageElement.src = this.artist.picture_small;
+        }
+
         this.artistNameElement.textContent = this.artist.name;
 
         this.trackNameElement.innerText = "???";

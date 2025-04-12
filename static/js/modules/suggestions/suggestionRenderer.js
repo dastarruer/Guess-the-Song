@@ -22,11 +22,11 @@ class SuggestionRenderer {
      * displayed in the suggestions container. Each suggestion includes the
      * track's cover image, title, and artist's name.
      */
-    showSuggestions(relevantTracks) {
+    showSuggestions(relevantTracks, player) {
         if (relevantTracks === null) {
             return;
         }
-        
+
         // Clear the list so that the previous suggestions are not shown
         this.suggestionsElement.innerHTML = "";
 
@@ -37,10 +37,11 @@ class SuggestionRenderer {
             // Create a list element to show the track
             const suggestion = document.createElement("li");
             suggestion.classList.add("suggestion-container");
-
+            const trackCoverUrl = this.getTrackCover(player)
+            
             // The HTML of the suggestion
             suggestion.innerHTML = `
-                    <img class="suggestion-cover" src=${track.album.cover}>
+                    <img class="suggestion-cover" src=${trackCoverUrl}>
                     <div class="suggestion-caption-container">
                         <p class="suggestion-title martian-mono">${track.title}</p>
                         <p class="suggestion-artist semibold">${this.artist.name}</p>
@@ -52,6 +53,19 @@ class SuggestionRenderer {
 
     hideSuggestions() {
         this.suggestionsElement.style.display = "none";
+    }
+
+    getTrackCover(player) {
+        let trackCoverUrl;
+
+        if (player.track.album.cover_big) {
+            trackCoverUrl = player.track.album.cover_big;
+        } else if (player.track.album.cover_medium) {
+            trackCoverUrl = player.track.album.cover_medium;
+        } else {
+            trackCoverUrl = player.track.album.cover_small;
+        }
+        return trackCoverUrl;
     }
 }
 export default SuggestionRenderer;
