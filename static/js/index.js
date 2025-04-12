@@ -1,6 +1,7 @@
 import GameManager from "./modules/gameManager.js";
 
 const submitButton = document.getElementById("submit-btn");
+const suggestions = document.querySelectorAll("#suggestions-container li");
 const guessInput = document.getElementById("input");
 const playPauseBtn = document.getElementById("play-track");
 const lives = 3;
@@ -51,7 +52,8 @@ window.onload = async function () {
 
         // Show suggestions to the user
         gameManager.suggestionRenderer.showSuggestions(
-            gameManager.trackMatcher.relevantTracks, gameManager.player
+            gameManager.trackMatcher.relevantTracks,
+            gameManager.player
         );
     });
 
@@ -66,14 +68,14 @@ window.onload = async function () {
         }
     });
 
-    guessInput.addEventListener("blur", () => {
-        gameManager.suggestionRenderer.hideSuggestions();
-    });
-
     guessInput.addEventListener("focus", () => {
         gameManager.suggestionRenderer.showSuggestions(
             gameManager.trackMatcher.relevantTracks
         );
+    });
+
+    suggestions.forEach((li) => {
+        console.log(li.innerHTML);
     });
 
     // Restart game when restart button is clicked
