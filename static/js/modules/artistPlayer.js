@@ -39,7 +39,6 @@ class ArtistPlayer {
         await this.fetchArtist();
         await this.fetchTracklist();
         await this.fetchRandomArtistTrack();
-        console.log(this.artist);
 
         // Set the audio
         this.trackPlayer.src = this.track.preview;
@@ -139,7 +138,6 @@ class ArtistPlayer {
         this.trackPlayer.play();
 
         const fadeIn = setInterval(() => {
-            console.log(this.trackPlayer.volume);
             if (this.trackPlayer.volume < 1 - step) {
                 this.trackPlayer.volume += step;
             } else if (!this.playing) {

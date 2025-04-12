@@ -52,8 +52,7 @@ window.onload = async function () {
 
         // Show suggestions to the user
         gameManager.suggestionRenderer.showSuggestions(
-            gameManager.trackMatcher.relevantTracks,
-            gameManager.player
+            gameManager.trackMatcher.relevantTracks
         );
     });
 
@@ -89,23 +88,18 @@ window.onload = async function () {
  * functions within the GameManager object. */
 function handleGuess(gameManager) {
     const firstGuessElement = document.querySelector(".guess");
-    const trackName = gameManager.player.track.title;
+    const track = gameManager.player.track;
     const guess = getGuess();
-
-    let trackCoverUrl = gameManager.suggestionRenderer.getTrackCover(
-        gameManager.player
-    );
 
     if (guess === "") {
         return;
     }
 
     // If the guess is valid
-    if (gameManager.verifyGuess(guess, trackName)) {
+    if (gameManager.verifyGuess(guess, track)) {
         gameManager.handleCorrectGuess(
             firstGuessElement,
-            trackName,
-            trackCoverUrl
+            track
         );
     } else {
         gameManager.handleIncorrectGuess(firstGuessElement);

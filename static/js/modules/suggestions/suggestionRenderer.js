@@ -22,7 +22,7 @@ class SuggestionRenderer {
      * displayed in the suggestions container. Each suggestion includes the
      * track's cover image, title, and artist's name.
      */
-    showSuggestions(relevantTracks, player) {
+    showSuggestions(relevantTracks) {
         if (relevantTracks === null) {
             return;
         }
@@ -37,7 +37,7 @@ class SuggestionRenderer {
             // Create a list element to show the track
             const suggestion = document.createElement("li");
             suggestion.classList.add("suggestion-container");
-            const trackCoverUrl = this.getTrackCover(player)
+            const trackCoverUrl = this.getTrackCover(track)
             
             // The HTML of the suggestion
             suggestion.innerHTML = `
@@ -55,15 +55,15 @@ class SuggestionRenderer {
         this.suggestionsElement.style.display = "none";
     }
 
-    getTrackCover(player) {
+    getTrackCover(track) {
         let trackCoverUrl;
 
-        if (player.track.album.cover_big) {
-            trackCoverUrl = player.track.album.cover_big;
-        } else if (player.track.album.cover_medium) {
-            trackCoverUrl = player.track.album.cover_medium;
+        if (track.album.cover_big) {
+            trackCoverUrl = track.album.cover_big;
+        } else if (track.album.cover_medium) {
+            trackCoverUrl = track.album.cover_medium;
         } else {
-            trackCoverUrl = player.track.album.cover_small;
+            trackCoverUrl = track.album.cover_small;
         }
         return trackCoverUrl;
     }
