@@ -137,6 +137,10 @@
     background-color: var(--primary-accent-color);
 }
 
+#restart-btn:active {
+    background-color: var(--active);
+}
+
 #restart-btn-icon {
     width: 16px;
     height: 16px;
