@@ -9,6 +9,7 @@
     width: var(--artist-image-size);
     height: var(--artist-image-size);
     border-radius: 7px;
+    padding-bottom: 10px;
 }
 
 #track-name,
@@ -21,13 +22,13 @@
 #track-name {
     font-size: 3.125rem;
     color: var(--text-light);
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 }
 
 #artist-name {
     font-size: 2rem;
     color: var(--text-muted);
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 }
 
 #play-track {
