@@ -39,6 +39,14 @@
     margin: 0 auto;
 }
 
+#play-track:hover {
+    color: var(--primary-accent-color);
+}
+
+#play-track:active {
+    color: var(--active);
+}
+
 #play-track-icon {
     width: 40px;
     height: 40px;
