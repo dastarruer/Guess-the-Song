@@ -4,6 +4,7 @@ class ArtistPlayer {
         this.artistNameElement = document.getElementById("artist-name");
         this.artistImageElement = document.getElementById("artist-image");
         this.trackNameElement = document.getElementById("track-name");
+        this.playing = false;
     }
 
     // Fetch the artist's data from the /artist API endpoint
@@ -78,12 +79,38 @@ class ArtistPlayer {
                         </svg>`;
         const playPauseBtnElement = document.getElementById("play-track");
 
-        if (this.trackPlayer.paused) {
-            playPauseBtnElement.innerHTML = pauseIcon;
+        const fadeDurationMs = 450;
+        const intervalMs = 50;
+        const step = 1 / (fadeDurationMs / intervalMs);
+
+        if (this.trackPlayer.paused && !this.playing) {
+            // Fade in and play
+            this.trackPlayer.volume = 0;
             this.trackPlayer.play();
+
+            const fadeIn = setInterval(() => {
+                if (this.trackPlayer.volume < 1 - step) {
+                    this.trackPlayer.volume += step;
+                } else if (!this.playing) {
+                    this.trackPlayer.volume = 1;
+                    clearInterval(fadeIn);
+                }
+            }, intervalMs);
+
+            playPauseBtnElement.innerHTML = pauseIcon;
         } else {
+            // Fade out and pause
+            const fadeOut = setInterval(() => {
+                if (this.trackPlayer.volume > step) {
+                    this.trackPlayer.volume -= step;
+                } else {
+                    this.trackPlayer.volume = 0;
+                    this.trackPlayer.pause();
+                    clearInterval(fadeOut);
+                }
+            }, intervalMs);
+
             playPauseBtnElement.innerHTML = playIcon;
-            this.trackPlayer.pause();
         }
     }
 
@@ -97,6 +124,7 @@ class ArtistPlayer {
 
         const minVolume = 0;
         const maxVolume = 1;
+        console.log(this.trackPlayer.volume);
 
         if (currentTime + fadeLengthSecs >= audioLengthSecs) {
             this.trackPlayer.volume = Math.max(
