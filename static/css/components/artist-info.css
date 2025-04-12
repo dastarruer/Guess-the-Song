@@ -22,7 +22,6 @@
 #track-name {
     font-size: 3.125rem;
     color: var(--text-light);
-    padding-bottom: 5px;
 }
 
 #artist-name {
