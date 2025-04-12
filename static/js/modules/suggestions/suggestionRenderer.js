@@ -22,7 +22,7 @@ class SuggestionRenderer {
      * displayed in the suggestions container. Each suggestion includes the
      * track's cover image, title, and artist's name.
      */
-    showSuggestions(relevantTracks) {
+    showSuggestions(relevantTracks, suggestionNavigator) {
         if (relevantTracks === null) {
             return;
         }
@@ -56,7 +56,7 @@ class SuggestionRenderer {
 
         for (const suggestion of suggestions) {
             suggestion.addEventListener("click", () => {
-                console.log(suggestion.innerHTML);
+                suggestionNavigator.autofillInputBox();
             });
 
             suggestion.addEventListener("mouseenter", () => {
