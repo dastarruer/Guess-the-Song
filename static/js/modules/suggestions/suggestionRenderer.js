@@ -58,6 +58,14 @@ class SuggestionRenderer {
             suggestion.addEventListener("click", () => {
                 console.log(suggestion.innerHTML);
             });
+
+            suggestion.addEventListener("mouseenter", () => {
+                suggestion.classList.add("highlight");
+            });
+
+            suggestion.addEventListener("mouseleave", () => {
+                suggestion.classList.remove("highlight");
+            });
         }
     }
 
