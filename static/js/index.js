@@ -6,6 +6,9 @@ const playPauseBtn = document.getElementById("play-track");
 const lives = 3;
 
 window.onload = async function () {
+    let genres = await getGenres();
+    console.log(genres);
+
     const gameManager = new GameManager();
     await gameManager.startGame(lives);
 
@@ -51,7 +54,8 @@ window.onload = async function () {
 
         // Show suggestions to the user
         gameManager.suggestionRenderer.showSuggestions(
-            gameManager.trackMatcher.relevantTracks, gameManager.suggestionNavigator
+            gameManager.trackMatcher.relevantTracks,
+            gameManager.suggestionNavigator
         );
     });
 
@@ -68,7 +72,8 @@ window.onload = async function () {
 
     guessInput.addEventListener("focus", () => {
         gameManager.suggestionRenderer.showSuggestions(
-            gameManager.trackMatcher.relevantTracks, gameManager.suggestionNavigator
+            gameManager.trackMatcher.relevantTracks,
+            gameManager.suggestionNavigator
         );
     });
 
@@ -100,4 +105,10 @@ function handleGuess(gameManager) {
 
 function getGuess() {
     return guessInput.value.trim();
+}
+
+async function getGenres() {
+    let data = await fetch("http://localhost:8080/genres");
+    let genres = await data.json();
+    return genres.data;
 }
