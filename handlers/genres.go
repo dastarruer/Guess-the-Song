@@ -8,22 +8,24 @@ import (
 	"github.com/carlmjohnson/requests"
 )
 
-type ArtistTopTracks struct {
-	Tracklist []Track `json:"data"`
+type Genre struct {
+	Id            int    `json:"id"`
+	PictureBig    string `json:"picture_big"`
+	PictureMedium string `json:"picture_medium"`
+	PictureSmall  string `json:"picture_small"`
 }
 
-func ArtistTopTracksHandler(w http.ResponseWriter, r *http.Request) {
-	// Hardcoded, to be changed
-	id := 525046
+type Genres struct {
+	Genres []Genre `json:"data"`
+}
 
-	var artist ArtistTopTracks
-	// Get the artist's top tracks
+func GenresHandler(w http.ResponseWriter, r *http.Request) {
+	var genres Genres
 	err := requests.
 		URL("https://api.deezer.com").
-		Pathf("/artist/%d/top", id).
-		Param("limit", "50").
+		Pathf("/genre").
 		ContentType("application/json").
-		ToJSON(&artist).
+		ToJSON(&genres).
 		Fetch(context.Background())
 	if err != nil {
 		http.Error(w, "could not connect to jsonplaceholder.typicode.com:", http.StatusInternalServerError)
@@ -33,7 +35,7 @@ func ArtistTopTracksHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	// Write the track object as JSON to the response
-	if err := json.NewEncoder(w).Encode(artist); err != nil {
+	if err := json.NewEncoder(w).Encode(genres); err != nil {
 		http.Error(w, "could not encode track data to JSON", http.StatusInternalServerError)
 		return
 	}
