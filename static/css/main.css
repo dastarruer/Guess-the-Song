@@ -4,7 +4,15 @@
 @import "./components/game-container.css";
 @import "./utilities/fonts.css";
 @import "./utilities/box-shadow.css";
+@import "./components/search-container.css";
 
 body {
     background-color: var(--primary-bg-color);
+}
+
+.content {
+    display: flex;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
 }

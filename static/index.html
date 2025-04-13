@@ -20,57 +20,68 @@
             <h1>Guess The Song</h1>
         </div>
 
-        <div id="game-container">
-            <div id="artist-info" class="box-shadow">
-                <figure>
-                    <img id="artist-image" src="images/loading.png" />
-                    <div id="captions">
-                        <figcaption
-                            id="track-name"
-                            class="martian-mono semibold">
-                            <div class="loading-dots-track">
-                                <span></span><span></span><span></span>
-                            </div>
-                        </figcaption>
-                        <figcaption
-                            id="artist-name"
-                            class="martian-mono semibold">
-                            <div class="loading-dots-artist">
-                                <span></span><span></span><span></span>
-                            </div>
-                        </figcaption>
-                    </div>
-                    <audio id="track">
-                        Your browser doesn't support this audio, sorry!
-                    </audio>
-                    <button id="play-track"></button>
-                </figure>
-            </div>
-
-            <div
-                id="input-container"
-                class="flex flex-col items-center space-y-4">
-                <div id="lives-counter"></div>
-
+        <div class="content">
+            <div id="search-container">
                 <input
                     autofocus
                     autocomplete="off"
                     class="rem regular box-shadow"
-                    id="input"
+                    id="search-input"
                     name="name"
                     type="text"
                     value=""
-                    placeholder="Guess the song..." />
-                <button id="submit-btn" class="jetbrains-mono bold">
-                    Submit guess
-                </button>
-                <ul id="suggestions-container" class="box-shadow"></ul>
+                    placeholder="Search for genres..." />
+            </div>
 
-                <!-- Restart button under input -->
-                <button id="restart-btn" class="jetbrains-mono bold hidden">
-                    <svg id="restart-btn-icon"></svg>
-                    <p id="restart-btn-text">Restart</p>
-                </button>
+            <div id="game-container" style="display: none">
+                <div id="artist-info" class="box-shadow">
+                    <figure>
+                        <img id="artist-image" src="images/loading.png" />
+                        <div id="captions">
+                            <figcaption
+                                id="track-name"
+                                class="martian-mono semibold">
+                                <div class="loading-dots-track">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </figcaption>
+                            <figcaption
+                                id="artist-name"
+                                class="martian-mono semibold">
+                                <div class="loading-dots-artist">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </figcaption>
+                        </div>
+                        <audio id="track">
+                            Your browser doesn't support this audio, sorry!
+                        </audio>
+                        <button id="play-track"></button>
+                    </figure>
+                </div>
+
+                <div id="input-container" class="flex">
+                    <div id="lives-counter"></div>
+                    <input
+                        autofocus
+                        autocomplete="off"
+                        class="rem regular box-shadow"
+                        id="input"
+                        name="name"
+                        type="text"
+                        value=""
+                        placeholder="Guess the song..." />
+                    <button id="submit-btn" class="jetbrains-mono bold">
+                        Submit guess
+                    </button>
+                    <ul id="suggestions-container" class="box-shadow"></ul>
+
+                    <!-- Restart button under input -->
+                    <button id="restart-btn" class="jetbrains-mono bold hidden">
+                        <svg id="restart-btn-icon"></svg>
+                        <p id="restart-btn-text">Restart</p>
+                    </button>
+                </div>
             </div>
         </div>
     </body>
