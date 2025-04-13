@@ -3,14 +3,19 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    padding-bottom: 100px;
 }
 
 #search-text {
     font-size: 5rem;
-    color: var(--text-light)
+    color: var(--text-light);
 }
 
 #search-input {
+    border: 2px solid;
+    border-radius: 8px;
+
+    border-color: var(--text-light);
     background-color: var(--primary-bg-color);
     color: var(--text-light);
 
@@ -21,6 +26,7 @@
 }
 
 #search-input::placeholder {
+    border-color: var(--primary-accent-color);
     letter-spacing: 25%;
     color: var(--text-muted);
 }

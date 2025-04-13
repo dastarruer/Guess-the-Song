@@ -46,6 +46,7 @@
 
 #input {
     grid-column-end: 2;
+
     background-color: var(--primary-bg-color);
     color: var(--text-light);
 
