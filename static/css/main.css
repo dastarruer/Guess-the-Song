@@ -5,6 +5,7 @@
 @import "./utilities/fonts.css";
 @import "./utilities/box-shadow.css";
 @import "./components/search-container.css";
+@import "./utilities/hidden.css";
 
 body {
     background-color: var(--primary-bg-color);
@@ -12,7 +13,7 @@ body {
 
 .content {
     display: flex;
-    height: 50vh;
+    height: 70vh;
     justify-content: center;
     align-items: center;
 }

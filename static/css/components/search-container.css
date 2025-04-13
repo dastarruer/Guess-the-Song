@@ -1,7 +1,13 @@
 #search-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    gap: 20px;
+}
+
+#search-text {
+    font-size: 5rem;
+    color: var(--text-light)
 }
 
 #search-input {
