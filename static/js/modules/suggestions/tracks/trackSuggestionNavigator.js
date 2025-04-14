@@ -1,4 +1,4 @@
-class SuggestionNavigator {
+class TrackSuggestionNavigator {
     constructor() {
         this.currentSuggestionIndex = -1;
         this.defaultSuggestionIndex = -1;
@@ -112,4 +112,4 @@ class SuggestionNavigator {
     }
 }
 
-export default SuggestionNavigator;
+export default TrackSuggestionNavigator;

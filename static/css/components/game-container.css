@@ -92,7 +92,7 @@
     outline: none;
 }
 
-#suggestions-container {
+.suggestions-container {
     display: none; /* Default hidden */
     flex-direction: column;
 

@@ -1,4 +1,4 @@
-class SuggestionRenderer {
+class TrackSuggestionRenderer {
     /**
      * Initializes a new instance of the SuggestionProvider class. This class will provide suggestions to the user based on what they type into text boxes.
      * @param {Object} artist - The artist object containing artist details.
@@ -86,4 +86,4 @@ class SuggestionRenderer {
         return trackCoverUrl;
     }
 }
-export default SuggestionRenderer;
+export default TrackSuggestionRenderer;

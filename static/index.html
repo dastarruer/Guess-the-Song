@@ -22,9 +22,7 @@
 
         <div class="content">
             <div id="search-container">
-                <div id="search-text" class="jersey-25">
-                    Guess The Song
-                </div>
+                <div id="search-text" class="jersey-25">Guess The Song</div>
 
                 <input
                     autofocus
@@ -35,6 +33,7 @@
                     type="text"
                     value=""
                     placeholder="Search for genres..." />
+                <ul class="suggestions-container box-shadow"></ul>
             </div>
 
             <div id="game-container" class="hidden">
@@ -78,7 +77,7 @@
                     <button id="submit-btn" class="jetbrains-mono bold">
                         Submit guess
                     </button>
-                    <ul id="suggestions-container" class="box-shadow"></ul>
+                    <ul class="suggestions-container box-shadow"></ul>
 
                     <!-- Restart button under input -->
                     <button id="restart-btn" class="jetbrains-mono bold hidden">

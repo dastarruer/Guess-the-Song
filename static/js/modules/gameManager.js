@@ -1,9 +1,9 @@
 // TODO: Replace raw html strings
 
 import ArtistPlayer from "./artistPlayer.js";
-import SuggestionRenderer from "./suggestions/suggestionRenderer.js";
-import SuggestionNavigator from "./suggestions/suggestionNavigator.js";
-import TrackMatcher from "./suggestions/trackMatcher.js";
+import TrackSuggestionRenderer from "./suggestions/tracks/trackSuggestionRenderer.js";
+import TrackSuggestionNavigator from "./suggestions/tracks/trackSuggestionNavigator.js";
+import TrackMatcher from "./suggestions/tracks/trackMatcher.js";
 
 class GameManager {
     handleIncorrectGuess(firstGuessElement) {
@@ -33,7 +33,10 @@ class GameManager {
         firstGuessElement.className = "correct-guess";
         firstGuessElement.innerHTML = checkIcon;
 
-        this.showTrackInfo(track.title, this.suggestionRenderer.getTrackCover(track));
+        this.showTrackInfo(
+            track.title,
+            this.suggestionRenderer.getTrackCover(track)
+        );
 
         // Show the restart button
         this.showRestartButton("win");
@@ -41,7 +44,7 @@ class GameManager {
         restartButtonText.innerText = "Next";
 
         // Clear and hide suggestions
-        this.trackMatcher.relevantTracks = []
+        this.trackMatcher.relevantTracks = [];
         this.suggestionRenderer.hideSuggestions();
     }
 
@@ -140,9 +143,11 @@ class GameManager {
         this.player = new ArtistPlayer();
         await this.player.setTrack();
 
-        this.suggestionNavigator = new SuggestionNavigator();
+        this.suggestionNavigator = new TrackSuggestionNavigator();
         this.trackMatcher = new TrackMatcher(this.player.tracklist);
-        this.suggestionRenderer = new SuggestionRenderer(this.player.artist);
+        this.suggestionRenderer = new TrackSuggestionRenderer(
+            this.player.artist
+        );
 
         // Clear livesCounter
         livesCounter.innerHTML = "";
