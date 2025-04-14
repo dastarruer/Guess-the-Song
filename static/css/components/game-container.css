@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    padding-right: 150px;
+    padding-top: 100px;
 }
 
 #input-container {
