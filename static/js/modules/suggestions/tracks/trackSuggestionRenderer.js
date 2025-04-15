@@ -5,13 +5,11 @@ class TrackSuggestionRenderer {
      * @param {Array} tracklist - The list of tracks associated with the artist.
      */
 
-    constructor(artist, suggestionContainerID) {
+    constructor(artist) {
         this.artist = artist;
 
         // The container that all suggestions are shown in
-        this.suggestionsElement = document.getElementById(
-            suggestionContainerID
-        );
+        this.suggestionsElement = document.getElementById("guess-suggestions");
     }
 
     /**
@@ -43,8 +41,8 @@ class TrackSuggestionRenderer {
             this.suggestionsElement.appendChild(suggestion);
         }
 
-        const suggestions = this.suggestionsElement.querySelectorAll(
-            ".suggestion-container"
+        const suggestions = document.querySelectorAll(
+            "#suggestions-container .suggestion-container"
         );
 
         for (const suggestion of suggestions) {
