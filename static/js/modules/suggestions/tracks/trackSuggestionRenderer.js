@@ -5,13 +5,11 @@ class TrackSuggestionRenderer {
      * @param {Array} tracklist - The list of tracks associated with the artist.
      */
 
-    constructor(artist, tracklist) {
+    constructor(artist) {
         this.artist = artist;
 
         // The container that all suggestions are shown in
-        this.suggestionsElement = document.getElementById(
-            "suggestions-container"
-        );
+        this.suggestionsElement = document.getElementById("guess-suggestions");
     }
 
     /**
@@ -37,16 +35,9 @@ class TrackSuggestionRenderer {
             // Create a list element to show the track
             const suggestion = document.createElement("li");
             suggestion.classList.add("suggestion-container");
-            const trackCoverUrl = this.getTrackCover(track);
 
             // The HTML of the suggestion
-            suggestion.innerHTML = `
-                    <img class="suggestion-cover" src=${trackCoverUrl}>
-                    <div class="suggestion-caption-container">
-                        <p class="suggestion-title martian-mono">${track.title}</p>
-                        <p class="suggestion-artist semibold">${this.artist.name}</p>
-                    </div>
-                `;
+            suggestion.innerHTML = this.getSuggestionHTML(track);
             this.suggestionsElement.appendChild(suggestion);
         }
 
@@ -84,6 +75,18 @@ class TrackSuggestionRenderer {
             trackCoverUrl = track.album.cover_small;
         }
         return trackCoverUrl;
+    }
+
+    getSuggestionHTML(track) {
+        const trackCoverUrl = this.getTrackCover(track);
+
+        return `
+                    <img class="suggestion-cover" src=${trackCoverUrl}>
+                    <div class="suggestion-caption-container">
+                        <p class="suggestion-title martian-mono">${track.title}</p>
+                        <p class="suggestion-artist semibold">${this.artist.name}</p>
+                    </div>
+                `;
     }
 }
 export default TrackSuggestionRenderer;

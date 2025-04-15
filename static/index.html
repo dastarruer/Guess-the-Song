@@ -63,7 +63,7 @@
                     </figure>
                 </div>
 
-                <div id="input-container" class="flex">
+                <div id="guess-container" class="flex">
                     <div id="lives-counter"></div>
                     <input
                         autofocus
@@ -77,7 +77,9 @@
                     <button id="submit-btn" class="jetbrains-mono bold">
                         Submit guess
                     </button>
-                    <ul class="suggestions-container box-shadow"></ul>
+                    <ul
+                        id="guess-suggestions"
+                        class="suggestions-container box-shadow"></ul>
 
                     <!-- Restart button under input -->
                     <button id="restart-btn" class="jetbrains-mono bold hidden">

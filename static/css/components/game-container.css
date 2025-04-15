@@ -7,7 +7,7 @@
     padding-top: 100px;
 }
 
-#input-container {
+#guess-container {
     display: grid;
     grid-template-columns: auto;
     row-gap: 20px;
