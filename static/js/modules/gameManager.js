@@ -146,7 +146,8 @@ class GameManager {
         this.suggestionNavigator = new TrackSuggestionNavigator();
         this.trackMatcher = new TrackMatcher(this.player.tracklist);
         this.suggestionRenderer = new TrackSuggestionRenderer(
-            this.player.artist
+            this.player.artist,
+            "guess-suggestions"
         );
 
         // Clear livesCounter
