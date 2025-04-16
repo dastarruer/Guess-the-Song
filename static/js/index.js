@@ -23,7 +23,7 @@ window.onload = async function () {
 
     // Navigate suggestions with arrow keys
     document.addEventListener("keydown", (event) => {
-        let len = gameManager.trackMatcher.numRelevantTracks();
+        let len = gameManager.trackMatcher.numRelevantSuggestions();
         gameManager.suggestionNavigator.navigateSuggestions(event, len);
     });
 
@@ -43,18 +43,18 @@ window.onload = async function () {
         // Unfocus the suggestions by resetting the index to its default
         gameManager.suggestionNavigator.currentSuggestionIndex = -1;
 
-        gameManager.trackMatcher.relevantTracks =
-            gameManager.trackMatcher.getRelevantTracks(guess);
+        gameManager.trackMatcher.relevantSuggestions =
+            gameManager.trackMatcher.getRelevantSuggestions(guess);
 
         // If there are no relevant tracks, don't show suggestions
-        if (gameManager.trackMatcher.numRelevantTracks() === 0) {
+        if (gameManager.trackMatcher.numRelevantSuggestions() === 0) {
             gameManager.suggestionRenderer.hideSuggestions();
             return;
         }
 
         // Show suggestions to the user
         gameManager.suggestionRenderer.showSuggestions(
-            gameManager.trackMatcher.relevantTracks,
+            gameManager.trackMatcher.relevantSuggestions,
             gameManager.suggestionNavigator
         );
     });
@@ -72,7 +72,7 @@ window.onload = async function () {
 
     guessInput.addEventListener("focus", () => {
         gameManager.suggestionRenderer.showSuggestions(
-            gameManager.trackMatcher.relevantTracks,
+            gameManager.trackMatcher.relevantSuggestions,
             gameManager.suggestionNavigator
         );
     });

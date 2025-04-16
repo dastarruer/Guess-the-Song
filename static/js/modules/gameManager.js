@@ -11,7 +11,7 @@ class GameManager {
             this.showRestartButton("lose");
 
             // Clear and hide suggestions
-            this.trackMatcher.relevantTracks = [];
+            this.trackMatcher.relevantSuggestions = [];
             this.suggestionRenderer.hideSuggestions();
         } else {
             this.livesLeft -= 1;
@@ -44,7 +44,7 @@ class GameManager {
         restartButtonText.innerText = "Next";
 
         // Clear and hide suggestions
-        this.trackMatcher.relevantTracks = [];
+        this.trackMatcher.relevantSuggestions = [];
         this.suggestionRenderer.hideSuggestions();
     }
 
