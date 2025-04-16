@@ -1,17 +1,19 @@
 class TrackSuggestionNavigator {
-    constructor() {
+    constructor(suggestionContainerID) {
         this.currentSuggestionIndex = -1;
         this.defaultSuggestionIndex = -1;
         this.firstSuggestionIndex = 0;
 
         // Will be modified depending on the number of suggestions to navigate
         this.lastSuggestionIndex = null;
+
+        this.suggestionContainerID = suggestionContainerID;
     }
 
     /** Gets all the suggestions elements */
     getSuggestionElements() {
-        let suggestionItems = document.getElementsByClassName(
-            "suggestion-container"
+        let suggestionItems = document.querySelectorAll(
+            `#${this.suggestionContainerID} .suggestion-container`
         );
         return suggestionItems;
     }
