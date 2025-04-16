@@ -1,17 +1,27 @@
-class TrackSuggestionRenderer {
+import BaseSuggestionRenderer from "../../baseSuggestionRenderer.js";
+
+class TrackSuggestionRenderer extends BaseSuggestionRenderer {
     /**
      * Initializes a new instance of the SuggestionProvider class. This class will provide suggestions to the user based on what they type into text boxes.
      * @param {Object} artist - The artist object containing artist details.
      * @param {Array} tracklist - The list of tracks associated with the artist.
      */
 
-    constructor(artist, suggestionContainerID) {
-        this.artist = artist;
+    constructor(suggestionContainerID) {
+        super({ suggestionContainerID });
+    }
 
-        // The container that all suggestions are shown in
-        this.suggestionsElement = document.getElementById(
-            suggestionContainerID
-        );
+    getTrackCover(track) {
+        let trackCoverUrl;
+
+        if (track.album.cover_big) {
+            trackCoverUrl = track.album.cover_big;
+        } else if (track.album.cover_medium) {
+            trackCoverUrl = track.album.cover_medium;
+        } else {
+            trackCoverUrl = track.album.cover_small;
+        }
+        return trackCoverUrl;
     }
 
     /**
@@ -22,8 +32,8 @@ class TrackSuggestionRenderer {
      * displayed in the suggestions container. Each suggestion includes the
      * track's cover image, title, and artist's name.
      */
-    showSuggestions(relevantTracks, suggestionNavigator) {
-        if (relevantTracks === null) {
+    showSuggestions(relevantSuggestions, suggestionNavigator, artist) {
+        if (relevantSuggestions === null) {
             return;
         }
 
@@ -33,14 +43,17 @@ class TrackSuggestionRenderer {
         // Show the suggestions
         this.suggestionsElement.style.display = "block";
 
-        for (const track of relevantTracks) {
+        for (const suggestion of relevantSuggestions) {
             // Create a list element to show the track
-            const suggestion = document.createElement("li");
-            suggestion.classList.add("suggestion-container");
+            const suggestionElement = document.createElement("li");
+            suggestionElement.classList.add("suggestion-container");
 
             // The HTML of the suggestion
-            suggestion.innerHTML = this.getSuggestionHTML(track);
-            this.suggestionsElement.appendChild(suggestion);
+            suggestionElement.innerHTML = this.getSuggestionHTML(
+                suggestion,
+                artist
+            );
+            this.suggestionsElement.appendChild(suggestionElement);
         }
 
         const suggestions = this.suggestionsElement.querySelectorAll(
@@ -62,33 +75,17 @@ class TrackSuggestionRenderer {
         }
     }
 
-    hideSuggestions() {
-        this.suggestionsElement.style.display = "none";
-    }
-
-    getTrackCover(track) {
-        let trackCoverUrl;
-
-        if (track.album.cover_big) {
-            trackCoverUrl = track.album.cover_big;
-        } else if (track.album.cover_medium) {
-            trackCoverUrl = track.album.cover_medium;
-        } else {
-            trackCoverUrl = track.album.cover_small;
-        }
-        return trackCoverUrl;
-    }
-
-    getSuggestionHTML(track) {
+    getSuggestionHTML(track, artist) {
         const trackCoverUrl = this.getTrackCover(track);
 
         return `
                     <img class="suggestion-cover" src=${trackCoverUrl}>
                     <div class="suggestion-caption-container">
                         <p class="suggestion-title martian-mono">${track.title}</p>
-                        <p class="suggestion-artist semibold">${this.artist.name}</p>
+                        <p class="suggestion-artist semibold">${artist.name}</p>
                     </div>
                 `;
     }
 }
+
 export default TrackSuggestionRenderer;

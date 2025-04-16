@@ -55,7 +55,8 @@ window.onload = async function () {
         // Show suggestions to the user
         gameManager.suggestionRenderer.showSuggestions(
             gameManager.trackMatcher.relevantSuggestions,
-            gameManager.suggestionNavigator
+            gameManager.suggestionNavigator,
+            gameManager.player.artist
         );
     });
 
@@ -73,7 +74,8 @@ window.onload = async function () {
     guessInput.addEventListener("focus", () => {
         gameManager.suggestionRenderer.showSuggestions(
             gameManager.trackMatcher.relevantSuggestions,
-            gameManager.suggestionNavigator
+            gameManager.suggestionNavigator,
+            gameManager.player.artist
         );
     });
 

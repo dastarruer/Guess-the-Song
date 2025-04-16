@@ -144,10 +144,11 @@ class GameManager {
         this.player = new ArtistPlayer();
         await this.player.setTrack();
 
-        this.suggestionNavigator = new TrackSuggestionNavigator("guess-suggestions");
+        this.suggestionNavigator = new TrackSuggestionNavigator(
+            "guess-suggestions"
+        );
         this.trackMatcher = new TrackMatcher(this.player.tracklist);
         this.suggestionRenderer = new TrackSuggestionRenderer(
-            this.player.artist,
             "guess-suggestions"
         );
 
