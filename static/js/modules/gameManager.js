@@ -54,7 +54,8 @@ class GameManager {
      */
     showRestartButton(outcome) {
         // Show the restart button
-        document.getElementById("restart-btn").style.display = "flex";
+        const restartButton = document.getElementById("restart-btn");
+        restartButton.classList.remove("hidden");
 
         const restartButtonText = document.getElementById("restart-btn-text");
         const restartButtonIcon = document.getElementById("restart-btn-icon");
@@ -88,7 +89,7 @@ class GameManager {
     }
 
     hideRestartButton() {
-        document.getElementById("restart-btn").style.display = "none";
+        document.getElementById("restart-btn").classList.add("hidden");
     }
 
     /** Show the user the track name and album cover of the song. */
