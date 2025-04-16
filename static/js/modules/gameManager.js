@@ -35,7 +35,7 @@ class GameManager {
 
         this.showTrackInfo(
             track.title,
-            this.suggestionRenderer.getTrackCover(track)
+            this.suggestionRenderer.getTrackCoverURL(track)
         );
 
         // Show the restart button
