@@ -4,6 +4,7 @@ import ArtistPlayer from "./artistPlayer.js";
 import TrackSuggestionRenderer from "./suggestions/tracks/trackSuggestionRenderer.js";
 import TrackSuggestionNavigator from "./suggestions/tracks/trackSuggestionNavigator.js";
 import TrackMatcher from "./suggestions/tracks/trackMatcher.js";
+import TrackSuggestionManager from "./suggestions/tracks/trackSuggestionManager.js";
 
 class GameManager {
     handleIncorrectGuess(firstGuessElement) {
@@ -11,8 +12,8 @@ class GameManager {
             this.showRestartButton("lose");
 
             // Clear and hide suggestions
-            this.trackMatcher.relevantSuggestions = [];
-            this.suggestionRenderer.hideSuggestions();
+            this.suggestionManager.suggestionMatcher.relevantSuggestions = [];
+            this.suggestionManager.suggestionRenderer.hideSuggestions();
         } else {
             this.livesLeft -= 1;
         }
@@ -35,7 +36,7 @@ class GameManager {
 
         this.showTrackInfo(
             track.title,
-            this.suggestionRenderer.getTrackCoverURL(track)
+            this.suggestionManager.suggestionRenderer.getTrackCoverURL(track)
         );
 
         // Show the restart button
@@ -44,8 +45,8 @@ class GameManager {
         restartButtonText.innerText = "Next";
 
         // Clear and hide suggestions
-        this.trackMatcher.relevantSuggestions = [];
-        this.suggestionRenderer.hideSuggestions();
+        this.suggestionManager.suggestionMatcher.relevantSuggestions = [];
+        this.suggestionManager.suggestionRenderer.hideSuggestions();
     }
 
     // TODO: Convert to enum
@@ -144,12 +145,20 @@ class GameManager {
         this.player = new ArtistPlayer();
         await this.player.setTrack();
 
-        this.suggestionNavigator = new TrackSuggestionNavigator(
+        let trackMatcher = new TrackMatcher(this.player.tracklist);
+
+        let suggestionNavigator = new TrackSuggestionNavigator(
             "guess-suggestions"
         );
-        this.trackMatcher = new TrackMatcher(this.player.tracklist);
-        this.suggestionRenderer = new TrackSuggestionRenderer(
+
+        let suggestionRenderer = new TrackSuggestionRenderer(
             "guess-suggestions"
+        );
+
+        this.suggestionManager = new TrackSuggestionManager(
+            trackMatcher,
+            suggestionNavigator,
+            suggestionRenderer
         );
 
         // Clear livesCounter
@@ -163,7 +172,7 @@ class GameManager {
         restartButtonIcon.classList.remove("rotate");
 
         // Hide these so that the user doesn't see them in the next game
-        this.suggestionRenderer.hideSuggestions();
+        this.suggestionManager.suggestionRenderer.hideSuggestions();
         this.clearInputBox();
         this.hideRestartButton();
     }
