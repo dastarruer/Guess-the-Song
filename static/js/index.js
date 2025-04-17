@@ -18,13 +18,17 @@ window.onload = async function () {
 
     // Handle guess when submit button is clicked
     submitButton.addEventListener("click", () => {
-        handleGuess(gameManager);
+        gameManager.handleGuess(getGuess());
     });
 
     // Navigate suggestions with arrow keys
     document.addEventListener("keydown", (event) => {
-        let len = gameManager.suggestionManager.suggestionMatcher.numRelevantSuggestions();
-        gameManager.suggestionManager.suggestionNavigator.navigateSuggestions(event, len);
+        let len =
+            gameManager.suggestionManager.suggestionMatcher.numRelevantSuggestions();
+        gameManager.suggestionManager.suggestionNavigator.navigateSuggestions(
+            event,
+            len
+        );
     });
 
     // Show suggestions based on what the user types into the input box
@@ -41,13 +45,19 @@ window.onload = async function () {
         }
 
         // Unfocus the suggestions by resetting the index to its default
-        gameManager.suggestionManager.suggestionNavigator.currentSuggestionIndex = -1;
+        gameManager.suggestionManager.suggestionNavigator.currentSuggestionIndex =
+            -1;
 
         gameManager.suggestionManager.suggestionMatcher.relevantSuggestions =
-            gameManager.suggestionManager.suggestionMatcher.getRelevantSuggestions(guess);
+            gameManager.suggestionManager.suggestionMatcher.getRelevantSuggestions(
+                guess
+            );
 
         // If there are no relevant tracks, don't show suggestions
-        if (gameManager.suggestionManager.suggestionMatcher.numRelevantSuggestions() === 0) {
+        if (
+            gameManager.suggestionManager.suggestionMatcher.numRelevantSuggestions() ===
+            0
+        ) {
             gameManager.suggestionManager.suggestionRenderer.hideSuggestions();
             return;
         }
@@ -63,7 +73,7 @@ window.onload = async function () {
     guessInput.addEventListener("keydown", () => {
         // Handle guess when enter is pressed on input box
         if (event.key === "Enter") {
-            handleGuess(gameManager);
+            gameManager.handleGuess(getGuess());
         }
         // Unfocus input box when escape is pressed
         else if (event.key === "Escape") {
@@ -85,32 +95,12 @@ window.onload = async function () {
     });
 };
 
-/** Handle the guess differently depending on whether it is correct or
- * incorrect using the hnadlceCorrectGuess() and handleIncorrectGuess()
- * functions within the GameManager object. */
-function handleGuess(gameManager) {
-    const firstGuessElement = document.querySelector(".guess");
-    const track = gameManager.player.track;
-    const guess = getGuess();
-
-    if (guess === "") {
-        return;
-    }
-
-    // If the guess is valid
-    if (gameManager.verifyGuess(guess, track)) {
-        gameManager.handleCorrectGuess(firstGuessElement, track);
-    } else {
-        gameManager.handleIncorrectGuess(firstGuessElement);
-    }
-}
-
-function getGuess() {
-    return guessInput.value.trim();
-}
-
 async function getGenres() {
     let data = await fetch("http://localhost:8080/genres");
     let genres = await data.json();
     return genres.data;
+}
+
+function getGuess() {
+    return guessInput.value.trim();
 }

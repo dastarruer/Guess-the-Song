@@ -49,6 +49,27 @@ class GameManager {
         this.suggestionManager.suggestionRenderer.hideSuggestions();
     }
 
+    /** Handle the guess differently depending on whether it is correct or
+     * incorrect using the hnadlceCorrectGuess() and handleIncorrectGuess()
+     * functions within the GameManager object. */
+    handleGuess(guess) {
+        const firstGuessElement = document.querySelector(".guess");
+        const track = this.player.track;
+
+        if (guess === "") {
+            return;
+        }
+
+        // If the guess is valid
+        if (this.verifyGuess(guess, track)) {
+            this.handleCorrectGuess(firstGuessElement, track);
+        } else {
+            this.handleIncorrectGuess(firstGuessElement);
+        }
+    }
+
+    
+
     // TODO: Convert to enum
     /** Show the restart button, with different text and a different icon depending on if the user won or lost the game.
      * @param {string} outcome - A string with the outcome. Can either be "win" or "lose".
