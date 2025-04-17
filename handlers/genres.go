@@ -10,6 +10,7 @@ import (
 
 type Genre struct {
 	Id            int    `json:"id"`
+	Name          string `json:"name"`
 	PictureBig    string `json:"picture_big"`
 	PictureMedium string `json:"picture_medium"`
 	PictureSmall  string `json:"picture_small"`
