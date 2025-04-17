@@ -23,12 +23,7 @@ window.onload = async function () {
 
     // Navigate suggestions with arrow keys
     document.addEventListener("keydown", (event) => {
-        let len =
-            gameManager.suggestionManager.suggestionMatcher.numRelevantSuggestions();
-        gameManager.suggestionManager.suggestionNavigator.navigateSuggestions(
-            event,
-            len
-        );
+        gameManager.suggestionManager.navigateSuggestions(event);
     });
 
     // Show suggestions based on what the user types into the input box
@@ -48,10 +43,7 @@ window.onload = async function () {
         gameManager.suggestionManager.suggestionNavigator.currentSuggestionIndex =
             -1;
 
-        gameManager.suggestionManager.suggestionMatcher.relevantSuggestions =
-            gameManager.suggestionManager.suggestionMatcher.getRelevantSuggestions(
-                guess
-            );
+        gameManager.suggestionManager.updateRelevantSuggestions(guess);
 
         // If there are no relevant tracks, don't show suggestions
         if (
@@ -63,10 +55,8 @@ window.onload = async function () {
         }
 
         // Show suggestions to the user
-        gameManager.suggestionManager.suggestionRenderer.showSuggestions(
-            gameManager.suggestionManager.suggestionMatcher.relevantSuggestions,
-            gameManager.suggestionManager.suggestionNavigator,
-            gameManager.player.artist
+        gameManager.suggestionManager.showSuggestions(
+            gameManager.player
         );
     });
 
@@ -82,11 +72,8 @@ window.onload = async function () {
     });
 
     guessInput.addEventListener("focus", () => {
-        gameManager.suggestionManager.suggestionRenderer.showSuggestions(
-            gameManager.suggestionManager.suggestionMatcher.relevantSuggestions,
-            gameManager.suggestionManager.suggestionNavigator,
-            gameManager.player.artist
-        );
+        // Show suggestions to the user
+        gameManager.suggestionManager.showSuggestions(gameManager.player);
     });
 
     // Restart game when restart button is clicked

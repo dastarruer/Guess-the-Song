@@ -8,6 +8,14 @@ class TrackSuggestionManager extends BaseSuggestionManager {
             suggestionRenderer: suggestionRenderer,
         });
     }
+
+    showSuggestions(player) {
+        this.suggestionRenderer.showSuggestions(
+            this.suggestionMatcher.relevantSuggestions,
+            this.suggestionNavigator,
+            player.artist
+        );
+    }
 }
 
 export default TrackSuggestionManager;
