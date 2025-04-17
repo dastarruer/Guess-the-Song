@@ -57,22 +57,6 @@ class TrackSuggestionRenderer extends BaseSuggestionRenderer {
         this.addEventListeners(suggestions, suggestionNavigator);
     }
 
-    addEventListeners(suggestions, suggestionNavigator) {
-        for (const suggestion of suggestions) {
-            suggestion.addEventListener("click", () => {
-                suggestionNavigator.autofillInputBox();
-            });
-
-            suggestion.addEventListener("mouseenter", () => {
-                suggestion.classList.add("highlight");
-            });
-
-            suggestion.addEventListener("mouseleave", () => {
-                suggestion.classList.remove("highlight");
-            });
-        }
-    }
-
     getSuggestionHTML(track, artist) {
         const trackCoverUrl = this.getTrackCoverURL(track);
 

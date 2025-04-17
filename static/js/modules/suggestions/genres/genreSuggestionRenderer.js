@@ -1,29 +1,36 @@
-class GenreSuggestionRenderer {
-    /**
-     * Initializes a new instance of the SuggestionProvider class. This class will provide suggestions to the user based on what they type into text boxes.
-     * @param {Object} artist - The artist object containing artist details.
-     * @param {Array} tracklist - The list of tracks associated with the artist.
-     */
+import BaseSuggestionRenderer from "../../baseSuggestionRenderer";
 
-    constructor(artist) {
-        this.artist = artist;
-
-        // The container that all suggestions are shown in
-        this.suggestionsElement = document.getElementById(
-            "suggestions-container"
-        );
+class GenreSuggestionRenderer extends BaseSuggestionRenderer {
+    constructor(suggestionContainerID) {
+        super({ suggestionContainerID });
     }
 
-    /**
-     * Displays song suggestions based on the user's input.
-     * Filters the tracklist to find tracks whose titles start with the first
-     * three characters of the user's guess, then sorts them by their
-     * Levenshtein distance to the guess. The top three closest matches are
-     * displayed in the suggestions container. Each suggestion includes the
-     * track's cover image, title, and artist's name.
-     */
-    showSuggestions(relevantGenres, suggestionNavigator) {
-        if (relevantGenres === null) {
+    getGenreCoverURL(genre) {
+        let genreCoverURL;
+
+        if (genre.picture_big) {
+            genreCoverURL = genre.picture_big;
+        } else if (genre.picture_medium) {
+            genreCoverURL = genre.picture_medium;
+        } else {
+            genreCoverURL = genre.picture_small;
+        }
+        return genreCoverURL;
+    }
+
+    getSuggestionHTML(genre) {
+        const genreCoverUrl = this.getGenreCoverURL(genre);
+
+        return `
+                    <img class="suggestion-cover" src=${genreCoverUrl}>
+                    <div class="suggestion-caption-container">
+                        <p class="suggestion-title martian-mono">${genre.name}</p>
+                    </div>
+                `;
+    }
+
+    showSuggestions(relevantSuggestions, suggestionNavigator) {
+        if (relevantSuggestions === null) {
             return;
         }
 
@@ -33,57 +40,24 @@ class GenreSuggestionRenderer {
         // Show the suggestions
         this.suggestionsElement.style.display = "block";
 
-        for (const track of relevantGenres) {
+        for (const suggestion of relevantSuggestions) {
             // Create a list element to show the track
-            const suggestion = document.createElement("li");
-            suggestion.classList.add("suggestion-container");
-            const trackCoverUrl = this.getGenrePicture(track);
+            const suggestionElement = document.createElement("li");
+            suggestionElement.classList.add("suggestion-container");
 
             // The HTML of the suggestion
-            suggestion.innerHTML = `
-                    <img class="suggestion-cover" src=${trackCoverUrl}>
-                    <div class="suggestion-caption-container">
-                        <p class="suggestion-title martian-mono">${track.title}</p>
-                        <p class="suggestion-artist semibold">${this.artist.name}</p>
-                    </div>
-                `;
-            this.suggestionsElement.appendChild(suggestion);
+            suggestionElement.innerHTML = this.getSuggestionHTML(
+                suggestion
+            );
+            this.suggestionsElement.appendChild(suggestionElement);
         }
 
-        const suggestions = document.querySelectorAll(
-            ".suggestions-container .suggestion-container"
+        const suggestions = this.suggestionsElement.querySelectorAll(
+            ".suggestion-container"
         );
 
-        for (const suggestion of suggestions) {
-            suggestion.addEventListener("click", () => {
-                suggestionNavigator.autofillInputBox();
-            });
-
-            suggestion.addEventListener("mouseenter", () => {
-                suggestion.classList.add("highlight");
-            });
-
-            suggestion.addEventListener("mouseleave", () => {
-                suggestion.classList.remove("highlight");
-            });
-        }
-    }
-
-    hideSuggestions() {
-        this.suggestionsElement.style.display = "none";
-    }
-
-    getGenrePicture(genre) {
-        let genrePictureUrl;
-
-        if (genre.cover_big) {
-            genrePictureUrl = genre.cover_big;
-        } else if (genre.cover_medium) {
-            genrePictureUrl = genre.cover_medium;
-        } else {
-            genrePictureUrl = genre.cover_small;
-        }
-        return genrePictureUrl;
+        this.addEventListeners(suggestions, suggestionNavigator);
     }
 }
+
 export default GenreSuggestionRenderer;

@@ -12,6 +12,22 @@ class BaseSuggestionRenderer {
         );
     }
 
+    addEventListeners(suggestions, suggestionNavigator) {
+        for (const suggestion of suggestions) {
+            suggestion.addEventListener("click", () => {
+                suggestionNavigator.autofillInputBox();
+            });
+
+            suggestion.addEventListener("mouseenter", () => {
+                suggestion.classList.add("highlight");
+            });
+
+            suggestion.addEventListener("mouseleave", () => {
+                suggestion.classList.remove("highlight");
+            });
+        }
+    }
+
     showSuggestions() {
         throw new Error(
             "showSuggestions() method must be implemented by subclass."
@@ -22,7 +38,7 @@ class BaseSuggestionRenderer {
         this.suggestionsElement.style.display = "none";
     }
 
-    getSuggestionHTML(args) {
+    getSuggestionHTML() {
         throw new Error(
             "getSuggestionHTML() method must be implemented by subclass."
         );
