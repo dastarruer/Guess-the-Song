@@ -1,4 +1,5 @@
 import GameManager from "./modules/gameManager.js";
+import GenreSuggestionManager from "./modules/suggestions/genres/genreSuggestionManager.js";
 
 const submitButton = document.getElementById("submit-btn");
 const guessInput = document.getElementById("input");
@@ -8,6 +9,8 @@ const lives = 3;
 window.onload = async function () {
     let genres = await getGenres();
     console.log(genres);
+
+    const genreSuggestionManager = new GenreSuggestionManager(genres)
 
     const gameManager = new GameManager();
     await gameManager.startGame(lives);
