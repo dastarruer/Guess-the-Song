@@ -1,4 +1,4 @@
-import BaseSuggestionRenderer from "../../baseSuggestionRenderer.js";
+import BaseSuggestionRenderer from "../base/baseSuggestionRenderer";
 
 class TrackSuggestionRenderer extends BaseSuggestionRenderer {
     constructor(suggestionContainerID) {

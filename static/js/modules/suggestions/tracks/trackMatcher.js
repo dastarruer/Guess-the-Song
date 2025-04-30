@@ -1,4 +1,4 @@
-import BaseSuggestionMatcher from "../baseSuggestionMatcher.js";
+import BaseSuggestionMatcher from "../base/baseSuggestionMatcher.js";
 
 class TrackMatcher extends BaseSuggestionMatcher {
     constructor(tracklist) {
