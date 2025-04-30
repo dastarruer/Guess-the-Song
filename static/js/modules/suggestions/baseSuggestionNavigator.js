@@ -60,7 +60,9 @@ class BaseSuggestionNavigator {
             this.highlightSuggestion(suggestionItems);
         }
 
-        this.autofillInputBox();
+        if (event.key === "Enter") {
+            this.autofillInputBox();
+        }
     }
 
     moveDown() {
