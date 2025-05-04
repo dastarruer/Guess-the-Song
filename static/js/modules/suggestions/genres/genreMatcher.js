@@ -1,4 +1,4 @@
-import BaseSuggestionMatcher from "../base/baseSuggestionMatcher";
+import BaseSuggestionMatcher from "../base/baseSuggestionMatcher.js";
 
 class GenreMatcher extends BaseSuggestionMatcher {
     constructor(genres) {

@@ -1,4 +1,4 @@
-import BaseSuggestionRenderer from "../base/baseSuggestionRenderer";
+import BaseSuggestionRenderer from "../base/baseSuggestionRenderer.js";
 
 class GenreSuggestionRenderer extends BaseSuggestionRenderer {
     constructor(suggestionContainerID) {

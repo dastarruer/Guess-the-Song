@@ -1,6 +1,8 @@
-import GenreMatcher from "./genreMatcher";
-import GenreSuggestionNavigator from "./genreSuggestionNavigator";
-import GenreSuggestionRenderer from "./genreSuggestionRenderer";
+import GenreMatcher from "./genreMatcher.js";
+import GenreSuggestionNavigator from "./genreSuggestionNavigator.js";
+import GenreSuggestionRenderer from "./genreSuggestionRenderer.js";
+
+import BaseSuggestionManager from "../base/baseSuggestionManager.js";
 
 class GenreSuggestionManager extends BaseSuggestionManager {
     constructor(genres) {

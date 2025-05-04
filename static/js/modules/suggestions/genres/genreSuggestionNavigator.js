@@ -1,4 +1,4 @@
-import BaseSuggestionNavigator from "../baseSuggestionNavigator";
+import BaseSuggestionNavigator from "../base/baseSuggestionNavigator.js";
 
 class GenreSuggestionNavigator extends BaseSuggestionNavigator {
     constructor(suggestionContainerID) {

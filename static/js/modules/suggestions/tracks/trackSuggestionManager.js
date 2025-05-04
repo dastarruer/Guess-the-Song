@@ -1,4 +1,4 @@
-import BaseSuggestionManager from "../base/baseSuggestionManager";
+import BaseSuggestionManager from "../base/baseSuggestionManager.js"
 
 class TrackSuggestionManager extends BaseSuggestionManager {
     constructor(suggestionMatcher, suggestionNavigator, suggestionRenderer) {
