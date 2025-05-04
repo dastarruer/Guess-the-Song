@@ -68,8 +68,6 @@ class GameManager {
         }
     }
 
-    
-
     // TODO: Convert to enum
     /** Show the restart button, with different text and a different icon depending on if the user won or lost the game.
      * @param {string} outcome - A string with the outcome. Can either be "win" or "lose".
@@ -179,7 +177,8 @@ class GameManager {
         this.suggestionManager = new TrackSuggestionManager(
             trackMatcher,
             suggestionNavigator,
-            suggestionRenderer
+            suggestionRenderer,
+            this
         );
 
         // Clear livesCounter

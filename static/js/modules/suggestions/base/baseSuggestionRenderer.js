@@ -12,6 +12,7 @@ class BaseSuggestionRenderer {
         );
     }
 
+    // Add event listeners to each suggestion, so that clicking and hovering will do something
     addEventListeners(suggestions, suggestionNavigator) {
         for (const suggestion of suggestions) {
             suggestion.addEventListener("click", () => {

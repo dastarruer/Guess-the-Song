@@ -60,6 +60,7 @@ class BaseSuggestionNavigator {
             this.highlightSuggestion(suggestionItems);
         }
 
+        // TODO: Autofill input box when a suggestion is highlighted as well
         if (event.key === "Enter") {
             this.autofillInputBox();
         }

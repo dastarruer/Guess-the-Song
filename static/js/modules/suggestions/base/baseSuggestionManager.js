@@ -22,8 +22,16 @@ class BaseSuggestionManager {
     }
 
     showSuggestions() {
-        throw new Error("showSuggestions() method should be implemented by subclass.")
-    } 
+        throw new Error(
+            "showSuggestions() method should be implemented by subclass."
+        );
+    }
+
+    addEventListeners() {
+        throw new Error(
+            "addEventListeners() method should be implemented by subclass."
+        );
+    }
 }
 
 export default BaseSuggestionManager;
