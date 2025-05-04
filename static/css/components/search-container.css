@@ -27,6 +27,7 @@
     height: var(--input-height);
 
     padding-left: 30px;
+    margin-bottom: 70px;
 }
 
 #search-input::placeholder {
