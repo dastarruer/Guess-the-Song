@@ -10,9 +10,15 @@ class GenreSuggestionManager extends BaseSuggestionManager {
 
         super({
             suggestionMatcher: new GenreMatcher(genres),
-            suggestionNavigator: new GenreSuggestionNavigator(suggestionContainerID),
-            suggestionRenderer: new GenreSuggestionRenderer(suggestionContainerID),
+            suggestionNavigator: new GenreSuggestionNavigator(
+                suggestionContainerID
+            ),
+            suggestionRenderer: new GenreSuggestionRenderer(
+                suggestionContainerID
+            ),
         });
+
+        this.addEventListeners();
     }
 
     showSuggestions() {
@@ -20,6 +26,33 @@ class GenreSuggestionManager extends BaseSuggestionManager {
             this.suggestionMatcher.relevantSuggestions,
             this.suggestionNavigator
         );
+    }
+
+    addEventListeners() {
+        const input = document.getElementById("search-input");
+
+        // Show suggestions based on what the user types into the input box
+        input.addEventListener("input", () => {
+            console.log("hello")
+            // Show suggestions to the user
+            this.showSuggestions();
+        });
+
+        input.addEventListener("keydown", () => {
+            // Handle guess when enter is pressed on input box
+            if (event.key === "Enter") {
+                return;
+            }
+            // Unfocus input box when escape is pressed
+            else if (event.key === "Escape") {
+                input.blur();
+            }
+        });
+
+        input.addEventListener("focus", () => {
+            // Show suggestions to the user
+            this.showSuggestions();
+        });
     }
 }
 

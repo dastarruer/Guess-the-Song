@@ -9,7 +9,7 @@ window.onload = async function () {
     let genres = await getGenres();
     console.log(genres);
 
-    const genreSuggestionManager = new GenreSuggestionManager(genres)
+    const genreSuggestionManager = new GenreSuggestionManager(genres);
 
     const gameManager = new GameManager();
     await gameManager.startGame(lives);
@@ -39,5 +39,3 @@ async function getGenres() {
     let genres = await data.json();
     return genres.data;
 }
-
-
