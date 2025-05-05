@@ -24,6 +24,7 @@ class TrackSuggestionManager extends BaseSuggestionManager {
         );
     }
 
+    // TODO: Remove the unnecessary gameManger stuff
     addEventListeners(gameManager) {
         const guessInput = document.getElementById("input");
 
