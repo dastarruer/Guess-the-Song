@@ -21,9 +21,9 @@ class GenreSuggestionManager extends BaseSuggestionManager {
         this.addEventListeners();
     }
 
-    showSuggestions() {
+    showSuggestions(input) {
         this.suggestionRenderer.showSuggestions(
-            this.suggestionMatcher.relevantSuggestions,
+            this.suggestionMatcher.getRelevantSuggestions(input),
             this.suggestionNavigator
         );
     }
@@ -33,9 +33,8 @@ class GenreSuggestionManager extends BaseSuggestionManager {
 
         // Show suggestions based on what the user types into the input box
         input.addEventListener("input", () => {
-            console.log("hello")
             // Show suggestions to the user
-            this.showSuggestions();
+            this.showSuggestions(input.value);
         });
 
         input.addEventListener("keydown", () => {
@@ -51,7 +50,8 @@ class GenreSuggestionManager extends BaseSuggestionManager {
 
         input.addEventListener("focus", () => {
             // Show suggestions to the user
-            this.showSuggestions();
+            console.log(input.value)
+            this.showSuggestions(input.value);
         });
     }
 }

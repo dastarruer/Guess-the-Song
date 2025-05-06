@@ -8,8 +8,12 @@ class BaseSuggestionMatcher {
     /** Get the list of suggestions most relevant to a given guess.
      * Uses the Levenshtein distance algorithm to find the distance between two strings. */
     getRelevantSuggestions(input) {
+        if (input === undefined) {
+            return
+        }
+        //TODO: input is undefined for some reason fix it
         input = input.toLowerCase();
-
+        console.log(input);
         // Filters the suggestion list to include suggestions where the title starts with the same 3 first letters as the guess, disregarding case
         const filtered = this.suggestionList.filter((suggestion) =>
             this.getSuggestionName(suggestion)
