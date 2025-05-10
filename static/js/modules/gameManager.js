@@ -168,7 +168,7 @@ class GameManager {
 
         let trackMatcher = new TrackMatcher(this.player.tracklist, suggestionContainerID);
         let suggestionNavigator = new TrackSuggestionNavigator(
-            suggestionContainerID
+            suggestionContainerID, "input"
         );
         let suggestionRenderer = new TrackSuggestionRenderer(
             suggestionContainerID

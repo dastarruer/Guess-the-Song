@@ -1,5 +1,5 @@
 class BaseSuggestionNavigator {
-    constructor({ suggestionContainerID }) {
+    constructor({ suggestionContainerID, inputBoxID }) {
         this.currentSuggestionIndex = -1;
         this.defaultSuggestionIndex = -1;
         this.firstSuggestionIndex = 0;
@@ -8,6 +8,7 @@ class BaseSuggestionNavigator {
         this.lastSuggestionIndex = null;
 
         this.suggestionContainerID = suggestionContainerID;
+        this.inputBoxID = inputBoxID;
     }
 
     /** Gets all the suggestions elements */
@@ -91,10 +92,9 @@ class BaseSuggestionNavigator {
         const highlightedSuggestionTitle = document.querySelector(
             ".highlight .suggestion-title"
         ).innerHTML;
-
         if (highlightedSuggestionTitle !== null) {
             // Set the input box's value to the name of the highlighted suggestion
-            document.getElementById("input").value = highlightedSuggestionTitle;
+            document.getElementById(this.inputBoxID).value = highlightedSuggestionTitle;
         }
     }
 

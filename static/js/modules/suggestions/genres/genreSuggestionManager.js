@@ -11,7 +11,7 @@ class GenreSuggestionManager extends BaseSuggestionManager {
         super({
             suggestionMatcher: new GenreMatcher(genres, suggestionContainerID),
             suggestionNavigator: new GenreSuggestionNavigator(
-                suggestionContainerID
+                suggestionContainerID, "search-input"
             ),
             suggestionRenderer: new GenreSuggestionRenderer(
                 suggestionContainerID
