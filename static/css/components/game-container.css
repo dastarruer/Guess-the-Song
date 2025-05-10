@@ -107,13 +107,13 @@
 
     max-height: 300px;
     overflow-y: auto;
+    border-radius: 8px;
 }
 
 #guess-suggestions {
     margin: -20px 0 0 -400px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-radius: 8px;
 }
 #restart-btn {
     background-color: var(--text-light);

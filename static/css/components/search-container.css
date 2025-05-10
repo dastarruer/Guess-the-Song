@@ -41,3 +41,9 @@
     caret-color: var(--primary-accent-color);
     outline: none;
 }
+
+#genre-suggestions {
+    margin-top: -50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
