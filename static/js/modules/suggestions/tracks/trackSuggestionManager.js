@@ -37,27 +37,27 @@ class TrackSuggestionManager extends BaseSuggestionManager {
             const guess = this.getGuess();
 
             if (guess === "") {
-                gameManager.suggestionManager.suggestionRenderer.hideSuggestions();
+                this.suggestionRenderer.hideSuggestions();
                 return;
             }
 
             // Unfocus the suggestions by resetting the index to its default
-            gameManager.suggestionManager.suggestionNavigator.currentSuggestionIndex =
+            this.suggestionNavigator.currentSuggestionIndex =
                 -1;
 
-            gameManager.suggestionManager.updateRelevantSuggestions(guess);
+            this.updateRelevantSuggestions(guess);
 
             // If there are no relevant tracks, don't show suggestions
             if (
-                gameManager.suggestionManager.suggestionMatcher.numRelevantSuggestions() ===
+                this.suggestionMatcher.numRelevantSuggestions() ===
                 0
             ) {
-                gameManager.suggestionManager.suggestionRenderer.hideSuggestions();
+                this.suggestionRenderer.hideSuggestions();
                 return;
             }
 
             // Show suggestions to the user
-            gameManager.suggestionManager.showSuggestions(gameManager.player);
+            this.showSuggestions(gameManager.player);
         });
 
         guessInput.addEventListener("keydown", () => {
@@ -72,13 +72,14 @@ class TrackSuggestionManager extends BaseSuggestionManager {
         });
 
         guessInput.addEventListener("focus", () => {
+            console.log("hello")
             // Show suggestions to the user
-            gameManager.suggestionManager.showSuggestions(gameManager.player);
+            this.showSuggestions(gameManager.player);
         });
 
         // Navigate suggestions with arrow keys
         document.addEventListener("keydown", (event) => {
-            gameManager.suggestionManager.navigateSuggestions(event);
+            this.navigateSuggestions(event);
         });
     }
 
