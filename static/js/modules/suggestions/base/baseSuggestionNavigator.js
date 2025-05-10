@@ -16,7 +16,7 @@ class BaseSuggestionNavigator {
             this.suggestionContainerID
         );
 
-        return suggestionContainer.querySelectorAll(".suggestion-container")
+        return suggestionContainer.querySelectorAll(".suggestion-container");
         // let suggestionItems = document.querySelectorAll(
         //     `#${this.suggestionContainerID} .suggestion-container`
         // );
@@ -29,7 +29,7 @@ class BaseSuggestionNavigator {
      */
     navigateSuggestions(event, numSuggestions) {
         let suggestionItems = this.getSuggestionElements();
-        console.log(suggestionItems)
+        console.log(suggestionItems);
         // If there are no suggestions to navigate, terminate early
         // TODO: for genre suggestions, numSuggestions is always 0 fix pls
         if (numSuggestions === 0) {
@@ -107,6 +107,7 @@ class BaseSuggestionNavigator {
 
     highlightSuggestion(suggestionItems) {
         suggestionItems[this.currentSuggestionIndex].classList.add("highlight");
+        this.autofillInputBox();
     }
 
     /** Return if there is a highlighted suggestion or not */
