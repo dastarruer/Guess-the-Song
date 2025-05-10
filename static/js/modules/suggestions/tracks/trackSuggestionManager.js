@@ -75,6 +75,11 @@ class TrackSuggestionManager extends BaseSuggestionManager {
             // Show suggestions to the user
             gameManager.suggestionManager.showSuggestions(gameManager.player);
         });
+
+        // Navigate suggestions with arrow keys
+        document.addEventListener("keydown", (event) => {
+            gameManager.suggestionManager.navigateSuggestions(event);
+        });
     }
 
     getGuess() {

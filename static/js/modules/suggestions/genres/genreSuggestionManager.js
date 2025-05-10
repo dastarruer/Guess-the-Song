@@ -53,6 +53,21 @@ class GenreSuggestionManager extends BaseSuggestionManager {
             console.log(input.value);
             this.showSuggestions(input.value);
         });
+
+        document.addEventListener("keydown", (event) => {
+            let numSuggestions =
+                this.suggestionMatcher.numRelevantSuggestions();
+            this.suggestionNavigator.navigateSuggestions(
+                event,
+                numSuggestions
+            );
+        });
+
+        input.addEventListener("focus", () => {
+            // Show suggestions to the user
+            console.log(input.value);
+            this.showSuggestions(input.value);
+        });
     }
 }
 
