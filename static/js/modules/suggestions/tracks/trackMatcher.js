@@ -1,8 +1,8 @@
 import BaseSuggestionMatcher from "../base/baseSuggestionMatcher.js";
 
 class TrackMatcher extends BaseSuggestionMatcher {
-    constructor(tracklist) {
-        super({ suggestionList: tracklist });
+    constructor(tracklist, suggestionContainerID) {
+        super({ suggestionList: tracklist, suggestionContainerID: suggestionContainerID });
     }
 
     /** Get the title of track */

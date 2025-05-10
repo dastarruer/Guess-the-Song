@@ -164,16 +164,15 @@ class GameManager {
         this.player = new ArtistPlayer();
         await this.player.setTrack();
 
-        let trackMatcher = new TrackMatcher(this.player.tracklist);
+        const suggestionContainerID = "guess-suggestions";
 
+        let trackMatcher = new TrackMatcher(this.player.tracklist, suggestionContainerID);
         let suggestionNavigator = new TrackSuggestionNavigator(
-            "guess-suggestions"
+            suggestionContainerID
         );
-
         let suggestionRenderer = new TrackSuggestionRenderer(
-            "guess-suggestions"
+            suggestionContainerID
         );
-
         this.suggestionManager = new TrackSuggestionManager(
             trackMatcher,
             suggestionNavigator,

@@ -1,6 +1,7 @@
 class BaseSuggestionMatcher {
-    constructor({ suggestionList }) {
+    constructor({ suggestionList, suggestionContainerID }) {
         this.suggestionList = suggestionList;
+        this.suggestionContainerID = suggestionContainerID;
 
         this.relevantSuggestions = null;
     }
@@ -9,11 +10,11 @@ class BaseSuggestionMatcher {
      * Uses the Levenshtein distance algorithm to find the distance between two strings. */
     getRelevantSuggestions(input) {
         if (input === undefined) {
-            return
+            return;
         }
         //TODO: input is undefined for some reason fix it
         input = input.toLowerCase();
-        console.log(input);
+
         // Filters the suggestion list to include suggestions where the title starts with the same 3 first letters as the guess, disregarding case
         const filtered = this.suggestionList.filter((suggestion) =>
             this.getSuggestionName(suggestion)
@@ -45,10 +46,19 @@ class BaseSuggestionMatcher {
      * Otherwse, return the length of this.relevantSuggestions.
      */
     numRelevantSuggestions() {
-        if (this.relevantSuggestions === null) {
+        // TODO: Move getting suggestion items to seperate function
+        const suggestionContainer = document.getElementById(
+            this.suggestionContainerID
+        );
+
+        const suggestionItems = suggestionContainer.querySelectorAll(
+            ".suggestion-container"
+        );
+
+        if (suggestionItems === null) {
             return 0;
         } else {
-            return this.relevantSuggestions.length;
+            return suggestionItems.length;
         }
     }
 

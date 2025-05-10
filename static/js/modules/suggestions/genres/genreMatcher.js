@@ -1,8 +1,11 @@
 import BaseSuggestionMatcher from "../base/baseSuggestionMatcher.js";
 
 class GenreMatcher extends BaseSuggestionMatcher {
-    constructor(genres) {
-        super({ suggestionList: genres });
+    constructor(genres, suggestionContainerID) {
+        super({
+            suggestionList: genres,
+            suggestionContainerID: suggestionContainerID,
+        });
     }
 
     getSuggestionName(genre) {

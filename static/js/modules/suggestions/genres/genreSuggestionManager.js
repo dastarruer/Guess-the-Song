@@ -9,7 +9,7 @@ class GenreSuggestionManager extends BaseSuggestionManager {
         const suggestionContainerID = "genre-suggestions";
 
         super({
-            suggestionMatcher: new GenreMatcher(genres),
+            suggestionMatcher: new GenreMatcher(genres, suggestionContainerID),
             suggestionNavigator: new GenreSuggestionNavigator(
                 suggestionContainerID
             ),
@@ -50,7 +50,7 @@ class GenreSuggestionManager extends BaseSuggestionManager {
 
         input.addEventListener("focus", () => {
             // Show suggestions to the user
-            console.log(input.value)
+            console.log(input.value);
             this.showSuggestions(input.value);
         });
     }

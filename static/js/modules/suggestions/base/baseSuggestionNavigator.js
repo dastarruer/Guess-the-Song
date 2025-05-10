@@ -12,10 +12,15 @@ class BaseSuggestionNavigator {
 
     /** Gets all the suggestions elements */
     getSuggestionElements() {
-        let suggestionItems = document.querySelectorAll(
-            `#${this.suggestionContainerID} .suggestion-container`
+        const suggestionContainer = document.getElementById(
+            this.suggestionContainerID
         );
-        return suggestionItems;
+
+        return suggestionContainer.querySelectorAll(".suggestion-container")
+        // let suggestionItems = document.querySelectorAll(
+        //     `#${this.suggestionContainerID} .suggestion-container`
+        // );
+        // return suggestionItems;
     }
 
     /** Navigate suggestions based on the key pressed.
@@ -23,12 +28,13 @@ class BaseSuggestionNavigator {
      * If the user presses the up key, highlights the suggestion above the current one.
      */
     navigateSuggestions(event, numSuggestions) {
+        let suggestionItems = this.getSuggestionElements();
+        console.log(suggestionItems)
         // If there are no suggestions to navigate, terminate early
+        // TODO: for genre suggestions, numSuggestions is always 0 fix pls
         if (numSuggestions === 0) {
             return;
         }
-
-        let suggestionItems = this.getSuggestionElements();
 
         this.lastSuggestionIndex = numSuggestions - 1;
 
