@@ -89,12 +89,19 @@ class BaseSuggestionNavigator {
     }
 
     autofillInputBox() {
-        const highlightedSuggestionTitle = document.querySelector(
+        let highlightedSuggestionTitle = document.querySelector(
             ".highlight .suggestion-title"
         ).innerHTML;
+
         if (highlightedSuggestionTitle !== null) {
+            // For whatever reason, R&B will autofill to R&amp;B, so we replace it
+            if (highlightedSuggestionTitle === "R&amp;B") {
+                highlightedSuggestionTitle = "R&B";
+            }
+
             // Set the input box's value to the name of the highlighted suggestion
-            document.getElementById(this.inputBoxID).value = highlightedSuggestionTitle;
+            document.getElementById(this.inputBoxID).value =
+                highlightedSuggestionTitle;
         }
     }
 
