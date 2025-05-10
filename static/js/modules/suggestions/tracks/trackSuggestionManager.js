@@ -12,7 +12,7 @@ class TrackSuggestionManager extends BaseSuggestionManager {
             suggestionNavigator: suggestionNavigator,
             suggestionRenderer: suggestionRenderer,
         });
-
+        this.suggestionContainerID = "guess-suggestions";
         this.addEventListeners(gameManager);
     }
 
@@ -42,16 +42,12 @@ class TrackSuggestionManager extends BaseSuggestionManager {
             }
 
             // Unfocus the suggestions by resetting the index to its default
-            this.suggestionNavigator.currentSuggestionIndex =
-                -1;
+            this.suggestionNavigator.currentSuggestionIndex = -1;
 
             this.updateRelevantSuggestions(guess);
 
             // If there are no relevant tracks, don't show suggestions
-            if (
-                this.suggestionMatcher.numRelevantSuggestions() ===
-                0
-            ) {
+            if (this.suggestionMatcher.numRelevantSuggestions() === 0) {
                 this.suggestionRenderer.hideSuggestions();
                 return;
             }
@@ -72,9 +68,17 @@ class TrackSuggestionManager extends BaseSuggestionManager {
         });
 
         guessInput.addEventListener("focus", () => {
-            console.log("hello")
+            document
+                .getElementById(this.suggestionContainerID)
+                .classList.remove("hidden");
             // Show suggestions to the user
             this.showSuggestions(gameManager.player);
+        });
+
+        guessInput.addEventListener("blur", () => {
+            document
+                .getElementById(this.suggestionContainerID)
+                .classList.add("hidden");
         });
 
         // Navigate suggestions with arrow keys
