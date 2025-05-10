@@ -76,9 +76,7 @@ class TrackSuggestionManager extends BaseSuggestionManager {
         });
 
         guessInput.addEventListener("blur", () => {
-            document
-                .getElementById(this.suggestionContainerID)
-                .classList.add("hidden");
+            this.suggestionRenderer.hideSuggestions();
         });
 
         // Navigate suggestions with arrow keys

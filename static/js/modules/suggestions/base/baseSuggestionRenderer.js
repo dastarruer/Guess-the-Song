@@ -36,7 +36,7 @@ class BaseSuggestionRenderer {
     }
 
     hideSuggestions() {
-        this.suggestionsElement.style.display = "none";
+        this.suggestionsElement.classList.add("hidden");
     }
 
     getSuggestionHTML() {

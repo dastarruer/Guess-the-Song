@@ -47,18 +47,23 @@ class BaseSuggestionMatcher {
      */
     numRelevantSuggestions() {
         // TODO: Move getting suggestion items to seperate function
-        const suggestionContainer = document.getElementById(
-            this.suggestionContainerID
-        );
+        // const suggestionContainer = document.getElementById(
+        //     this.suggestionContainerID
+        // );
 
-        const suggestionItems = suggestionContainer.querySelectorAll(
-            ".suggestion-container"
-        );
+        // const suggestionItems = suggestionContainer.querySelectorAll(
+        //     ".suggestion-container"
+        // );
 
-        if (suggestionItems === null) {
+        // if (suggestionItems === null) {
+        //     return 0;
+        // } else {
+        //     return suggestionItems.length;
+        // }
+        if (this.relevantSuggestions === null) {
             return 0;
         } else {
-            return suggestionItems.length;
+            return this.relevantSuggestions.length;
         }
     }
 
