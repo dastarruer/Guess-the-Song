@@ -46,20 +46,7 @@ class BaseSuggestionMatcher {
      * Otherwse, return the length of this.relevantSuggestions.
      */
     numRelevantSuggestions() {
-        // TODO: Move getting suggestion items to seperate function
-        // const suggestionContainer = document.getElementById(
-        //     this.suggestionContainerID
-        // );
-
-        // const suggestionItems = suggestionContainer.querySelectorAll(
-        //     ".suggestion-container"
-        // );
-
-        // if (suggestionItems === null) {
-        //     return 0;
-        // } else {
-        //     return suggestionItems.length;
-        // }
+        // TODO: For some reason, genre suggestions are ALWAYS NULL SO KEYBOARD NAVIGATION DOESNT WORK AHSFDJKL; JASD;FLAKS but this code holds together guess suggestions so PLEASE DONT CHANGE
         if (this.relevantSuggestions === null) {
             return 0;
         } else {
