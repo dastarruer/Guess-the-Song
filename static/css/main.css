@@ -17,3 +17,7 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.flex {
+    display: flex;
+}

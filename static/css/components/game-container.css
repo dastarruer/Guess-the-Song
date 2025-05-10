@@ -115,15 +115,13 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-#restart-btn {
+
+.button {
     background-color: var(--text-light);
     border-color: var(--text-light);
 
     border-width: 0px;
     border-radius: 8px;
-
-    margin-left: 300px;
-    margin-right: 300px;
 
     padding-top: 5px;
     padding-bottom: 5px;
@@ -133,17 +131,21 @@
     display: flex;
     gap: 7px;
     outline: none;
-
     align-items: center;
     justify-content: center;
 }
 
-#restart-btn:hover {
+.button:hover {
     background-color: var(--primary-accent-color);
 }
 
-#restart-btn:active {
+.button:active {
     background-color: var(--active);
+}
+
+#restart-btn {
+    margin-left: 300px;
+    margin-right: 300px;
 }
 
 #restart-btn-icon {
