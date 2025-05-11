@@ -64,6 +64,7 @@
 /* Change individual item styles */
 .dropdown-item {
     color: white !important;
+    display: flex;
 }
 
 .dropdown-item:hover,
