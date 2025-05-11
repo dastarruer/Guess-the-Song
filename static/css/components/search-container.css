@@ -56,6 +56,10 @@
     max-height: 200px;
     overflow-y: auto;
 
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
     background-color: #111 !important;
     color: white !important;
     border: 1px solid #444;
@@ -64,6 +68,7 @@
 /* Change individual item styles */
 .dropdown-item {
     color: white !important;
+    display: flex;
 }
 
 .dropdown-item:hover,
