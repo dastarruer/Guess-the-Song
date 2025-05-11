@@ -9,24 +9,24 @@ window.onload = async function () {
     let genres = await getGenres();
     console.log(genres);
 
-    const genreSuggestionManager = new GenreSuggestionManager(genres);
+    // const genreSuggestionManager = new GenreSuggestionManager(genres);
 
-    const gameManager = new GameManager();
-    await gameManager.startGame(lives);
+    // const gameManager = new GameManager();
+    // await gameManager.startGame(lives);
 
-    playPauseBtn.addEventListener("click", () => {
-        gameManager.player.playPauseTrack();
-    });
+    // playPauseBtn.addEventListener("click", () => {
+    //     gameManager.player.playPauseTrack();
+    // });
 
-    // Handle guess when submit button is clicked
-    submitButton.addEventListener("click", () => {
-        gameManager.handleGuess(getGuess());
-    });
+    // // Handle guess when submit button is clicked
+    // submitButton.addEventListener("click", () => {
+    //     gameManager.handleGuess(getGuess());
+    // });
 
-    // Restart game when restart button is clicked
-    document.getElementById("restart-btn").addEventListener("click", () => {
-        gameManager.startGame(lives);
-    });
+    // // Restart game when restart button is clicked
+    // document.getElementById("restart-btn").addEventListener("click", () => {
+    //     gameManager.startGame(lives);
+    // });
 };
 
 async function getGenres() {

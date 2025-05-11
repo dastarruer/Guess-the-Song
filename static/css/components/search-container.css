@@ -47,3 +47,24 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+#genre-dropdown {
+    color: black !important;
+}
+
+.dropdown-menu {
+    background-color: #111 !important;
+    color: white !important;
+    border: 1px solid #444;
+  }
+  
+  /* Change individual item styles */
+  .dropdown-item {
+    color: white !important;
+  }
+  
+  .dropdown-item:hover,
+  .dropdown-item:focus {
+    background-color: #222 !important;
+    color: limegreen !important;
+  }
