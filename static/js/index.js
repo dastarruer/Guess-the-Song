@@ -40,15 +40,20 @@ function addDropdown(genre) {
     const dropdownMenu = document
         .getElementById("genre-dropdown")
         .querySelector(".dropdown-menu");
+
     const li = document.createElement("li");
     const btn = document.createElement("a");
 
-    btn.className = "dropdown-item"; // same Bootstrap style as <a>
+    btn.className = "dropdown-item";
     btn.textContent = genre;
-    btn.type = "button"; // make it a button
+    btn.type = "button";
+    btn.innerHTML =
+        btn.innerHTML = `<img src="${genre.picture_big}" alt="${genre.name}" style="margin-right: 8px;" class="suggestion-cover"> <p>${genre.name}</p>`;
+
     btn.addEventListener("click", () => {
-        console.log(`Selected genre: ${genre}`);
-        // put your selection logic here
+        document
+            .getElementById("genre-dropdown")
+            .querySelector("#dropdownMenuLink").innerHTML = genre.name;
     });
 
     li.appendChild(btn);
