@@ -53,18 +53,21 @@
 }
 
 .dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+
     background-color: #111 !important;
     color: white !important;
     border: 1px solid #444;
   }
   
-  /* Change individual item styles */
-  .dropdown-item {
+/* Change individual item styles */
+.dropdown-item {
     color: white !important;
-  }
-  
-  .dropdown-item:hover,
-  .dropdown-item:focus {
-    background-color: #222 !important;
-    color: limegreen !important;
-  }
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #222 !important;
+  color: limegreen !important;
+}
