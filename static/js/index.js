@@ -1,8 +1,7 @@
 import GameManager from "./modules/gameManager.js";
 
-const submitButton = document.getElementById("submit-btn");
-const playPauseBtn = document.getElementById("play-track");
 const lives = 3;
+const submitGenreButton = document.getElementById("submit-genre");
 
 window.onload = async function () {
     const gameManager = new GameManager();
@@ -12,29 +11,11 @@ window.onload = async function () {
         addDropdown(genre);
     });
 
-    document
-        .getElementById("submit-genre")
-        .addEventListener("click", async () => {
-            console.log(getChosenGenre());
-            
-            await gameManager.startGame(lives);
+    submitGenreButton.addEventListener("click", async () => {
+        console.log(getChosenGenre());
 
-            playPauseBtn.addEventListener("click", () => {
-                gameManager.player.playPauseTrack();
-            });
-
-            // Handle guess when submit button is clicked
-            submitButton.addEventListener("click", () => {
-                gameManager.handleGuess(getGuess());
-            });
-
-            // Restart game when restart button is clicked
-            document
-                .getElementById("restart-btn")
-                .addEventListener("click", () => {
-                    gameManager.startGame(lives);
-                });
-        });
+        await gameManager.startGame(lives);
+    });
 };
 
 async function getGenres() {
