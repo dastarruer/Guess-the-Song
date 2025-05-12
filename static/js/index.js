@@ -5,28 +5,36 @@ const playPauseBtn = document.getElementById("play-track");
 const lives = 3;
 
 window.onload = async function () {
+    const gameManager = new GameManager();
     let genres = await getGenres();
 
     genres.forEach((genre) => {
         addDropdown(genre);
     });
 
-    // const gameManager = new GameManager();
-    // await gameManager.startGame(lives);
+    document
+        .getElementById("submit-genre")
+        .addEventListener("click", async () => {
+            console.log(getChosenGenre());
+            
+            await gameManager.startGame(lives);
 
-    // playPauseBtn.addEventListener("click", () => {
-    //     gameManager.player.playPauseTrack();
-    // });
+            playPauseBtn.addEventListener("click", () => {
+                gameManager.player.playPauseTrack();
+            });
 
-    // // Handle guess when submit button is clicked
-    // submitButton.addEventListener("click", () => {
-    //     gameManager.handleGuess(getGuess());
-    // });
+            // Handle guess when submit button is clicked
+            submitButton.addEventListener("click", () => {
+                gameManager.handleGuess(getGuess());
+            });
 
-    // // Restart game when restart button is clicked
-    // document.getElementById("restart-btn").addEventListener("click", () => {
-    //     gameManager.startGame(lives);
-    // });
+            // Restart game when restart button is clicked
+            document
+                .getElementById("restart-btn")
+                .addEventListener("click", () => {
+                    gameManager.startGame(lives);
+                });
+        });
 };
 
 async function getGenres() {
@@ -57,4 +65,8 @@ function addDropdown(genre) {
 
     li.appendChild(btn);
     dropdownMenu.appendChild(li);
+}
+
+function getChosenGenre() {
+    return document.getElementById("dropdownMenuLink").innerHTML.trim();
 }
