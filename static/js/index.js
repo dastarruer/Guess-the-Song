@@ -1,5 +1,4 @@
 import GameManager from "./modules/gameManager.js";
-import GenreSuggestionManager from "./modules/suggestions/genres/genreSuggestionManager.js";
 
 const submitButton = document.getElementById("submit-btn");
 const playPauseBtn = document.getElementById("play-track");
