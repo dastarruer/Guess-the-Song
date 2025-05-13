@@ -201,6 +201,14 @@ class GameManager {
         this.addEventListeners();
     }
 
+    showGameElements() {
+        // Hide genre search container
+        document.getElementById("genre-container").classList.add("hidden");
+
+        // Show game container
+        document.getElementById("game-container").classList.remove("hidden");
+    }
+
     addEventListeners() {
         const playPauseBtn = document.getElementById("play-track");
         const restartButton = document.getElementById("restart-btn");

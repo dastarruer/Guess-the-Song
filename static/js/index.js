@@ -13,7 +13,7 @@ window.onload = async function () {
 
     submitGenreButton.addEventListener("click", async () => {
         console.log(getChosenGenre());
-
+        gameManager.showGameElements();
         await gameManager.startGame(lives);
     });
 };
