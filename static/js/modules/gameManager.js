@@ -216,17 +216,17 @@ class GameManager {
 
         // Play/pause audio once play button is clicked
         playPauseBtn.addEventListener("click", () => {
-            gameManager.player.playPauseTrack();
+            this.player.playPauseTrack();
         });
 
         // Handle guess when submit button is clicked
         submitButton.addEventListener("click", () => {
-            gameManager.handleGuess(getGuess());
+            this.handleGuess(getGuess());
         });
 
         // Restart game when restart button is clicked
         restartButton.addEventListener("click", () => {
-            gameManager.startGame(lives);
+            this.startGame(lives);
         });
     }
 }
