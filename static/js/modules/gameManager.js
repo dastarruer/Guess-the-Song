@@ -221,12 +221,12 @@ class GameManager {
 
         // Handle guess when submit button is clicked
         submitButton.addEventListener("click", () => {
-            this.handleGuess(getGuess());
+            this.handleGuess(this.suggestionManager.getGuess());
         });
 
         // Restart game when restart button is clicked
         restartButton.addEventListener("click", () => {
-            this.startGame(lives);
+            this.startGame(this.lives);
         });
     }
 }

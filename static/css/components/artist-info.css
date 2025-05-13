@@ -12,6 +12,8 @@
     height: var(--artist-image-size);
     border-radius: 7px;
     padding-bottom: 10px;
+    margin-top: 20px;
+    margin-left: 40px
 }
 
 #track-name,
