@@ -1,7 +1,9 @@
 #artist-info {
-    width: var(--artist-info-width);
     display: flex;
     align-items: center;
+    border-radius: 7px;
+    
+    width: var(--artist-info-width);
     margin: 50px 200px;
 }
 

@@ -166,9 +166,13 @@ class GameManager {
 
         const suggestionContainerID = "guess-suggestions";
 
-        let trackMatcher = new TrackMatcher(this.player.tracklist, suggestionContainerID);
+        let trackMatcher = new TrackMatcher(
+            this.player.tracklist,
+            suggestionContainerID
+        );
         let suggestionNavigator = new TrackSuggestionNavigator(
-            suggestionContainerID, "input"
+            suggestionContainerID,
+            "input"
         );
         let suggestionRenderer = new TrackSuggestionRenderer(
             suggestionContainerID
@@ -194,6 +198,36 @@ class GameManager {
         this.suggestionManager.suggestionRenderer.hideSuggestions();
         this.clearInputBox();
         this.hideRestartButton();
+        this.addEventListeners();
+    }
+
+    showGameElements() {
+        // Hide genre search container
+        document.getElementById("genre-container").classList.add("hidden");
+
+        // Show game container
+        document.getElementById("game-container").classList.remove("hidden");
+    }
+
+    addEventListeners() {
+        const playPauseBtn = document.getElementById("play-track");
+        const restartButton = document.getElementById("restart-btn");
+        const submitButton = document.getElementById("submit-btn");
+
+        // Play/pause audio once play button is clicked
+        playPauseBtn.addEventListener("click", () => {
+            gameManager.player.playPauseTrack();
+        });
+
+        // Handle guess when submit button is clicked
+        submitButton.addEventListener("click", () => {
+            gameManager.handleGuess(getGuess());
+        });
+
+        // Restart game when restart button is clicked
+        restartButton.addEventListener("click", () => {
+            gameManager.startGame(lives);
+        });
     }
 }
 
