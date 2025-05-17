@@ -54,11 +54,14 @@ class GameManager {
         const firstGuessElement = document.querySelector(".guess");
         const track = this.player.track;
 
-        if (guess === "") {
+        if (
+            guess === "" ||
+            document.getElementsByClassName("correct-guess").length == 1
+        ) {
             return;
         }
 
-        // If the guess is valid
+        // If the guess is correct and valid
         if (this.verifyGuess(guess, track)) {
             this.handleCorrectGuess(firstGuessElement, track);
         } else {
