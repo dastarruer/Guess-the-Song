@@ -15,11 +15,12 @@ class BaseSuggestionRenderer {
     // Add event listeners to each suggestion, so that clicking and hovering will do something
     addEventListeners(suggestions, suggestionNavigator) {
         for (const suggestion of suggestions) {
-            suggestion.addEventListener("click", () => {
+            suggestion.addEventListener("mousedown", () => {
                 suggestionNavigator.autofillInputBox();
             });
 
             suggestion.addEventListener("mouseenter", () => {
+                console.log("hello")
                 suggestion.classList.add("highlight");
             });
 
