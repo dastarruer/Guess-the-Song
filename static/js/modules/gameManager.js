@@ -54,10 +54,7 @@ class GameManager {
         const firstGuessElement = document.querySelector(".guess");
         const track = this.player.track;
 
-        if (
-            guess === "" ||
-            document.getElementsByClassName("correct-guess").length == 1
-        ) {
+        if (this.canUserGuess(guess)) {
             return;
         }
 
@@ -67,6 +64,13 @@ class GameManager {
         } else {
             this.handleIncorrectGuess(firstGuessElement);
         }
+    }
+
+    canUserGuess(guess) {
+        return !(
+            guess === "" ||
+            document.getElementsByClassName("correct-guess").length == 1
+        );
     }
 
     // TODO: Convert to enum
