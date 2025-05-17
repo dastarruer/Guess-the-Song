@@ -41,8 +41,6 @@ class GameManager {
 
         // Show the restart button
         this.showRestartButton("win");
-        const restartButtonText = document.getElementById("restart-btn-text");
-        restartButtonText.innerText = "Next";
 
         // Clear and hide suggestions
         this.suggestionManager.suggestionMatcher.relevantSuggestions = [];
@@ -198,7 +196,7 @@ class GameManager {
         this.suggestionManager.suggestionRenderer.hideSuggestions();
         this.clearInputBox();
         this.hideRestartButton();
-        this.addEventListeners();
+        this.addEventListeners(totalLives);
     }
 
     showGameElements() {
@@ -209,7 +207,7 @@ class GameManager {
         document.getElementById("game-container").classList.remove("hidden");
     }
 
-    addEventListeners() {
+    addEventListeners(lives) {
         const playPauseBtn = document.getElementById("play-track");
         const restartButton = document.getElementById("restart-btn");
         const submitButton = document.getElementById("submit-btn");
@@ -226,7 +224,7 @@ class GameManager {
 
         // Restart game when restart button is clicked
         restartButton.addEventListener("click", () => {
-            this.startGame(this.lives);
+            this.startGame(lives);
         });
     }
 }
