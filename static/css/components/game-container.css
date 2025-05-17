@@ -146,6 +146,8 @@
 #restart-btn {
     margin-left: 300px;
     margin-right: 300px;
+    padding-right: 7px;
+    padding-left: 7px;
 }
 
 #restart-btn-icon {
@@ -155,6 +157,10 @@
 
 #restart-btn-icon.rotate {
     animation: rotateIcon 1s linear infinite;
+}
+
+#restart-btn-text {
+    margin-top: 10px;
 }
 
 .suggestion-container {
