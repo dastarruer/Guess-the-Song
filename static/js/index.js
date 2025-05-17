@@ -5,17 +5,18 @@ const submitGenreButton = document.getElementById("submit-genre");
 
 window.onload = async function () {
     const gameManager = new GameManager();
-    let genres = await getGenres();
+    // let genres = await getGenres();
 
-    genres.forEach((genre) => {
-        addDropdown(genre);
-    });
+    // genres.forEach((genre) => {
+    //     addDropdown(genre);
+    // });
 
-    submitGenreButton.addEventListener("click", async () => {
-        console.log(getChosenGenre());
-        gameManager.showGameElements();
-        await gameManager.startGame(lives);
-    });
+    // submitGenreButton.addEventListener("click", async () => {
+    //     console.log(getChosenGenre());
+    //     gameManager.showGameElements();
+    //     await gameManager.startGame(lives);
+    // });
+    await gameManager.startGame(lives);
 };
 
 async function getGenres() {

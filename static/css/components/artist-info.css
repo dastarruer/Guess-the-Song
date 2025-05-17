@@ -21,6 +21,7 @@
     text-align: center;
     width: var(--artist-image-size);
     font-style: normal;
+    margin-left: 40px
 }
 
 #track-name {
@@ -31,7 +32,7 @@
 #artist-name {
     font-size: 2rem;
     color: var(--text-muted);
-    padding-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 #play-track {
@@ -41,6 +42,7 @@
     
     display: block;
     margin: 0 auto;
+    padding-left: 40px;
 }
 
 #play-track:hover {
