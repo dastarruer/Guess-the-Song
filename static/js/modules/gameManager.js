@@ -52,7 +52,7 @@ class GameManager {
      * functions within the GameManager object. */
     handleGuess(guess) {
         const firstGuessElement = document.querySelectorAll(".guess")[0];
-        
+
         const track = this.player.track;
 
         if (!this.isGuessAllowed(guess)) {
@@ -69,8 +69,8 @@ class GameManager {
 
     isGuessAllowed(guess) {
         return (
-            guess !== "" ||
-            document.getElementsByClassName("correct-guess").length !== 1
+            guess.trim() !== "" &&
+            document.getElementsByClassName("correct-guess").length < 1
         );
     }
 
@@ -205,11 +205,11 @@ class GameManager {
         this.clearInputBox();
         this.hideRestartButton();
     }
-    
+
     showGameElements() {
         // Hide genre search container
         document.getElementById("genre-container").classList.add("hidden");
-        
+
         // Show game container
         document.getElementById("game-container").classList.remove("hidden");
 
@@ -229,7 +229,7 @@ class GameManager {
 
         // Handle guess when submit button is clicked
         submitButton.addEventListener("mousedown", () => {
-            console.log("submit button pressed")
+            console.log("submit button pressed");
             this.handleGuess(this.suggestionManager.getGuess());
         });
 
