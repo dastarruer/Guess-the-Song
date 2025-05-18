@@ -9,6 +9,18 @@ import (
 	"github.com/carlmjohnson/requests"
 )
 
+type Track struct {
+	Title      string `json:"title"`
+	PreviewURL string `json:"preview"`
+	Album      Album  `json:"album"`
+}
+
+type Album struct {
+	CoverBig    string `json:"cover_big"`
+	CoverMedium string `json:"cover_medium"`
+	CoverSmall  string `json:"cover_small"`
+}
+
 type ArtistTopTracks struct {
 	Tracklist []Track `json:"data"`
 }

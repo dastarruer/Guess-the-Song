@@ -8,7 +8,6 @@ import (
 	"guess-the-song/handlers"
 )
 
-
 func main() {
 	// Serve static directory
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
@@ -18,7 +17,6 @@ func main() {
 
 	// Handle routes
 	http.HandleFunc("/", handlers.IndexHandler)
-	http.HandleFunc("/track", handlers.TrackHandler)
 	http.HandleFunc("/artist", handlers.ArtistHandler)
 	http.HandleFunc("/artist/top", handlers.ArtistTopTracksHandler)
 	http.HandleFunc("/genres", handlers.GenresHandler)
