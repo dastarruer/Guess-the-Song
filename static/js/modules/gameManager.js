@@ -206,7 +206,7 @@ class GameManager {
         this.hideRestartButton();
     }
 
-    showGameElements() {
+    showGameElements(totalLives, genre) {
         // Hide genre search container
         document.getElementById("genre-container").classList.add("hidden");
 
@@ -214,10 +214,10 @@ class GameManager {
         document.getElementById("game-container").classList.remove("hidden");
 
         // Add the necessary event listeners
-        this.addEventListeners(3);
+        this.addEventListeners(totalLives, genre);
     }
 
-    addEventListeners(lives) {
+    addEventListeners(lives, genre) {
         const playPauseBtn = document.getElementById("play-track");
         const restartButton = document.getElementById("restart-btn");
         const submitButton = document.getElementById("submit-btn");
@@ -234,8 +234,8 @@ class GameManager {
         });
 
         // Restart game when restart button is clicked
-        restartButton.addEventListener("click", () => {
-            this.startGame(lives);
+        restartButton.addEventListener("click", async () => {
+            await this.startGame(lives, genre);
         });
     }
 }

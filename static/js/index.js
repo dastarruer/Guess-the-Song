@@ -17,7 +17,7 @@ window.onload = async function () {
             return;
         }
 
-        gameManager.showGameElements();
+        gameManager.showGameElements(lives, chosenGenre);
         await gameManager.startGame(lives, chosenGenre);
     });
 };
