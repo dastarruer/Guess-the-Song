@@ -8,16 +8,14 @@ class ArtistPlayer {
     }
 
     // Fetch the artist's data from the /artist API endpoint
-    async fetchArtist() {
-        // Hardcoded for now
-        const artistId = "525046";
+    async fetchArtist(artistId) {
         const data = await fetch(`http://localhost:8080/artist?id=${artistId}`);
         this.artist = await data.json();
     }
 
     // Fetch the artist's top songs' data from the /artist/top API endpoint
-    async fetchTracklist() {
-        const data = await fetch("http://localhost:8080/artist/top");
+    async fetchTracklist(artistId) {
+        const data = await fetch(`http://localhost:8080/artist/top?id=${artistId}`);
         const json = await data.json();
 
         this.tracklist = json.data;
@@ -37,9 +35,11 @@ class ArtistPlayer {
     async setTrack(genre) {
         // Set volume to 0 so fade function fades in audio
         this.trackPlayer.volume = 0;
-        console.log(genre)
-        await this.fetchArtist();
-        await this.fetchTracklist();
+        // Hardcoded for now
+        const artistId = "525045";
+
+        await this.fetchArtist(artistId);
+        await this.fetchTracklist(artistId);
         await this.fetchRandomArtistTrack();
 
         // Set the audio
