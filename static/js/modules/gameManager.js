@@ -51,10 +51,11 @@ class GameManager {
      * incorrect using the hnadlceCorrectGuess() and handleIncorrectGuess()
      * functions within the GameManager object. */
     handleGuess(guess) {
-        const firstGuessElement = document.querySelector(".guess");
+        const firstGuessElement = document.querySelectorAll(".guess")[0];
+        
         const track = this.player.track;
 
-        if (this.canUserGuess(guess)) {
+        if (!this.isGuessAllowed(guess)) {
             return;
         }
 
@@ -66,10 +67,10 @@ class GameManager {
         }
     }
 
-    canUserGuess(guess) {
-        return !(
-            guess === "" ||
-            document.getElementsByClassName("correct-guess").length == 1
+    isGuessAllowed(guess) {
+        return (
+            guess !== "" ||
+            document.getElementsByClassName("correct-guess").length !== 1
         );
     }
 
@@ -105,10 +106,10 @@ class GameManager {
                         </svg>`;
 
         if (outcome === "win") {
-            restartButtonIcon.outerHTML = winIcon; // Set the icon to an arrow icon, signifying that they have to move on
+            restartButtonIcon.outerHTML = winIcon; // Set the icon to an arrow icon, signifying that the user has to move on
             restartButtonText.innerText = "Next";
         } else if (outcome === "lose") {
-            restartButtonIcon.outerHTML = lossIcon; // Set the icon to a restart icon, signifying that they have to try again
+            restartButtonIcon.outerHTML = lossIcon; // Set the icon to a restart icon, signifying that the user has to try again
             restartButtonText.innerText = "Try again";
         }
     }
@@ -203,15 +204,17 @@ class GameManager {
         this.suggestionManager.suggestionRenderer.hideSuggestions();
         this.clearInputBox();
         this.hideRestartButton();
-        this.addEventListeners(totalLives);
     }
-
+    
     showGameElements() {
         // Hide genre search container
         document.getElementById("genre-container").classList.add("hidden");
-
+        
         // Show game container
         document.getElementById("game-container").classList.remove("hidden");
+
+        // Add the necessary event listeners
+        this.addEventListeners(3);
     }
 
     addEventListeners(lives) {
@@ -225,7 +228,8 @@ class GameManager {
         });
 
         // Handle guess when submit button is clicked
-        submitButton.addEventListener("click", () => {
+        submitButton.addEventListener("mousedown", () => {
+            console.log("submit button pressed")
             this.handleGuess(this.suggestionManager.getGuess());
         });
 
