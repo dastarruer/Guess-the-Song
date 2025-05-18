@@ -13,12 +13,10 @@ window.onload = async function () {
     });
 
     submitGenreButton.addEventListener("click", async () => {
-        const defaultOption = "Choose a genre:";
-
-        if (chosenGenre === defaultOption) {
+        if (chosenGenre === null) {
             return;
         }
-        
+
         gameManager.showGameElements();
         await gameManager.startGame(lives, chosenGenre);
     });

@@ -8,14 +8,16 @@ class ArtistPlayer {
     }
 
     // Fetch the artist's data from the /artist API endpoint
-    async fetchArtist(artistId) {
+    async fetchArtistInfo(artistId) {
         const data = await fetch(`http://localhost:8080/artist?id=${artistId}`);
         this.artist = await data.json();
     }
 
     // Fetch the artist's top songs' data from the /artist/top API endpoint
     async fetchTracklist(artistId) {
-        const data = await fetch(`http://localhost:8080/artist/top?id=${artistId}`);
+        const data = await fetch(
+            `http://localhost:8080/artist/top?id=${artistId}`
+        );
         const json = await data.json();
 
         this.tracklist = json.data;
@@ -27,6 +29,17 @@ class ArtistPlayer {
             this.tracklist[Math.floor(Math.random() * this.tracklist.length)];
     }
 
+    async chooseArtist(genre) {
+        const data = await fetch(
+            `http://localhost:8080/genres/artists?id=${genre.id}`
+        );
+        const json = await data.json();
+        const artists = json.data;
+
+        this.artist = artists[Math.floor(Math.random() * artists.length)];
+        console.log(this.artist);
+    }
+
     /**
      * Asynchronously sets the current track and artist information.
      * Fetches artist data, tracklist, and a random track, then updates the audio source and
@@ -35,11 +48,10 @@ class ArtistPlayer {
     async setTrack(genre) {
         // Set volume to 0 so fade function fades in audio
         this.trackPlayer.volume = 0;
-        // Hardcoded for now
-        const artistId = "525046";
-        console.log(genre)
-        await this.fetchArtist(artistId);
-        await this.fetchTracklist(artistId);
+
+        await this.chooseArtist(genre);
+        // await this.fetchArtistInfo(artistId);
+        await this.fetchTracklist(this.artist.id);
         await this.fetchRandomArtistTrack();
 
         // Set the audio

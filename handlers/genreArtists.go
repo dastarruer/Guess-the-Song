@@ -3,6 +3,7 @@ package handlers
 import (
 	"context"
 	"encoding/json"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -37,7 +38,10 @@ func GenreArtistsHandler(w http.ResponseWriter, r *http.Request) {
 		ToJSON(&artist).
 		Fetch(context.Background())
 	if err != nil {
-		http.Error(w, "could not connect to jsonplaceholder.typicode.com:", http.StatusInternalServerError)
+		log.Println("Deezer API fetch error:", err)
+		http.Error(w, "could not connect to Deezer API", http.StatusInternalServerError)
+		return
+
 	}
 
 	// Set the content type to application/json

@@ -11,6 +11,7 @@ import (
 
 type Artist struct {
 	Name          string `json:"name"`
+	Id            int    `json:"id"`
 	PictureSmall  string `json:"picture_small"`
 	PictureMedium string `json:"picture_medium"`
 	PictureBig    string `json:"picture_big"`
