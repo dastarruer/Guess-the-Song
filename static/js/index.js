@@ -12,11 +12,17 @@ window.onload = async function () {
     });
 
     submitGenreButton.addEventListener("click", async () => {
-        console.log(getChosenGenre());
+        const chosenGenre = getChosenGenre();
+        const defaultOption = "Choose a genre:";
+
+        if (chosenGenre === defaultOption) {
+            return;
+        }
+        console.log(chosenGenre)
+
         gameManager.showGameElements();
         await gameManager.startGame(lives);
     });
-    await gameManager.startGame(lives);
 };
 
 async function getGenres() {
