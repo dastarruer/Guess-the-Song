@@ -9,7 +9,9 @@ class ArtistPlayer {
 
     // Fetch the artist's data from the /artist API endpoint
     async fetchArtist() {
-        const data = await fetch("http://localhost:8080/artist");
+        // Hardcoded for now
+        const artistId = "525046";
+        const data = await fetch(`http://localhost:8080/artist?id=${artistId}`);
         this.artist = await data.json();
     }
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/carlmjohnson/requests"
 )
@@ -16,12 +17,23 @@ type Artist struct {
 }
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
-	// Hardcoded, to be changed
-	id := 525046
+	idStr := r.URL.Query().Get("id")
+	if idStr == "" {
+		http.Error(w, "missing artist id", http.StatusBadRequest)
+		return
+	}
+
+	// Convert it to an integer
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(w, "invalid artist id", http.StatusBadRequest)
+		return
+	}
+
 	var artist Artist
 
 	// Get the artist's data
-	err := requests.
+	err = requests.
 		URL("https://api.deezer.com").
 		Pathf("/artist/%d", id).
 		ContentType("application/json").
