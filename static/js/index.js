@@ -21,7 +21,7 @@ window.onload = async function () {
         console.log(chosenGenre)
 
         gameManager.showGameElements();
-        await gameManager.startGame(lives);
+        await gameManager.startGame(lives, chosenGenre);
     });
 };
 

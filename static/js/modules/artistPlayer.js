@@ -32,10 +32,10 @@ class ArtistPlayer {
      * Fetches artist data, tracklist, and a random track, then updates the audio source and
      * artist elements in the DOM. The track name is obscured as "???" until guessed correctly.
      */
-    async setTrack() {
+    async setTrack(genre) {
         // Set volume to 0 so fade function fades in audio
         this.trackPlayer.volume = 0;
-
+        console.log(genre)
         await this.fetchArtist();
         await this.fetchTracklist();
         await this.fetchRandomArtistTrack();

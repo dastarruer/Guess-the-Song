@@ -150,7 +150,7 @@ class GameManager {
 
     /** Start the game by initializing the ArtistPlayer, SuggestionNavigator, TrackMatcher, and SuggestionRenderer objects.
      * Rotate the restart icon as well to indicate to the user that the game is loading. */
-    async startGame(totalLives) {
+    async startGame(totalLives, genre) {
         const restartButtonIcon = document.getElementById("restart-btn-icon");
         const livesCounter = document.getElementById("lives-counter");
         const livesIcon = `<div class="guess">
@@ -168,7 +168,7 @@ class GameManager {
         restartButtonIcon.classList.add("rotate");
 
         this.player = new ArtistPlayer();
-        await this.player.setTrack();
+        await this.player.setTrack(genre);
 
         const suggestionContainerID = "guess-suggestions";
 
