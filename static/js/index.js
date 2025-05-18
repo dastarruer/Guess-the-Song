@@ -2,6 +2,7 @@ import GameManager from "./modules/gameManager.js";
 
 const lives = 3;
 const submitGenreButton = document.getElementById("submit-genre");
+let chosenGenre = null;
 
 window.onload = async function () {
     const gameManager = new GameManager();
@@ -12,14 +13,12 @@ window.onload = async function () {
     });
 
     submitGenreButton.addEventListener("click", async () => {
-        const chosenGenre = getChosenGenre();
         const defaultOption = "Choose a genre:";
 
         if (chosenGenre === defaultOption) {
             return;
         }
-        console.log(chosenGenre)
-
+        
         gameManager.showGameElements();
         await gameManager.startGame(lives, chosenGenre);
     });
@@ -49,12 +48,9 @@ function addDropdown(genre) {
         document
             .getElementById("genre-dropdown")
             .querySelector("#dropdownMenuLink").innerHTML = genre.name;
+        chosenGenre = genre;
     });
 
     li.appendChild(btn);
     dropdownMenu.appendChild(li);
-}
-
-function getChosenGenre() {
-    return document.getElementById("dropdownMenuLink").innerHTML.trim();
 }

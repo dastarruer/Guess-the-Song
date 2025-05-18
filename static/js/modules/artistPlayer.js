@@ -36,8 +36,8 @@ class ArtistPlayer {
         // Set volume to 0 so fade function fades in audio
         this.trackPlayer.volume = 0;
         // Hardcoded for now
-        const artistId = "525045";
-
+        const artistId = "525046";
+        console.log(genre)
         await this.fetchArtist(artistId);
         await this.fetchTracklist(artistId);
         await this.fetchRandomArtistTrack();
