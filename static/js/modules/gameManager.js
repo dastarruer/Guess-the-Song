@@ -7,13 +7,20 @@ import TrackMatcher from "./suggestions/tracks/trackMatcher.js";
 import TrackSuggestionManager from "./suggestions/tracks/trackSuggestionManager.js";
 
 class GameManager {
-    handleIncorrectGuess(firstGuessElement) {
+    handleIncorrectGuess(firstGuessElement, track) {
         if (this.livesLeft <= 1) {
             this.showRestartButton("lose");
 
             // Clear and hide suggestions
             this.suggestionManager.suggestionMatcher.relevantSuggestions = [];
             this.suggestionManager.suggestionRenderer.hideSuggestions();
+
+            this.showTrackInfo(
+                track.title,
+                this.suggestionManager.suggestionRenderer.getTrackCoverURL(
+                    track
+                )
+            );
         } else {
             this.livesLeft -= 1;
         }
@@ -63,7 +70,7 @@ class GameManager {
         if (this.verifyGuess(guess, track)) {
             this.handleCorrectGuess(firstGuessElement, track);
         } else {
-            this.handleIncorrectGuess(firstGuessElement);
+            this.handleIncorrectGuess(firstGuessElement, track);
         }
     }
 
