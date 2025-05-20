@@ -59,6 +59,7 @@ class TrackSuggestionManager extends BaseSuggestionManager {
             // Handle guess when enter is pressed on input box
             if (event.key === "Enter") {
                 gameManager.handleGuess(this.getGuess());
+                this.suggestionNavigator.autofillInputBox();
             }
             // Unfocus input box when escape is pressed
             else if (event.key === "Escape") {

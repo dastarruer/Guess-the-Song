@@ -7,6 +7,10 @@ import TrackMatcher from "./suggestions/tracks/trackMatcher.js";
 import TrackSuggestionManager from "./suggestions/tracks/trackSuggestionManager.js";
 
 class GameManager {
+    constructor() {
+        this.suggestionManager = null;
+    }
+
     handleIncorrectGuess(firstGuessElement, track) {
         if (this.livesLeft <= 1) {
             this.showRestartButton("lose");
@@ -190,12 +194,22 @@ class GameManager {
         let suggestionRenderer = new TrackSuggestionRenderer(
             suggestionContainerID
         );
-        this.suggestionManager = new TrackSuggestionManager(
-            trackMatcher,
-            suggestionNavigator,
-            suggestionRenderer,
-            this
-        );
+
+        // If there is not an already created instance of the suggestion manager, create it
+        if (this.suggestionManager === null) {
+            this.suggestionManager = new TrackSuggestionManager(
+                trackMatcher,
+                suggestionNavigator,
+                suggestionRenderer,
+                this
+            );
+        } else {
+            // Manually assign variables because in the constructor of TrackSuggestionManager, event listeners are added every time a new instance is initialized. This is my way of circumventing that
+            // TODO: fix this bro what
+            this.suggestionManager.trackMatcher = trackMatcher;
+            this.suggestionManager.suggestionNavigator = suggestionNavigator;
+            this.suggestionManager.suggestionRenderer = suggestionRenderer;
+        }
 
         // Clear livesCounter
         livesCounter.innerHTML = "";
