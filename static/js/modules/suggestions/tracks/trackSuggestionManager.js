@@ -67,9 +67,6 @@ class TrackSuggestionManager extends BaseSuggestionManager {
         });
 
         guessInput.addEventListener("focus", () => {
-            document
-                .getElementById(this.suggestionContainerID)
-                .classList.remove("hidden");
             // Show suggestions to the user
             this.showSuggestions(gameManager.player);
         });

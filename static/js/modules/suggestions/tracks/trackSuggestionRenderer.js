@@ -30,7 +30,7 @@ class TrackSuggestionRenderer extends BaseSuggestionRenderer {
         if (relevantSuggestions === null) {
             return;
         }
-
+        this.suggestionsElement.classList.remove("hidden");
         // Clear the list so that the previous suggestions are not shown
         this.suggestionsElement.innerHTML = "";
 
