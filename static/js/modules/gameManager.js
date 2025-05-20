@@ -9,6 +9,7 @@ import TrackSuggestionManager from "./suggestions/tracks/trackSuggestionManager.
 class GameManager {
     constructor() {
         this.suggestionManager = null;
+        this.score = 0;
     }
 
     handleIncorrectGuess(firstGuessElement, track) {
@@ -25,6 +26,10 @@ class GameManager {
                     track
                 )
             );
+
+            // Reset user score
+            this.score = 0;
+            console.log(this.score);
         } else {
             this.livesLeft -= 1;
         }
@@ -56,6 +61,10 @@ class GameManager {
         // Clear and hide suggestions
         this.suggestionManager.suggestionMatcher.relevantSuggestions = [];
         this.suggestionManager.suggestionRenderer.hideSuggestions();
+
+        // Increment user's score
+        this.score += 1;
+        console.log(this.score);
     }
 
     /** Handle the guess differently depending on whether it is correct or
