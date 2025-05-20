@@ -10,6 +10,7 @@ class GameManager {
     constructor() {
         this.suggestionManager = null;
         this.score = 0;
+        this.updateScore();
     }
 
     handleIncorrectGuess(firstGuessElement, track) {
@@ -29,7 +30,7 @@ class GameManager {
 
             // Reset user score
             this.score = 0;
-            console.log(this.score);
+            this.updateScore();
         } else {
             this.livesLeft -= 1;
         }
@@ -64,7 +65,7 @@ class GameManager {
 
         // Increment user's score
         this.score += 1;
-        console.log(this.score);
+        this.updateScore();
     }
 
     /** Handle the guess differently depending on whether it is correct or
@@ -92,6 +93,10 @@ class GameManager {
             guess.trim() !== "" &&
             document.getElementsByClassName("correct-guess").length < 1
         );
+    }
+
+    updateScore() {
+        document.getElementById("score").innerHTML = `Score:<br>${this.score}`;
     }
 
     // TODO: Convert to enum

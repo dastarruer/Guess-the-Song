@@ -201,6 +201,10 @@
     margin-top: 10px;
 }
 
+#score {
+    color: var(--text-light)
+}
+
 @keyframes rotateIcon {
     0% {
         transform: rotate(0deg);
