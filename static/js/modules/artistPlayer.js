@@ -14,7 +14,7 @@ class ArtistPlayer {
     }
 
     // Fetch the artist's top songs' data from the /artist/top API endpoint
-    async fetchTracklist(artistId) {
+    async fetchTracklist() {
         const data = await fetch(
             `http://localhost:8080/chart`
         );
@@ -24,7 +24,7 @@ class ArtistPlayer {
     }
 
     // Fetch a random track from the tracklist fetched in this.fetchTracklist()
-    fetchRandomArtistTrack() {
+    fetchRandomTrack() {
         this.track =
             this.tracklist[Math.floor(Math.random() * this.tracklist.length)];
     }
@@ -37,7 +37,6 @@ class ArtistPlayer {
         const artists = json.data;
 
         this.artist = artists[Math.floor(Math.random() * artists.length)];
-        console.log(this.artist);
     }
 
     /**
@@ -49,10 +48,10 @@ class ArtistPlayer {
         // Set volume to 0 so fade function fades in audio
         this.trackPlayer.volume = 0;
 
-        await this.chooseArtist(genre);
+        // await this.chooseArtist(genre);
         // await this.fetchArtistInfo(artistId);
-        await this.fetchTracklist(this.artist.id);
-        await this.fetchRandomArtistTrack();
+        await this.fetchTracklist();
+        this.fetchRandomTrack();
 
         // Set the audio
         this.trackPlayer.src = this.track.preview;

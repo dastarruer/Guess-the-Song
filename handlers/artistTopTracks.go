@@ -10,9 +10,10 @@ import (
 )
 
 type Track struct {
-	Title      string `json:"title"`
-	PreviewURL string `json:"preview"`
-	Album      Album  `json:"album"`
+	Title      string   `json:"title"`
+	PreviewURL string   `json:"preview"`
+	Album      Album    `json:"album"`
+	Artists    []Artist `json:"contributers"`
 }
 
 type Album struct {
