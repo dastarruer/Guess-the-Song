@@ -14,12 +14,13 @@ type ChartTopTracks struct {
 
 func ChartsHandler(w http.ResponseWriter, r *http.Request) {
 	var tracklist ChartTopTracks;
+	numTracks := "25"
 
 	// Get the artist's data
 	err := requests.
 		URL("https://api.deezer.com").
 		Pathf("/chart/tracks/tracks").
-		Param("limit", "50").
+		Param("limit", numTracks).
 		ContentType("application/json").
 		ToJSON(&tracklist).
 		Fetch(context.Background())
