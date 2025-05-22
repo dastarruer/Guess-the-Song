@@ -37,7 +37,6 @@ class ArtistPlayer {
         const artists = json.data;
 
         this.artist = artists[Math.floor(Math.random() * artists.length)];
-        console.log(this.artist);
     }
 
     /**
