@@ -5,9 +5,15 @@
     align-items: center;
     justify-content: center;
 
-    
     color: var(--text-dark);
     background-color: var(--primary-accent-color);
+
+    position: fixed;
+    z-index: 999;
+
+    top: 0;
+    left: 0;
+    width: 100vw;
 }
 
 #banner:hover {

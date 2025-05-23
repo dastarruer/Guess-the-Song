@@ -259,8 +259,10 @@ class GameManager {
         // Hide game container
         document.getElementById("game-container").classList.add("hidden");
 
-        this.player.pauseTrack();
-        
+        if (this.player !== undefined) {
+            this.player.pauseTrack();
+        }
+
         // Reset score
         this.score = 0;
     }
