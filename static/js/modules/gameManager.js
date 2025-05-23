@@ -252,10 +252,24 @@ class GameManager {
         this.addEventListeners(totalLives, genre);
     }
 
+    showSearchElements() {
+        // Show genre search container
+        document.getElementById("genre-container").classList.remove("hidden");
+
+        // Hide game container
+        document.getElementById("game-container").classList.add("hidden");
+
+        this.player.pauseTrack();
+        
+        // Reset score
+        this.score = 0;
+    }
+
     addEventListeners(lives, genre) {
         const playPauseBtn = document.getElementById("play-track");
         const restartButton = document.getElementById("restart-btn");
         const submitButton = document.getElementById("submit-btn");
+        const banner = document.getElementById("banner");
 
         // Play/pause audio once play button is clicked
         playPauseBtn.addEventListener("click", () => {
@@ -265,12 +279,17 @@ class GameManager {
         // Handle guess when submit button is clicked
         submitButton.addEventListener("mousedown", () => {
             console.log("submit button pressed");
+            this.showSearchElements();
             this.handleGuess(this.suggestionManager.getGuess());
         });
 
         // Restart game when restart button is clicked
         restartButton.addEventListener("click", async () => {
             await this.startGame(lives, genre);
+        });
+
+        banner.addEventListener("click", () => {
+            this.showSearchElements();
         });
     }
 }

@@ -2,6 +2,7 @@ import GameManager from "./modules/gameManager.js";
 
 const lives = 3;
 const submitGenreButton = document.getElementById("submit-genre");
+const banner = document.getElementById("banner");
 let chosenGenre = null;
 
 window.onload = async function () {
@@ -19,6 +20,10 @@ window.onload = async function () {
 
         gameManager.showGameElements(lives, chosenGenre);
         await gameManager.startGame(lives, chosenGenre);
+    });
+
+    banner.addEventListener("click", () => {
+        gameManager.showSearchElements();
     });
 };
 

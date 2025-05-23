@@ -10,13 +10,13 @@
     background-color: var(--primary-accent-color);
 }
 
+#banner:hover {
+    cursor: pointer;
+}
+
 #banner h1 {
     font-style: normal;
     font-size: 4rem;
     letter-spacing: 14%;
-    
-}
-
-#banner h1 {
-    cursor: pointer;
+    user-select: none;
 }
