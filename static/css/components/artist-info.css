@@ -5,6 +5,7 @@
     
     width: var(--artist-info-width);
     margin: 50px 200px;
+    user-select: none;
 }
 
 #artist-image {
