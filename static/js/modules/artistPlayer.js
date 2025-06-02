@@ -17,7 +17,7 @@ class ArtistPlayer {
     // Fetch the artist's top songs' data from the /artist/top API endpoint
     async fetchTracklist(artistId) {
         const baseURL = window.location.origin;
-        let data = await fetch(`${baseURL}/top?id=${artistId}`);
+        let data = await fetch(`${baseURL}/artist/top?id=${artistId}`);
         const json = await data.json();
 
         this.tracklist = json.data;
