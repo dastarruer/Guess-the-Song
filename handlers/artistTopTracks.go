@@ -44,7 +44,7 @@ func ArtistTopTracksHandler(w http.ResponseWriter, r *http.Request) {
 	err = requests.
 		URL("https://api.deezer.com").
 		Pathf("/artist/%d/top", id).
-		Param("limit", "50").
+		Param("limit", "10").
 		ContentType("application/json").
 		ToJSON(&artist).
 		Fetch(context.Background())
