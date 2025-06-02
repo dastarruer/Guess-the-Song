@@ -23,7 +23,8 @@ window.onload = async function () {
 };
 
 async function getGenres() {
-    let data = await fetch("http://localhost:8080/genres");
+    const baseURL = window.location.origin;
+    let data = await fetch(`${baseURL}/genres`);
     let genres = await data.json();
     return genres.data;
 }

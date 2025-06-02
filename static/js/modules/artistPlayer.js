@@ -9,15 +9,15 @@ class ArtistPlayer {
 
     // Fetch the artist's data from the /artist API endpoint
     async fetchArtistInfo(artistId) {
-        const data = await fetch(`http://localhost:8080/artist?id=${artistId}`);
+        const baseURL = window.location.origin;
+        const data = await fetch(`${baseURL}/artist?id=${artistId}`);
         this.artist = await data.json();
     }
 
     // Fetch the artist's top songs' data from the /artist/top API endpoint
     async fetchTracklist(artistId) {
-        const data = await fetch(
-            `http://localhost:8080/artist/top?id=${artistId}`
-        );
+        const baseURL = window.location.origin;
+        let data = await fetch(`${baseURL}/top?id=${artistId}`);
         const json = await data.json();
 
         this.tracklist = json.data;
@@ -30,9 +30,8 @@ class ArtistPlayer {
     }
 
     async chooseArtist(genre) {
-        const data = await fetch(
-            `http://localhost:8080/genres/artists?id=${genre.id}`
-        );
+        const baseURL = window.location.origin;
+        const data = await fetch(`${baseURL}/genres/artists?id=${genre.id}`);
         const json = await data.json();
         const artists = json.data;
 
